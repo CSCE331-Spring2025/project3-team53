@@ -1,4 +1,4 @@
-body {
+/* body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -10,4 +10,34 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+} */
+.card {
+  border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px hsla(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 40px 20px;
+  text-align: center;
+  max-width: 300px;
+  cursor: pointer;
+  display: inline-block;
 }
+
+.card .card-image {
+  max-width: 60%;
+  height: auto;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.card .card-title {
+font-family: "Comic Sans MS", "Comic Sans", cursive;
+margin: 0;
+color: hsl(0, 0%, 20%);
+}
+
+.card .card-text {
+  font-family: "BebasNeueRegular","Arial","Sans-Serif";
+  color: hsl(0, 0%, 30%);
+  font-size: 1.2em;
+  } 
