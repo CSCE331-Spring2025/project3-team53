@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import bobaPic from './placeholder.jpg';
-
 
 
 const milkTeaDrinks = [
@@ -52,50 +52,53 @@ const specialtyDrinks = [
 ];
 
 const Drinks = () => {
-    const [currentMenu, setCurrentMenu] = useState("milkTea"); // State for the selected array
-
+    const [currentMenu, setCurrentMenu] = useState("milkTea");
+  
     const drinkMenus = {
-        milkTea: milkTeaDrinks,
-        fruitTea: fruitTeaDrinks,
-        brewedTea: brewedTeaDrinks,
-        iceBlended: iceBlendedDrinks,
-        freshMilk: freshMilkDrinks,
-        crema: cremaDrinks,
-        mojito: mojitoDrinks,
-        specialty: specialtyDrinks
+      milkTea: milkTeaDrinks,
+      fruitTea: fruitTeaDrinks,
+      brewedTea: brewedTeaDrinks,
+      iceBlended: iceBlendedDrinks,
+      freshMilk: freshMilkDrinks,
+      crema: cremaDrinks,
+      mojito: mojitoDrinks,
+      specialty: specialtyDrinks
     };
-
+  
     return (
-        <div className="app-container">
-            <h1>Boba Menu</h1>
-            <select
-                className="menu-selector"
-                onChange={(e) => setCurrentMenu(e.target.value)}
-                value={currentMenu}
-            >
-                <option value="milkTea">Milk Tea</option>
-                <option value="fruitTea">Fruit Tea</option>
-                <option value="brewedTea">Brewed Tea</option>
-                <option value="iceBlended">Ice Blended</option>
-                <option value="freshMilk">Fresh Milk</option>
-                <option value="crema">Crema</option>
-                <option value="mojito">Mojito</option>
-                <option value="specialty">Specialty</option>
-            </select>
-            <div className="card-container">
-                {drinkMenus[currentMenu].map((drink) => (
-                    <div key={drink.id} className="card">
-                        <img
-                            className="card-image"
-                            src={drink.img}
-                            alt={`Picture of ${drink.name}`}
-                        />
-                        <p className="card-text">{drink.name}</p>
-                    </div>
-                ))}
+      <div className="app-container">
+        <h1>Boba Menu</h1>
+        <select
+          className="menu-selector"
+          onChange={(e) => setCurrentMenu(e.target.value)}
+          value={currentMenu}
+        >
+          <option value="milkTea">Milk Tea</option>
+          <option value="fruitTea">Fruit Tea</option>
+          <option value="brewedTea">Brewed Tea</option>
+          <option value="iceBlended">Ice Blended</option>
+          <option value="freshMilk">Fresh Milk</option>
+          <option value="crema">Crema</option>
+          <option value="mojito">Mojito</option>
+          <option value="specialty">Specialty</option>
+        </select>
+        <div className="card-container">
+          {drinkMenus[currentMenu].map((drink) => (
+            <div key={drink.id} className="card">
+              <img
+                className="card-image"
+                src={drink.img}
+                alt={`Picture of ${drink.name}`}
+              />
+              <p className="card-text">{drink.name}</p>
             </div>
+          ))}
         </div>
+        <Link to="/">
+          <button>Go to Home Page</button>
+        </Link>
+      </div>
     );
-};
-export default Drinks;
-
+  };
+  
+  export default Drinks;
