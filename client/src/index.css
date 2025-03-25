@@ -23,6 +23,10 @@ code {
   display: inline-block;
 }
 
+.app-container {
+  text-align: center;
+}
+
 .card .card-image {
   max-width: 60%;
   height: auto;
