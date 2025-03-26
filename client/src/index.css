@@ -42,6 +42,8 @@ body {
 .card:hover {
   background-color: hsl(0, 0%, 83%);
   cursor: pointer;
+  /* width: 20%;
+  height: 20%; */
 }
 
 .app-container {
