@@ -95,7 +95,10 @@ const Drinks = () => {
           ))}
         </div>
         <Link to="/">
-          <button>Go to Home Page</button>
+          <button className="home-button">Go to Home Page</button>
+        </Link> <br/>
+        <Link to="/Checkout">
+          <button>Go to Checkout Page</button>
         </Link>
       </div>
     );

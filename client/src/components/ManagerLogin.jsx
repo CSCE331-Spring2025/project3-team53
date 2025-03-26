@@ -30,7 +30,9 @@ const ManagerLogin = () => {
         <input className = "username-text" type="text" value={username} placeholder = "Username" onChange={handleUsernameChange} /> <br />
         <input className = "password-text" type="password" id="myInput" value={password} placeholder = "Password" onChange={handlePasswordChange} /> <br />
         <input className = "show" type="checkbox" onClick={myFunction} /> Show Password <br/>
-        <button className = "login">Login</button>
+        <Link to="/Manager">
+          <button className="empButton" >Login</button>
+        </Link>
       </div>
       <p>Username: {username}</p>
       <p>Password: {password}</p>

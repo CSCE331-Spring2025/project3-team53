@@ -16,6 +16,9 @@ const Home = () => {
         <Link to="/Emplogin">
           <button className="empButton" >Go to Employee Login</button>
         </Link>
+        <Link to="/Checkout">
+          <button className="empButton" >Go to Checkout</button>
+        </Link>
     </div>
   );
 };

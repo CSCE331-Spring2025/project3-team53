@@ -112,3 +112,34 @@ color: hsl(0, 0%, 20%);
 .Hohn {
   margin-left: 50px;
 }
+
+.checkout {
+  justify-content: left;
+  align-items: left;
+  margin-top: 25px;
+}
+
+.home-button {
+  margin-bottom: 20px;
+}
+
+.manager-card {
+  border: 1px solid black;
+  box-shadow: 5px 5px 5px hsla(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-top: 20px;
+  margin-bottom: 30px; 
+  margin-right: 20px;
+  margin-left: 40px;
+  text-align: center;
+  width: 26%;
+  height: 20%;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.manager-text {
+  display: inline-block; 
+  text-align: center; 
+  font-size: 2em;
+}
