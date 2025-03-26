@@ -1,7 +1,8 @@
 import './App.css';
 import Drinks from './components/Drinks';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import About from "./components/About";
+import ManagerLogin from "./components/ManagerLogin";
+import EmployeeLogin from "./components/EmplyeeLogin";
 import Home from "./components/Home";
 
 
@@ -10,8 +11,9 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/malogin" element={<ManagerLogin />} />
         <Route path="/drinks" element={<Drinks />} />
+        <Route path="/emplogin" element={<EmployeeLogin />} />
       </Routes>
     </Router>
   );
