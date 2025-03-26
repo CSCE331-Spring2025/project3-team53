@@ -11,14 +11,34 @@ body {
 .card {
   border: 1px solid black;
   border-radius: 10px;
-  box-shadow: 5px 5px 5px hsla(0, 0, 0, 0.1);
+  box-shadow: 5px 5px 5px hsla(0, 0%, 0%, 0.1);
   padding: 20px;
   margin: 40px 20px;
   text-align: center;
-  max-width: 300px;
-  display: inline-block;
+  width: 300px;
+  min-height: 300px; /* Adjust as needed */
+  display: inline-flex; /* Use flexbox */
+  flex-direction: column; /* Stack items vertically */
+  justify-content: space-between; /* Ensures content is evenly spaced */
+  align-items: center; /* Centers content */
+  box-sizing: border-box;
+  vertical-align: top;
+  overflow: hidden;
 }
 
+.card .card-image {
+  width: 60%;
+  height: 100px; /* Set a fixed height */
+  object-fit: cover; /* Ensures images maintain aspect ratio */
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.card .card-text {
+  white-space: normal;
+  overflow-wrap: break-word;
+  flex-grow: 1; /* Allows text to expand evenly */
+}
 .card:hover {
   background-color: hsl(0, 0%, 83%);
   cursor: pointer;
