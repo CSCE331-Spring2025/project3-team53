@@ -15,13 +15,16 @@ body {
   padding: 20px;
   margin: 40px 20px;
   text-align: center;
-  max-width: 300px;
+  width: 17.5%;
+  height: 17.5%;
   display: inline-block;
 }
 
 .card:hover {
   background-color: hsl(0, 0%, 83%);
   cursor: pointer;
+  /* width: 20%;
+  height: 20%; */
 }
 
 .app-container {
