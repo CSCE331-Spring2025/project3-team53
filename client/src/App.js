@@ -1,11 +1,21 @@
 import './App.css';
-import Drinks from './components/Drinks';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ManagerLogin from "./components/ManagerLogin.jsx";
 import EmployeeLogin from "./components/EmplyeeLogin.jsx";
 import Checkout from './components/Checkout.jsx';
 import Home from "./components/Home";
 import Manager from "./components/Manager";
+import Categories from './components/Categories.jsx';
+import MilkTea from './components/MilkTea.jsx';
+import FruitTea from './components/FruitTea';
+import BrewedTea from './components/BrewedTea';
+import IceBlended from './components/IceBlended';
+import FreshMilk from './components/FreshMilk';
+import Crema from './components/Crema';
+import Mojito from './components/Mojito';
+import Specialty from './components/Specialty';
+import BYOT from './components/BYOT';
+
 
 
 function App() {
@@ -13,11 +23,20 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/malogin" element={<ManagerLogin />} />
-        <Route path="/drinks" element={<Drinks />} />
-        <Route path="/emplogin" element={<EmployeeLogin />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/manager" element={<Manager />} />
+        <Route path="/Malogin" element={<ManagerLogin />} />
+        <Route path="/Emplogin" element={<EmployeeLogin />} />
+        <Route path="/Categories" element={<Categories />} />
+        <Route path="/Checkout" element={<Manager />} />
+        <Route path="/Manager" element={<Checkout />} />
+        <Route path="/Drinks/milkTea" element={<MilkTea />} />
+        <Route path="/Drinks/fruitTea" element={<FruitTea />} />
+        <Route path="/Drinks/brewedTea" element={<BrewedTea />} />
+        <Route path="/Drinks/iceBlended" element={<IceBlended />} />
+        <Route path="/Drinks/freshMilk" element={<FreshMilk />} />
+        <Route path="/Drinks/crema" element={<Crema />} />
+        <Route path="/Drinks/mojito" element={<Mojito />} />
+        <Route path="/Drinks/specialty" element={<Specialty />} />
+        <Route path="/Drinks/byot" element={<BYOT />} />
       </Routes>
     </Router>
   );

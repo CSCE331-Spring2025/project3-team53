@@ -10,8 +10,8 @@ const Home = () => {
       <Link to="/Malogin">
           <button className="manButton">Go to Manager Login Page</button>
         </Link>
-        <Link to="/Drinks">
-          <button className="drinkButton">Go to Drinks Page</button>
+        <Link to="/Categories">
+          <button className="drinkButton">Go to Menu Page</button>
         </Link>
         <Link to="/Emplogin">
           <button className="empButton" >Go to Employee Login</button>
