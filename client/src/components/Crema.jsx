@@ -1,9 +1,8 @@
 import React from "react";
-import bobaPic from "./placeholder.jpg";
 
 const cremaDrinks = [
-    { id: 17, name: "Black Crema Tea", img: bobaPic},
-    { id: 18, name: "Wintermelon Crema", img: bobaPic }
+    { id: 17, name: "Black Crema Tea", img: "/placeholder.jpg"},
+    { id: 18, name: "Wintermelon Crema", img: "/placeholder.jpg" }
 ];
 
 const Crema = () => {

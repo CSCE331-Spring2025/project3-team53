@@ -1,9 +1,8 @@
 import React from "react";
-import bobaPic from "./placeholder.jpg";
 
 const mojitoDrinks = [
-    { id: 19, name: "Lime Mojito", img: bobaPic},
-    { id: 20, name: "Strawberry Mojito", img: bobaPic }
+    { id: 19, name: "Lime Mojito", img: "/placeholder.jpg"},
+    { id: 20, name: "Strawberry Mojito", img: "/placeholder.jpg" }
 ];
 
 

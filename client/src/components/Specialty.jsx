@@ -1,10 +1,9 @@
 import React from "react";
-import bobaPic from "./placeholder.jpg";
 
 const specialtyDrinks = [
-    { id: 21, name: "Pineapple Honey Lemonade with Crystal Boba", img: bobaPic},
-    { id: 22, name: "Christmas Tea", img: bobaPic },
-    { id: 23, name: "Spring Tea", img: bobaPic}
+    { id: 21, name: "Pineapple Honey Lemonade with Crystal Boba", img: "/placeholder.jpg" },
+    { id: 22, name: "Christmas Tea", img: "/placeholder.jpg" },
+    { id: 23, name: "Spring Tea", img: "/placeholder.jpg" }
 ];
 
 

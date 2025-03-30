@@ -1,9 +1,8 @@
 import React from "react";
-import bobaPic from "./placeholder.jpg";
 
 const freshMilkDrinks = [
-    { id: 15, name: "Cocoa Lover with Fresh Milk", img: bobaPic},
-    { id: 16, name: "Handmade Taro with Fresh Milk", img: bobaPic }
+    { id: 15, name: "Cocoa Lover with Fresh Milk", img: "/placeholder.jpg"},
+    { id: 16, name: "Handmade Taro with Fresh Milk", img: "/placeholder.jpg" }
 ];
 
 const FreshMilk = () => {

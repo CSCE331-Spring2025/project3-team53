@@ -1,11 +1,10 @@
 import React from "react";
-import bobaPic from "./placeholder.jpg";
 
 const brewedTeaDrinks = [
-    { id: 9, name: "Classic Oolong Tea", img: bobaPic},
-    { id: 10, name: "Ginger Tea", img: bobaPic },
-    { id: 11, name: "Wintermelon Tea", img: bobaPic},
-    { id: 12, name: "Honey Oolong Tea", img: bobaPic}
+    { id: 9, name: "Classic Oolong Tea", img: "/placeholder.jpg"},
+    { id: 10, name: "Ginger Tea", img: "/placeholder.jpg" },
+    { id: 11, name: "Wintermelon Tea", img: "/placeholder.jpg"},
+    { id: 12, name: "Honey Oolong Tea", img: "/placeholder.jpg"}
 ];
 
 const BrewedTea = () => {

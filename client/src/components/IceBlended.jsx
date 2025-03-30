@@ -1,9 +1,8 @@
 import React from "react";
-import bobaPic from "./placeholder.jpg";
 
 const iceBlendedDrinks = [
-    { id: 13, name: "Oreo Ice Blended with Pearl", img: bobaPic},
-    { id: 14, name: "Taro Ice Blended with pudding", img: bobaPic }
+    { id: 13, name: "Oreo Ice Blended with Pearl", img: "/placeholder.jpg"},
+    { id: 14, name: "Taro Ice Blended with pudding", img: "/placeholder.jpg" }
 ];
 
 const IceBlended = () => {

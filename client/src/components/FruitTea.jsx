@@ -1,11 +1,10 @@
 import React from "react";
-import bobaPic from "./placeholder.jpg";
 
 const fruitTeaDrinks = [
-    { id: 5, name: "Hawaii Fruit Tea", img: bobaPic},
-    { id: 6, name: "Kiwi Fruit Tea", img: bobaPic},
-    { id: 7, name: "Honey Lemonade with Aloe Vera", img: bobaPic},
-    { id: 8, name: "Mango and Passion Fruit Tea", img: bobaPic},
+    { id: 5, name: "Hawaii Fruit Tea", img: "/placeholder.jpg"},
+    { id: 6, name: "Kiwi Fruit Tea", img: "/placeholder.jpg"},
+    { id: 7, name: "Honey Lemonade with Aloe Vera", img: "/placeholder.jpg"},
+    { id: 8, name: "Mango and Passion Fruit Tea", img: "/placeholder.jpg"},
     
 ];
 

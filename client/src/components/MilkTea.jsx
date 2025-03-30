@@ -1,11 +1,10 @@
 import React from "react";
-import bobaPic from "./placeholder.jpg";
 
 const milkTeaDrinks = [
-    { id: 1, name: "Black Classic Milk Tea", img: bobaPic },
-    { id: 2, name: "Coffee Milk Tea", img: bobaPic },
-    { id: 3, name: "Thai Milk Tea", img: bobaPic },
-    { id: 4, name: "Matcha Red Bean Milk Tea", img: bobaPic }
+    { id: 1, name: "Black Classic Milk Tea", img: "/placeholder.jpg" },
+    { id: 2, name: "Coffee Milk Tea", img: "/placeholder.jpg" },
+    { id: 3, name: "Thai Milk Tea", img: "/placeholder.jpg" },
+    { id: 4, name: "Matcha Red Bean Milk Tea", img: "/placeholder.jpg" }
 ];
 
 const MilkTea = () => {
