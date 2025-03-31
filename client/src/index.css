@@ -175,6 +175,7 @@ color: hsl(0, 0%, 20%);
   display: inline-block; 
   text-align: center; 
   font-size: 2em;
+  color: black;
 }
 
 .title-m {
