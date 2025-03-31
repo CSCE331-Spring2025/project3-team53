@@ -184,7 +184,8 @@ color: hsl(0, 0%, 20%);
   text-align: center;
   margin-bottom: 25px;
 }
-.drinkButton {
-  margin-left: 0;
-  margin-bottom:0;
+
+.drinksButton {
+  margin-bottom: 0px;
+  margin-left: 0px;
 }

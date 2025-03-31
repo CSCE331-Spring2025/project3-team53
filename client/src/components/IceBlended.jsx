@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 
 
 const IceBlended = () => {
@@ -36,7 +36,9 @@ const IceBlended = () => {
               </div>
             ))}
           </div>
-          <button className="drinkButton" >Go Back</button>
+          <Link to="/Categories">
+          <button className="drinksButton" >Go Back</button>
+          </Link>
         </div>
       );
 };

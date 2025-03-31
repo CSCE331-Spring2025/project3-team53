@@ -8,7 +8,17 @@ const pool = new Pool({
     database: process.env.PSQL_DATABASE,
     password: process.env.PSQL_PASSWORD,
     port: process.env.PSQL_PORT || 5432,
-    ssl: { rejectUnauthorized: false }
+    ssl: { rejectUnauthorized: false },
+});
+
+pool.on('connect', async (client) => {
+    try{
+        await client.query('SET search_path TO restaurant_schema');
+        console.log('Connected to schema');
+    }
+    catch(err){
+        console.error('Error', err);
+    }
 });
 
 module.exports = pool;
