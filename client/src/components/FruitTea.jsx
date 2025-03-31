@@ -1,6 +1,17 @@
 import React, { useState, useEffect } from "react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+
+
 
 const FruitTea = () => {
+    const navigate = useNavigate();
+
+    const handleCardClick = () => {
+        // Navigate to the options page for the selected drink
+        navigate(`/Options`);
+    };
+
     const [drinks, setDrinks] = useState([]);
     
       useEffect(() => {
@@ -15,7 +26,9 @@ const FruitTea = () => {
           <h2 className="title-m">Fruit Tea Menu</h2>
           <div className="card-container">
             {drinks.map((drink) => (
-              <div key={drink.id} className="card">
+              <div key={drink.id} className="card" 
+              onClick={() => handleCardClick(drink.id)} 
+              style={{ cursor: "pointer" }}>
                 <img
                   className="card-image"
                   src="/placeholder.jpg" 

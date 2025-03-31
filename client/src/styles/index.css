@@ -168,6 +168,7 @@ color: hsl(0, 0%, 20%);
 }
 .manager-card:hover {
   cursor: pointer;
+  background-color: hsl(0, 2%, 91%);
   /* width: 20%;
   height: 20%; */
 }
@@ -175,6 +176,7 @@ color: hsl(0, 0%, 20%);
   display: inline-block; 
   text-align: center; 
   font-size: 2em;
+  color: black;
 }
 
 .title-m {
