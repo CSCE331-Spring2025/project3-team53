@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import React from "react";
 import { useNavigate } from "react-router-dom";
 
 
@@ -38,6 +37,7 @@ const FruitTea = () => {
               </div>
             ))}
           </div>
+          <button className="drinkButton" >Go Back</button>
         </div>
       );
 };
