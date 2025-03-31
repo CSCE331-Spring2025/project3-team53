@@ -19,9 +19,6 @@ const Home = () => {
         <Link to="/Checkout">
           <button className="empButton" >Go to Checkout</button>
           </Link>
-        <Link to="/Options">
-          <button className="empButton" >Go to Options</button>
-        </Link>
     </div>
   );
 };

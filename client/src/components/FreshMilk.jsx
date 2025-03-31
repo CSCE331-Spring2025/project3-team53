@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const FreshMilk = () => {
     const navigate = useNavigate();
@@ -33,7 +34,9 @@ const FreshMilk = () => {
               </div>
             ))}
           </div>
-          <button className="drinksButton" >Go Back</button>
+          <Link to="/Categories">
+              <button className="drinksButton" >Go Back</button>
+          </Link>
         </div>
       );
 };
