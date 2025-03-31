@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <div>
       <h1>Nothing is happening here, pretty neat right?</h1>
-      <img  className = "Hohn" src = "./Nothing.jpg" alt = "picture of the best group"></img><br/>
+      <img  className = "Hohn" src = "./Nothing.jpg" alt = "My Man Hohn Jina"></img><br/>
       <Link to="/Malogin">
           <button className="manButton">Go to Manager Login Page</button>
         </Link>
