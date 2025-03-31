@@ -33,6 +33,7 @@ const FreshMilk = () => {
               </div>
             ))}
           </div>
+          <button className="drinkButton" >Go Back</button>
         </div>
       );
 };

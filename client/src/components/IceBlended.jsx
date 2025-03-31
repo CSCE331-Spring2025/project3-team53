@@ -36,6 +36,7 @@ const IceBlended = () => {
               </div>
             ))}
           </div>
+          <button className="drinkButton" >Go Back</button>
         </div>
       );
 };
