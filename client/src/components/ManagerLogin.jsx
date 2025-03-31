@@ -31,7 +31,7 @@ const ManagerLogin = () => {
         <input className = "password-text" type="password" id="myInput" value={password} placeholder = "Password" onChange={handlePasswordChange} /> <br />
         <input className = "show" type="checkbox" onClick={myFunction} /> Show Password <br/>
         <Link to="/Manager">
-          <button className="empButton" >Login</button>
+          <button className="login" >Login</button>
         </Link>
       </div>
       <p>Username: {username}</p>
