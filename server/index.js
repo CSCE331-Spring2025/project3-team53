@@ -3,6 +3,7 @@ const cors = require("cors");
 const pool = require('./db');
 require("dotenv").config();
 const drinksRoutes = require("./routes/drinks");
+const sendOrderRoutes = require("./routes/send_order");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -12,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/drinks", drinksRoutes);
+app.use("/api/send_orders", sendOrderRoutes);
 
 // Test route
 app.get("/", (req, res) => {
