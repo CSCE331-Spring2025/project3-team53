@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 const Categories = () => {
     return(
         <>
-            <h2 className="login-header">Menu</h2>
+     <h2 className="login-header">Menu</h2>
             
-            <Link to="/drinks/milkTea" className='manager-card'>
+    <Link to="/drinks/milkTea" className='manager-card'>
     <div>
         <p className='manager-text'>Milk Tea</p> <br />
     </div>
