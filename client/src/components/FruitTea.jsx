@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
-import React from "react";
 import { useNavigate } from "react-router-dom";
-
-
 
 const FruitTea = () => {
     const navigate = useNavigate();
@@ -11,9 +8,7 @@ const FruitTea = () => {
         // Navigate to the options page for the selected drink
         navigate(`/Options`);
     };
-
-    const [drinks, setDrinks] = useState([]);
-    
+    const [drinks, setDrinks] = useState([]);  
       useEffect(() => {
         fetch("http://localhost:5000/api/drinks/fruit-tea") 
           .then((response) => response.json())
