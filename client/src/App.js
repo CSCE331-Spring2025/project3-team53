@@ -27,8 +27,8 @@ function App() {
         <Route path="/Malogin" element={<ManagerLogin />} />
         <Route path="/Emplogin" element={<EmployeeLogin />} />
         <Route path="/Categories" element={<Categories />} />
-        <Route path="/Checkout" element={<Manager />} />
-        <Route path="/Manager" element={<Checkout />} />
+        <Route path="/Checkout" element={< Checkout/>} />
+        <Route path="/Manager" element={< Manager/>} />
         <Route path="/Drinks/milkTea" element={<MilkTea />} />
         <Route path="/Drinks/fruitTea" element={<FruitTea />} />
         <Route path="/Drinks/brewedTea" element={<BrewedTea />} />
