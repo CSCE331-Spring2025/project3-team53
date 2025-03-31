@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Home = () => {
   return (
     <div>
-      <h1>Nothing is happening here</h1>
+      <h1>Nothing is happening here, pretty neat right?</h1>
       <img  className = "Hohn" src = "./Nothing.jpg" alt = "picture of the best group"></img><br/>
       <Link to="/Malogin">
           <button className="manButton">Go to Manager Login Page</button>
@@ -18,7 +18,7 @@ const Home = () => {
         </Link>
         <Link to="/Checkout">
           <button className="empButton" >Go to Checkout</button>
-        </Link>
+          </Link>
     </div>
   );
 };

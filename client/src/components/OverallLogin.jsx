@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
-const ManagerLogin = () => {
+const OverallLogin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false); // State for checkbox
@@ -67,4 +67,4 @@ const ManagerLogin = () => {
   );
 };
 
-export default ManagerLogin;
+export default OverallLogin;

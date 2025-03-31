@@ -15,6 +15,7 @@ import Crema from './components/Crema';
 import Mojito from './components/Mojito';
 import Specialty from './components/Specialty';
 import BYOT from './components/BYOT';
+import Options from './components/Options.jsx';
 
 
 
@@ -26,8 +27,8 @@ function App() {
         <Route path="/Malogin" element={<ManagerLogin />} />
         <Route path="/Emplogin" element={<EmployeeLogin />} />
         <Route path="/Categories" element={<Categories />} />
-        <Route path="/Checkout" element={<Manager />} />
-        <Route path="/Manager" element={<Checkout />} />
+        <Route path="/Checkout" element={< Checkout/>} />
+        <Route path="/Manager" element={< Manager/>} />
         <Route path="/Drinks/milkTea" element={<MilkTea />} />
         <Route path="/Drinks/fruitTea" element={<FruitTea />} />
         <Route path="/Drinks/brewedTea" element={<BrewedTea />} />
@@ -37,6 +38,7 @@ function App() {
         <Route path="/Drinks/mojito" element={<Mojito />} />
         <Route path="/Drinks/specialty" element={<Specialty />} />
         <Route path="/Drinks/byot" element={<BYOT />} />
+        <Route path="/Options" element={<Options />} />
       </Routes>
     </Router>
   );

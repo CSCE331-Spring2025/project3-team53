@@ -1,0 +1,68 @@
+{
+    "milkTeaDrinks": [
+        { 
+            "id": 1, 
+            "name": "Black Classic Milk Tea", 
+            "img": "bobaPic"
+        },
+        { 
+            "id": 2, 
+            "name": "Coffee Milk Tea", 
+            "img": "bobaPic"
+        },
+        { 
+            "id": 3, 
+            "name": "Thai Milk Tea", 
+            "img": "bobaPic"
+        },
+        { 
+            "id": 4, 
+            "name": "Matcha Red Bean Milk Tea", 
+            "img": "bobaPic"
+        }
+    ],
+    "fruitTeaDrinks": [
+        { 
+            "id": 5, 
+            "name": "Hawaii Fruit Tea", 
+            "img": "bobaPic"
+        },
+        { 
+            "id": 6, 
+            "name": "Kiwi Fruit Tea", 
+            "img": "bobaPic"
+        },
+        { 
+            "id": 7, 
+            "name": "Honey Lemonade with Aloe Vera", 
+            "img": "bobaPic"
+        },
+        { 
+            "id": 8, 
+            "name": "Mango and Passion Fruit Tea", 
+            "img": "bobaPic"
+        }
+    ],
+    "brewedTeaDrinks": [
+        { 
+            "id": 9, 
+            "name": "Classic Oolong Tea", 
+            "img": "bobaPic"
+        },
+        { 
+            "id": 10, 
+            "name": "Ginger Tea", 
+            "img": "bobaPic" 
+        },
+        { 
+            "id": 11, 
+            "name": "Wintermelon Tea", 
+            "img": "bobaPic"
+        },
+        { 
+            "id": 12, 
+            "name": "Honey Oolong Tea", 
+            "img": "bobaPic"
+        }
+    ]
+}
