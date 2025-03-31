@@ -15,6 +15,7 @@ import Crema from './components/Crema';
 import Mojito from './components/Mojito';
 import Specialty from './components/Specialty';
 import BYOT from './components/BYOT';
+import Options from './components/Options.jsx';
 
 
 
@@ -37,6 +38,7 @@ function App() {
         <Route path="/Drinks/mojito" element={<Mojito />} />
         <Route path="/Drinks/specialty" element={<Specialty />} />
         <Route path="/Drinks/byot" element={<BYOT />} />
+        <Route path="/Options" element={<Options />} />
       </Routes>
     </Router>
   );
