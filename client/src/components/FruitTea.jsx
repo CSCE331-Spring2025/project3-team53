@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 
 
 const FruitTea = () => {
@@ -37,6 +37,9 @@ const FruitTea = () => {
               </div>
             ))}
           </div>
+          <Link to="/Categories">
+          <button className="drinksButton" >Go Back</button>
+          </Link>
         </div>
       );
 };
