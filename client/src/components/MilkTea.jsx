@@ -1,30 +1,34 @@
-import React from "react";
-
-const milkTeaDrinks = [
-    { id: 1, name: "Black Classic Milk Tea", img: "/placeholder.jpg" },
-    { id: 2, name: "Coffee Milk Tea", img: "/placeholder.jpg" },
-    { id: 3, name: "Thai Milk Tea", img: "/placeholder.jpg" },
-    { id: 4, name: "Matcha Red Bean Milk Tea", img: "/placeholder.jpg" }
-];
+import React, { useState, useEffect } from "react";
 
 const MilkTea = () => {
-    return (
+    const [drinks, setDrinks] = useState([]);
+    
+      // Fetch data when the component mounts (only once)
+      useEffect(() => {
+        fetch("http://localhost:5000/api/drinks/milk-tea") // Your API endpoint
+          .then((response) => response.json())
+          .then((data) => setDrinks(data))  // Set the fetched data in state
+          .catch((error) => console.error("Error fetching drinks:", error));
+      }, []); // Empty dependency array to run the effect only once
+    
+      return (
         <div>
-            <h2 className = "title-m">Milk Tea Menu</h2>
-            <div className="card-container">
-                {milkTeaDrinks.map((drink) => (
-                    <div key={drink.id} className="card">
-                        <img
-                            className="card-image"
-                            src={drink.img}
-                            alt={`Picture of ${drink.name}`}
-                        />
-                        <p className="card-text">{drink.name}</p>
-                    </div>
-                ))}
-            </div>
+          <h2 className="title-m">Milk Tea Menu</h2>
+          <div className="card-container">
+            {/* Map over the drinks array and render each drink */}
+            {drinks.map((drink) => (
+              <div key={drink.id} className="card">
+                <img
+                  className="card-image"
+                  src="/placeholder.jpg" // Static image for all drinks
+                  alt={`Picture of ${drink.drink_name}`}
+                />
+                <p className="card-text">{drink.drink_name}</p> {/* Dynamic drink name */}
+              </div>
+            ))}
+          </div>
         </div>
-    );
+      );
 };
 
 export default MilkTea;

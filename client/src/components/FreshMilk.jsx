@@ -1,28 +1,35 @@
-import React from "react";
-
-const freshMilkDrinks = [
-    { id: 15, name: "Cocoa Lover with Fresh Milk", img: "/placeholder.jpg"},
-    { id: 16, name: "Handmade Taro with Fresh Milk", img: "/placeholder.jpg" }
-];
+import React, { useState, useEffect } from "react";
 
 const FreshMilk = () => {
-    return (
-        <div>
-            <h2 className = "title-m">Fresh Milk Menu</h2>
-            <div className="card-container">
-                {freshMilkDrinks.map((drink) => (
-                    <div key={drink.id} className="card">
-                        <img
-                            className="card-image"
-                            src={drink.img}
-                            alt={`Picture of ${drink.name}`}
-                        />
-                        <p className="card-text">{drink.name}</p>
-                    </div>
-                ))}
-            </div>
-        </div>
-    );
+  // State to hold the fetched drinks data
+  const [drinks, setDrinks] = useState([]);
+
+  // Fetch data when the component mounts (only once)
+  useEffect(() => {
+    fetch("http://localhost:5000/api/drinks/fresh-milk") // Your API endpoint
+      .then((response) => response.json())
+      .then((data) => setDrinks(data))  // Set the fetched data in state
+      .catch((error) => console.error("Error fetching drinks:", error));
+  }, []); // Empty dependency array to run the effect only once
+
+  return (
+    <div>
+      <h2 className="title-m">Fresh Milk Menu</h2>
+      <div className="card-container">
+        {/* Map over the drinks array and render each drink */}
+        {drinks.map((drink) => (
+          <div key={drink.id} className="card">
+            <img
+              className="card-image"
+              src="/placeholder.jpg" // Static image for all drinks
+              alt={`Picture of ${drink.drink_name}`}
+            />
+            <p className="card-text">{drink.drink_name}</p> {/* Dynamic drink name */}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default FreshMilk;
