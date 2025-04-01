@@ -4,6 +4,9 @@ const pool = require('./db');
 require("dotenv").config();
 const drinksRoutes = require("./routes/drinks");
 const sendOrderRoutes = require("./routes/send_order");
+const deleteItem = require("./routes/delete_item");
+const editItem = require("./routes/edit_item");
+
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -14,6 +17,9 @@ app.use(express.json());
 
 app.use("/api/drinks", drinksRoutes);
 app.use("/api/send_orders", sendOrderRoutes);
+app.use("/api/delete", deleteItem);
+app.use("/api/edit", editItem);
+
 
 // Test route
 app.get("/", (req, res) => {
