@@ -6,8 +6,9 @@ const OrderHistory = () => {
   const data = [
     { label: "Ingredient 1", value: 10 },
     { label: "Ingredient 2", value: 20 },
-    { label: "Ingredient 3", value: 15 },
+    { label: "Ingredient 3", value: 15 }, //TODO, fetch from database
     { label: "Ingredient 4", value: 5 },
+    { label: "Bruhbas", value: 50}
   ];
 
   // Calculate the maximum value for scaling
