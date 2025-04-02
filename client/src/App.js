@@ -16,7 +16,10 @@ import Mojito from './components/Mojito';
 import Specialty from './components/Specialty';
 import BYOT from './components/BYOT';
 import Options from './components/Options.jsx';
-
+import Inventory from './components/Inventory.jsx';
+import OrderHistory from './components/OrderHistory.jsx';
+import Logging from './components/Logging.jsx';
+import ZReport from './components/ZReport.jsx'
 
 
 function App() {
@@ -39,6 +42,10 @@ function App() {
         <Route path="/Drinks/specialty" element={<Specialty />} />
         <Route path="/Drinks/byot" element={<BYOT />} />
         <Route path="/Options" element={<Options />} />
+        <Route path="/Inventory" element={<Inventory />} />
+        <Route path="/OrderH" element={<OrderHistory />} />
+        <Route path="/Logging" element={<Logging />} />
+        <Route path="/ZReport" element={<ZReport />} />
       </Routes>
     </Router>
   );
