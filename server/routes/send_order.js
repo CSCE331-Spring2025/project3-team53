@@ -43,6 +43,7 @@ router.post("/", async (req, res) => {
           });
           let sql = `INSERT INTO orders (order_number, employee_id, drink_id, ice_level, sugar_level, add_ons, order_date, price) 
           VALUES (${order_number}, ${employee_id}, ${drink_id}, ${ice_level}, ${sugar_level}, '${add_on_text}', '${timenow}', ${price});`
+          //console.log(sql);
           try{
             const result = await pool.query(sql);
           }
