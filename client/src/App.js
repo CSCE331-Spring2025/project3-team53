@@ -19,7 +19,8 @@ import Options from './components/Options.jsx';
 import Inventory from './components/Inventory.jsx';
 import OrderHistory from './components/OrderHistory.jsx';
 import Logging from './components/Logging.jsx';
-import ZReport from './components/ZReport.jsx'
+import ZReport from './components/ZReport.jsx';
+import Settings from './components/Settings.jsx';
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
         <Route path="/OrderH" element={<OrderHistory />} />
         <Route path="/Logging" element={<Logging />} />
         <Route path="/ZReport" element={<ZReport />} />
+        <Route path="/Settings" element={<Settings />} />
       </Routes>
     </Router>
   );

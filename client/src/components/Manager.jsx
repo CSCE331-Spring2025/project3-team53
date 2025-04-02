@@ -37,9 +37,11 @@ return(
 </div>
 </Link>
 
+<Link to="/Settings">
 <div className='manager-card'>
  <p className = 'manager-text'>Settings</p> <br />
 </div>
+</Link>
 </>
     );
 };
