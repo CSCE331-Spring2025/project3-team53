@@ -21,6 +21,7 @@ const FruitTea = () => {
       return (
         <div>
           <h2 className="title-m">Fruit Tea Menu</h2>
+          <center>
           <div className="card-container">
             {drinks.map((drink) => (
               <div key={drink.id} className="card" 
@@ -35,6 +36,7 @@ const FruitTea = () => {
               </div>
             ))}
           </div>
+          </center>
           <Link to="/Categories">
           <button className="drinksButton" >Go Back</button>
           </Link>

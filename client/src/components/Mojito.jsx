@@ -20,20 +20,22 @@ const Mojito = () => {
       return (
         <div>
           <h2 className="title-m">Mojito Menu</h2>
-          <div className="card-container">
-            {drinks.map((drink) => (
-              <div key={drink.id} className="card" 
-              onClick={() => handleCardClick(drink.id)} 
-              style={{ cursor: "pointer" }}>
-                <img
-                  className="card-image"
-                  src="/placeholder.jpg" 
-                  alt={`Picture of ${drink.drink_name}`}
-                />
-                <p className="card-text">{drink.drink_name}</p>
-              </div>
-            ))}
-          </div>
+          <center>
+            <div className="card-container">
+              {drinks.map((drink) => (
+                <div key={drink.id} className="card" 
+                onClick={() => handleCardClick(drink.id)} 
+                style={{ cursor: "pointer" }}>
+                  <img
+                    className="card-image"
+                    src="/placeholder.jpg" 
+                    alt={`Picture of ${drink.drink_name}`}
+                  />
+                  <p className="card-text">{drink.drink_name}</p>
+                </div>
+              ))}
+            </div>
+          </center>
           <Link to="/Categories">
           <button className="drinksButton" >Go Back</button>
           </Link>
