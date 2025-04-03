@@ -21,6 +21,7 @@ import OrderHistory from './components/OrderHistory.jsx';
 import Logging from './components/Logging.jsx';
 import ZReport from './components/ZReport.jsx';
 import Settings from './components/Settings.jsx';
+import Editor from './components/Editor.jsx';
 
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
         <Route path="/Logging" element={<Logging />} />
         <Route path="/ZReport" element={<ZReport />} />
         <Route path="/Settings" element={<Settings />} />
+        <Route path="/Editor" element={<Editor />} />
       </Routes>
     </Router>
   );

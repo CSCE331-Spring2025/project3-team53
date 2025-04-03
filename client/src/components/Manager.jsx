@@ -21,10 +21,11 @@ return(
  <p className = 'manager-text'>Scheduling</p> <br />
 </div>
 
+<Link to="/Editor">
 <div className='manager-card'>
  <p className = 'manager-text'>Menu Editor</p> <br />
 </div>
-
+</Link>
 <Link to="/OrderH">
 <div className='manager-card'>
  <p className = 'manager-text'>Order History</p> <br />
