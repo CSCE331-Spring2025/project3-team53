@@ -23,7 +23,7 @@ return(
 
 <Link to="/Editor">
 <div className='manager-card'>
- <p className = 'manager-text'>Menu Editor</p> <br />
+ <p className = 'manager-text'>Editor</p> <br />
 </div>
 </Link>
 <Link to="/OrderH">
