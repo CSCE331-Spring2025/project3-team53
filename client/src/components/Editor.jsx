@@ -18,19 +18,23 @@ const IngredientsSelector = () => {
   ];
 
   return (
-    <>
-      <div className="scrollable-container">
-        {ingredients.map((ingredient) => (
-          <div
-            key={ingredient}
-            className={`ingredient-item ${selectedIngredient === ingredient ? "selected" : ""}`}
-            onClick={() => handleSelect(ingredient)}
-          >
-            {ingredient}
-          </div>
-        ))}
+<>
+  <div className="scrollable-container">
+    {ingredients.map((ingredient) => (
+      <div
+        key={ingredient}
+        className={`ingredient-item ${selectedIngredient === ingredient ? "selected" : ""}`}
+        onClick={() => handleSelect(ingredient)}
+      >
+        {ingredient}
       </div>
-    </>
+    ))}
+  </div>
+  <button className="button-ing">Add Ingredient</button>
+  <div>
+    <button className="button-ing2">Add Item</button>
+  </div>
+</>
   );
 };
 
@@ -119,7 +123,11 @@ const Editor = () => {
         </div>
 
         <div>
-        <button className="button-sub2">Add Employees</button>
+        <button className="button-sub2">Add Employee</button>
+        </div>
+
+        <div>
+        <button className="button-sub3">Remove Employee</button>
         </div>
 
         <IngredientsSelector />
