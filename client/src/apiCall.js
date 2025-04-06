@@ -217,11 +217,11 @@ export const delete_entry = async (table_id, entry_id) => {
 
 
 /*
-Return analysis of order history from start to end hours on date
+Return analysis of order history between start to end hours on date
     date: yyyy:mm:dd format
     start: start hour in 24-hr format
     end: end hour in 24-hr format
-outputs amount of dollar, drinks, and orders on each hour, wihin the specified hour range
+outputs amount of dollar, drinks, and orders on each hour
 */
 export const order_hist = async (date, start_hour, end_hour) => {
     const parameter = new URLSearchParams({
@@ -230,6 +230,23 @@ export const order_hist = async (date, start_hour, end_hour) => {
         end: end_hour
     });
     const url = `http://localhost:5000/api/analyze/order_history?${parameter.toString()}`;
+    //console.log(url);
+    await fetch_request(url, {} ,1);
+
+    //TODO: return the data 
+}
+
+/*
+Return amount of each ingredient used between the dates
+    start_date: yyyy:mm:dd format
+    end_date: yyyy:mm:dd format
+*/
+export const ingred_hist = async (start_date, end_date) => {
+    const parameter = new URLSearchParams({
+        start: start_date,
+        end: end_date
+    });
+    const url = `http://localhost:5000/api/analyze/ingredients_use?${parameter.toString()}`;
     //console.log(url);
     await fetch_request(url, {} ,1);
 
