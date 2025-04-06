@@ -7,6 +7,7 @@ const sendOrderRoutes = require("./routes/send_order");
 const deleteItem = require("./routes/delete_item");
 const editItem = require("./routes/edit_item");
 const insertItem = require("./routes/insert_item");
+const analyze = require("./routes/analyze");
 
 
 const app = express();
@@ -21,6 +22,7 @@ app.use("/api/send_orders", sendOrderRoutes);
 app.use("/api/delete", deleteItem);
 app.use("/api/edit", editItem);
 app.use("/api/insert", insertItem);
+app.use("/api/analyze", analyze);
 
 
 // Test route

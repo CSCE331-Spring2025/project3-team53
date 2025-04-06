@@ -29,24 +29,42 @@ export const fetch_request = async(url, body, request_type) => {
     }
 
     try{
-        const response = await fetch(
-            url,
-            {
-                method: method,
-                body: body,
-                headers: {
-                    "Content-Type": "application/json",
-                  }
-            });
-        const data = await response.json();
-        if(response.ok){
-            console.log(data.message);
+        let response;
+        if(request_type !== 1){
+            response = await fetch(
+                url,
+                {
+                    method: method,
+                    body: body,
+                    headers: {
+                        "Content-Type": "application/json",
+                        }
+                });
         }
         else{
-            if(data.message){
-                console.log(data.message);
+            response = await fetch(
+                url,
+                {
+                    method: method,
+                    headers: {
+                        "Content-Type": "application/json",
+                      }
+                });
+        }
+
+        const repjson = await response.json();
+        if(response.ok){
+            if(repjson.message){
+                console.log(repjson.message);
             }
-            console.log(data.error);
+            if(repjson.data)
+                console.log(repjson.data)
+        }
+        else{
+            if(repjson.message){
+                console.log(repjson.message);
+            }
+            console.log(repjson.error);
         }
     }
     catch(err){
@@ -83,7 +101,7 @@ export const edit_drink_price = async (id, new_price) => {
         new_price: new_price,
     }
     );
-    await put_fetch(url, body, 2);
+    await fetch_request(url, body, 2);
 }
 
 /*
@@ -102,7 +120,7 @@ export const edit_inventory_quantity = async (id, value, set_value) => {
         set_value: set_value
     }
     );
-    await put_fetch(url, body, 2);
+    await fetch_request(url, body, 2);
 }
 
 /*
@@ -121,7 +139,7 @@ export const edit_employee = async (id, name, position, store_id) => {
         store_id: store_id
     }
     );
-    await put_fetch(url, body, 2);
+    await fetch_request(url, body, 2);
 }
 
 /*
@@ -142,7 +160,7 @@ export const add_new_drink = async (name, type, ingredient, amount, price) => {
         price: price
     }
     );
-    await put_fetch(url, body, 2);
+    await fetch_request(url, body, 2);
 }
 
 /*
@@ -159,7 +177,7 @@ export const add_new_inventory = async (name, type, store_id) => {
         store_id: store_id
     }
     );
-    await put_fetch(url, body, 2);
+    await fetch_request(url, body, 2);
 }
 
 /*
@@ -176,7 +194,7 @@ export const add_new_employee = async (name, position, store_id) => {
         store_id: store_id
     }
     );
-    await put_fetch(url, body, 2);
+    await fetch_request(url, body, 2);
 }
 
 /*
@@ -194,5 +212,26 @@ export const delete_entry = async (table_id, entry_id) => {
         id: entry_id
     }
     );
-    await put_fetch(url, body, 4);
+    await fetch_request(url, body, 4);
+}
+
+
+/*
+Return analysis of order history from start to end hours on date
+    date: yyyy:mm:dd format
+    start: start hour in 24-hr format
+    end: end hour in 24-hr format
+outputs amount of dollar, drinks, and orders on each hour, wihin the specified hour range
+*/
+export const order_hist = async (date, start_hour, end_hour) => {
+    const parameter = new URLSearchParams({
+        date: date,
+        start: start_hour,
+        end: end_hour
+    });
+    const url = `http://localhost:5000/api/analyze/order_history?${parameter.toString()}`;
+    //console.log(url);
+    await fetch_request(url, {} ,1);
+
+    //TODO: return the data 
 }
