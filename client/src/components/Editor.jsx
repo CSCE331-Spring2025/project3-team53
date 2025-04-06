@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import React, { useState } from 'react';
 
 const IngredientsSelector = () => {
@@ -18,23 +19,23 @@ const IngredientsSelector = () => {
   ];
 
   return (
-<>
-  <div className="scrollable-container">
-    {ingredients.map((ingredient) => (
-      <div
-        key={ingredient}
-        className={`ingredient-item ${selectedIngredient === ingredient ? "selected" : ""}`}
-        onClick={() => handleSelect(ingredient)}
-      >
-        {ingredient}
+    <>
+      <div className="scrollable-container">
+        {ingredients.map((ingredient) => (
+          <div
+            key={ingredient}
+            className={`ingredient-item ${selectedIngredient === ingredient ? "selected" : ""}`}
+            onClick={() => handleSelect(ingredient)}
+          >
+            {ingredient}
+          </div>
+        ))}
       </div>
-    ))}
-  </div>
-  <button className="button-ing">Add Ingredient</button>
-  <div>
-    <button className="button-ing2">Add Item</button>
-  </div>
-</>
+      <div className='sides'>
+      <button className="button-ing">Add Item</button>
+      <button className="button-ing2">Add Ingredient</button>
+      </div>
+    </>
   );
 };
 
@@ -44,12 +45,7 @@ const Editor = () => {
   const [ID2, setID2] = useState("");
   const [ID3, setID3] = useState("");
   const [ID4, setID4] = useState("");
-
-  const handleNameChange = (event) => setName(event.target.value);
-  const handleIDChange = (event) => setID(event.target.value);
-  const handleID2Change = (event) => setID2(event.target.value);
-  const handleID3Change = (event) => setID3(event.target.value);
-  const handleID4Change = (event) => setID4(event.target.value);
+  const [ID5, setID5] = useState("");
 
   return (
     <>
@@ -60,77 +56,92 @@ const Editor = () => {
         <p className="edit-header3">Edit Employees</p>
       </div>
 
-      <div>
-        <div className="Enter_ID">
-          <label htmlFor="drink-name">Enter Name of the Drink to Add:</label>
-          <br />
-          <input
-            id="drink-name"
-            className="text-input"
-            type="text"
-            value={name}
-            onChange={handleNameChange}
-          />
-        </div>
+      <div className="Enter_ID">
+        <label >Enter Name of the Drink to Add:</label>
+        <br />
+        <input
+          id="drink-name"
+          className="text-input"
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </div>
 
-        <div className="ID_2">
-          <label htmlFor="drink-id">Enter ID of the Drink:</label>
-          <br />
-          <input
-            id="drink-id"
-            className="text-input2"
-            type="number"
-            value={ID}
-            onChange={handleIDChange}
-          />
-        </div>
+      <div className="ID_2">
+        <label htmlFor="drink-id">Enter ID of the Drink:</label>
+        <br />
+        <input
+          id="drink-id"
+          className="text-input2"
+          type="number"
+          value={ID}
+          onChange={(e) => setID(e.target.value)}
+        />
+      </div>
 
-        <div className="ID_3">
-          <label htmlFor="employee-id">Enter Employee ID:</label>
-          <br />
-          <input
-            id="employee-id"
-            className="text-input2"
-            type="number"
-            value={ID2}
-            onChange={handleID2Change}
-          />
-        </div>
+      <div className="ID_3">
+        <label htmlFor="employee-id">Enter Employee ID:</label>
+        <br />
+        <input
+          id="employee-id"
+          className="text-input2"
+          type="number"
+          value={ID2}
+          onChange={(e) => setID2(e.target.value)}
+        />
+      </div>
 
-        <div className="ID_4">
-          <label htmlFor="drink-price">Enter The Price:</label>
-          <br />
-          <input
-            id="drink-price"
-            className="text-input3"
-            value={ID3}
-            onChange={handleID3Change}
-          />
-        </div>
+      <div className="ID_4">
+        <label htmlFor="drink-price">Enter The Price:</label>
+        <br />
+        <input
+          id="drink-price"
+          className="text-input3"
+          type="text"
+          value={ID3}
+          onChange={(e) => setID3(e.target.value)}
+        />
+      </div>
 
-        <div className="ID_5">
-          <label htmlFor="drink-price">Enter The New Price:</label>
-          <br />
-          <input
-            id="new-price"
-            className="text-input4"
-            value={ID4}
-            onChange={handleID4Change}
-          />
-        </div>
-        <div>
+      <div className="ID_5">
+        <label htmlFor="new-price">Enter The New Price:</label>
+        <br />
+        <input
+          id="new-price"
+          className="text-input4"
+          type="text"
+          value={ID4}
+          onChange={(e) => setID4(e.target.value)}
+        />
+      </div>
+
+      <div className='sides'>
         <button className="button-sub">Submit</button>
-        </div>
-
-        <div>
         <button className="button-sub2">Add Employee</button>
         </div>
-
         <div>
         <button className="button-sub3">Remove Employee</button>
-        </div>
+      </div>
 
-        <IngredientsSelector />
+      <IngredientsSelector />
+
+      <div className="ID6">
+        <label >Enter ID of the Drink to Remove:</label>
+        <br />
+        <input
+          id="drink-rem"
+          className="text-input5"
+          type="number"
+          value={ID5}
+          onChange={(e) => setID5(e.target.value)}
+        />
+      </div>
+      <button className="button-ing3">Remove Item</button>
+      <div>
+      <Link to="/Manager">
+      <button className = "back">Back</button>
+      </Link>
       </div>
     </>
   );
