@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 
 const PriceEditor = () => {
 
-const [ID, setID] = useState("1");
-const [ID4, setID4] = useState("4");
+const [ID, setID] = useState("");
+const [ID4, setID4] = useState("");
 return (
     <>
      <p className="login-header">Edit Prices</p>

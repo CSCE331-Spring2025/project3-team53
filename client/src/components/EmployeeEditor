@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 const EmployeeEditor = () => {
 
 
-  const [ID2, setID2] = useState("2");
+  const [ID2, setID2] = useState("");
   return(
     <>
    <p>Edit Employees</p>

@@ -41,8 +41,8 @@ const IngredientsSelector = () => {
 
 const MenuEditor = () => {  
   const [name, setName] = useState("BoBruh");
-  const [ID3, setID3] = useState("3");
-  const [ID5, setID5] = useState("6");
+  const [ID3, setID3] = useState("");
+  const [ID5, setID5] = useState("");
 
   return (
     <>  
