@@ -7,10 +7,10 @@ const EmployeeEditor = () => {
   const [ID2, setID2] = useState("");
   return(
     <>
-   <p>Edit Employees</p>
+   <b className ="emp">Edit Employees</b>
 
   <div className="ID_3">
-    <label htmlFor="employee-id">Enter Employee ID:</label>
+    <label>Enter Employee ID:</label>
     <br />
     <input
       id="employee-id"
@@ -21,7 +21,7 @@ const EmployeeEditor = () => {
     />
   </div>
 
-  <div className='sides'>
+  <div className="sides">
     <button className="button-sub2">Add Employee</button>
     <button className="button-sub3">Remove Employee</button>
   </div>

@@ -398,10 +398,9 @@ a {
 .ID_3 {
   display: flex; 
   gap: 2px;
-  margin-left: 75vw;
-  margin-right: -20vw;
+  margin-left: 4vw;
   font-size: 1.5em;
-  margin-top: -2vw;
+  margin-top: 1.5vw;
 }
 
 .ID_4 {
@@ -504,23 +503,23 @@ a {
 }
 
 .button-sub2 {
-  margin-left: 11vw;
+  margin-left: 6vw;
   margin-right: 0vw;
   font-size: 2.5em;
   height: 3vw;
   width: 20vw;
-  margin-top: 2.5vw;
+  margin-top: 1.5vw;
   position: relative;
   cursor: pointer;
 }
 
 .button-sub3 {
-  margin-left: 78.5vw;
+  margin-left: -20vw;
   margin-right: 7vw;
   font-size: 2em;
   height: 3vw;
   width: 20vw;
-  margin-top: 1vw;
+  margin-top: 5.5vw;
   position: relative;
   cursor: pointer;
 }
@@ -558,4 +557,9 @@ a {
   cursor: pointer;
   margin-left: 3.5vw;
   margin-top: 3vw;
+}
+
+.emp {
+  margin-left: 8vw;
+  font-size: 2.5em;
 }
