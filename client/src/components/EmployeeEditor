@@ -1,0 +1,31 @@
+import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+
+const EmployeeEditor = () => {
+
+
+  const [ID2, setID2] = useState("2");
+  return(
+    <>
+   <p>Edit Employees</p>
+
+  <div className="ID_3">
+    <label htmlFor="employee-id">Enter Employee ID:</label>
+    <br />
+    <input
+      id="employee-id"
+      className="text-input2"
+      type="number"
+      value={ID2}
+      onChange={(e) => setID2(e.target.value)}
+    />
+  </div>
+
+  <div className='sides'>
+    <button className="button-sub2">Add Employee</button>
+    <button className="button-sub3">Remove Employee</button>
+  </div>
+</>
+  );
+};
+export default EmployeeEditor;
