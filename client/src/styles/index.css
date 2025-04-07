@@ -388,10 +388,11 @@ a {
 .ID_2 {
   display: flex; 
   gap: 2px;
-  margin-left: 45vw;
+  margin-left: 5vw;
   margin-right: -13vw;
   font-size: 1.5em;
-  margin-top: -2vw;
+  margin-top: 3vw;
+  margin-bottom: -4vw;
 }
 
 .ID_3 {
@@ -421,7 +422,7 @@ a {
 .scrollable-container {
   max-height: 10vw;
   width: 25vw;
-  margin-top: -7vw;
+  margin-top: 2vw;
   margin-left: 4vw;
   margin-right: 25vw;
   overflow-y: auto;
@@ -460,7 +461,7 @@ a {
 .button-ing {
   margin-left: 10vw;
   max-height: 4vw;
-  margin-top: 1vw;
+  margin-top: 2vw;
   width: 10vw;
   font-size: 2em;
   cursor: pointer;
@@ -485,19 +486,19 @@ a {
   align-items: left;
   text-align: left;
   gap: 2px;
-  margin-left: 45vw;
+  margin-left: 5vw;
   margin-right: 2vw;
   font-size: 1.5em;
-  margin-top: -2vw;
+  margin-top: 5vw;
 }
 
 .button-sub {
-  margin-left: 47.5vw;
+  margin-left: 6vw;
   margin-right: 0vw;
   font-size: 2.5em;
   height: 3vw;
   width: 20vw;
-  margin-top: 2.5vw;
+  margin-top: 1.5vw;
   position: relative;
   cursor: pointer;
 }

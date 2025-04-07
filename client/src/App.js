@@ -22,6 +22,9 @@ import Logging from './components/Logging.jsx';
 import ZReport from './components/ZReport.jsx';
 import Settings from './components/Settings.jsx';
 import Editor from './components/Editor.jsx';
+import EmployeeEditor from './components/EmployeeEditor';
+import PriceEditor from './components/PriceEditor.jsx';
+import MenuEditor from './components/MenuEditor.jsx';
 
 
 function App() {
@@ -50,6 +53,9 @@ function App() {
         <Route path="/ZReport" element={<ZReport />} />
         <Route path="/Settings" element={<Settings />} />
         <Route path="/Editor" element={<Editor />} />
+        <Route path="/MenuEditor" element={<MenuEditor />} />
+        <Route path="/PriceEditor" element={<PriceEditor />} />
+        <Route path="/EmployeeEditor" element={<EmployeeEditor />} />
       </Routes>
     </Router>
   );

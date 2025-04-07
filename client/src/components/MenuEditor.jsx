@@ -39,13 +39,13 @@ const IngredientsSelector = () => {
   );
 };
 
-const MenuEditor = () => {  // Fixed syntax here
+const MenuEditor = () => {  
   const [name, setName] = useState("BoBruh");
   const [ID3, setID3] = useState("3");
   const [ID5, setID5] = useState("6");
 
   return (
-    <>  {/* Added Fragment wrapper */}
+    <>  
       <p className="edit-header">Edit Menu</p>
       <div className="Enter_ID">
         <label>Enter Name of the Drink to Add:</label>
@@ -70,6 +70,7 @@ const MenuEditor = () => {  // Fixed syntax here
           onChange={(e) => setID3(e.target.value)}
         />
       </div>
+      <IngredientsSelector/>
 
       <div className="ID6">
         <label>Enter ID of the Drink to Remove:</label>
