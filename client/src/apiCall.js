@@ -66,12 +66,16 @@ export const fetch_request = async(url, body, request_type) => {
             }
             console.log(repjson.error);
         }
+        return repjson;
     }
     catch(err){
         console.log(err);
+        return undefined;
     }
 
 }
+
+
 
 /*
 Send a new order
@@ -81,13 +85,41 @@ Send a new order
     surgar_level: surgar level of the drink ordered
     add_ons: array of add ons on the drink ordered
 */
-export const send_order = async (employee_id, drink_id, ice_level, sugar_level, add_ons) => {
+export const send_indv_order = async (employee_id, drink_id, ice_level, sugar_level, add_ons) => {
     const url = 'http://localhost:5000/api/send_orders/';
     const body = JSON.stringify([
         [employee_id, drink_id, ice_level, sugar_level, add_ons]
     ]);
     await fetch_request(url, body, 3);
 }
+
+
+let orders = new Map(); //global order variable
+let local_id = 1;
+export const enqueue_order = (employee_id, drink_id, ice_level, sugar_level, add_ons) => {
+    orders.set(local_id++, [employee_id, drink_id, ice_level, sugar_level, add_ons]);
+}
+
+export const dequeue_order = (id) => {
+    orders.delete(local_id--);
+}
+
+export const get_order_queue = () => {
+    return Object.fromEntries(orders);
+}
+
+export const send_order_queue = async () => {
+    let temp = [];
+    orders.forEach(arr => {
+        temp.push(arr);
+    })
+    orders.clear();
+    const url = 'http://localhost:5000/api/send_orders/';
+    const body = JSON.stringify(
+        temp
+    );
+    return await fetch_request(url, body, 3);
+};
 
 /*
 Edit price of a drink
@@ -101,7 +133,7 @@ export const edit_drink_price = async (id, new_price) => {
         new_price: new_price,
     }
     );
-    await fetch_request(url, body, 2);
+    return (await fetch_request(url, body, 2));
 }
 
 /*
@@ -120,7 +152,7 @@ export const edit_inventory_quantity = async (id, value, set_value) => {
         set_value: set_value
     }
     );
-    await fetch_request(url, body, 2);
+    return (await fetch_request(url, body, 2));
 }
 
 /*
@@ -139,7 +171,7 @@ export const edit_employee = async (id, name, position, store_id) => {
         store_id: store_id
     }
     );
-    await fetch_request(url, body, 2);
+    return (await fetch_request(url, body, 2));
 }
 
 /*
@@ -160,7 +192,7 @@ export const add_new_drink = async (name, type, ingredient, amount, price) => {
         price: price
     }
     );
-    await fetch_request(url, body, 2);
+    return (await fetch_request(url, body, 2));
 }
 
 /*
@@ -177,7 +209,7 @@ export const add_new_inventory = async (name, type, store_id) => {
         store_id: store_id
     }
     );
-    await fetch_request(url, body, 2);
+    return (await fetch_request(url, body, 2));
 }
 
 /*
@@ -194,7 +226,7 @@ export const add_new_employee = async (name, position, store_id) => {
         store_id: store_id
     }
     );
-    await fetch_request(url, body, 2);
+    return (await fetch_request(url, body, 2));
 }
 
 /*
@@ -212,7 +244,7 @@ export const delete_entry = async (table_id, entry_id) => {
         id: entry_id
     }
     );
-    await fetch_request(url, body, 4);
+    return (await fetch_request(url, body, 4));
 }
 
 
@@ -231,9 +263,7 @@ export const order_hist = async (date, start_hour, end_hour) => {
     });
     const url = `http://localhost:5000/api/analyze/order_history?${parameter.toString()}`;
     //console.log(url);
-    await fetch_request(url, {} ,1);
-
-    //TODO: return the data 
+    return (await fetch_request(url, {} ,1));
 }
 
 /*
@@ -248,7 +278,5 @@ export const ingred_hist = async (start_date, end_date) => {
     });
     const url = `http://localhost:5000/api/analyze/ingredients_use?${parameter.toString()}`;
     //console.log(url);
-    await fetch_request(url, {} ,1);
-
-    //TODO: return the data 
+    return (await fetch_request(url, {} ,1));
 }
