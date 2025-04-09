@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { SERVER_DOMAIN } from "config";
 
 const MilkTea = () => {
     const navigate = useNavigate();
@@ -11,7 +11,7 @@ const MilkTea = () => {
     };
     const [drinks, setDrinks] = useState([]);  
       useEffect(() => {
-        fetch("http://localhost:5000/api/drinks/milk-tea") 
+        fetch("http://" + SERVER_DOMAIN + "/api/drinks/milk-tea") 
           .then((response) => response.json())
           .then((data) => setDrinks(data)) 
           .catch((error) => console.error("Error fetching drinks:", error));
