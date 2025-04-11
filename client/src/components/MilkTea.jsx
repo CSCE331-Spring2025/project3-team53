@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { SERVER_DOMAIN } from "config";
 
 const MilkTea = () => {
   const navigate = useNavigate();
 
-  const [drinks, setDrinks] = useState([]);
-  const [showCheckout, setShowCheckout] = useState(false);
+    const handleCardClick = () => {
+        // Navigate to the options page for the selected drink
+        navigate(`/Options`);
+    };
+    const [drinks, setDrinks] = useState([]);  
+    const [showCheckout, setShowCheckout] = useState(false);
 
-  useEffect(() => {
-    fetch("http://localhost:5000/api/drinks/milk-tea")
-      .then((response) => response.json())
-      .then((data) => setDrinks(data))
-      .catch((error) => console.error("Error fetching drinks:", error));
-  }, []);
-
-  const handleCardClick = (drinkId) => {
-    navigate(`/Options`);
-  };
+    useEffect(() => {
+      fetch("http://localhost:5000/api/drinks/milk-tea")
+          .then((response) => response.json())
+          .then((data) => setDrinks(data)) 
+          .catch((error) => console.error("Error fetching drinks:", error));
+      }, []);
 
   return (
     <>
