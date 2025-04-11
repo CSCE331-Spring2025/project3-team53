@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { SERVER_DOMAIN } from "config";
+import { SERVER_DOMAIN } from "./config";
 
 const Crema = () => {
     const navigate = useNavigate();

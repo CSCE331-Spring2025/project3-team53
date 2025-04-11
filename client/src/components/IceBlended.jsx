@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { SERVER_DOMAIN } from "config";
+import { SERVER_DOMAIN } from "./config";
 
 
 const IceBlended = () => {
