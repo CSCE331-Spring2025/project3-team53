@@ -78,7 +78,7 @@ export const fetch_request = async(url, body, request_type) => {
 
 
 /*
-Send a new order
+Send a new drink order
     employee_id: id of te employee who sent the order
     drink_id: id of the drink ordered
     ice_level: ice level of the drink ordered
@@ -93,27 +93,60 @@ export const send_indv_order = async (employee_id, drink_id, ice_level, sugar_le
     await fetch_request(url, body, 3);
 }
 
+//global order variables
+let orders = new Map(); 
+let local_id = 1;   
 
-let orders = new Map(); //global order variable
-let local_id = 1;
+/*
+Stash a new drink order but does not send it
+    employee_id: id of te employee who sent the order
+    drink_id: id of the drink ordered
+    ice_level: ice level of the drink ordered
+    surgar_level: surgar level of the drink ordered
+    add_ons: array of add ons on the drink ordered
+*/
 export const enqueue_order = (employee_id, drink_id, ice_level, sugar_level, add_ons) => {
     orders.set(local_id++, [employee_id, drink_id, ice_level, sugar_level, add_ons]);
 }
 
+/*
+Delete a saved drink order in the stash
+    id: 
+        temporary id of the drink order saved
+        or 0 to clear the entire stash
+*/
 export const dequeue_order = (id) => {
-    orders.delete(local_id--);
+    if(id === 0){
+        orders.clear();
+        local_id = 1;
+    }
+    else{
+        orders.delete(local_id--);
+    }
 }
 
+/*
+Returns an object containing on the saved drink orders stash, in format
+    {
+    <temporary id 1>:[employee_id_1, drink_id_1, ice_level_1, sugar_level_1, add_ons_1]
+    <temporary id 2>:[employee_id_2, drink_id_2, ice_level_2, sugar_level_2, add_ons_2]
+    ...
+    }
+*/
 export const get_order_queue = () => {
     return Object.fromEntries(orders);
 }
 
+/*
+Sends the all the stashed orders
+*/
 export const send_order_queue = async () => {
     let temp = [];
     orders.forEach(arr => {
         temp.push(arr);
     })
     orders.clear();
+    local_id = 1;
     const url = 'http://localhost:5000/api/send_orders/';
     const body = JSON.stringify(
         temp
