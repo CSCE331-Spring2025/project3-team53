@@ -46,9 +46,6 @@ export const fetch_request = async(url, body, request_type) => {
                 url,
                 {
                     method: method,
-                    headers: {
-                        "Content-Type": "application/json",
-                      }
                 });
         }
 
@@ -57,8 +54,9 @@ export const fetch_request = async(url, body, request_type) => {
             if(repjson.message){
                 console.log(repjson.message);
             }
-            if(repjson.data)
-                console.log(repjson.data)
+            if(repjson.data){
+                //console.log(repjson.data)
+            }
         }
         else{
             if(repjson.message){
@@ -311,5 +309,31 @@ export const ingred_hist = async (start_date, end_date) => {
     });
     const url = `http://localhost:5000/api/analyze/ingredients_use?${parameter.toString()}`;
     //console.log(url);
+    return (await fetch_request(url, {} ,1));
+}
+
+/*
+Return inventory of the store
+    manager_id: manager id of the store
+*/
+export const get_inventory = async (manager_id) => {
+    const parameter = new URLSearchParams({
+        employee_id: manager_id
+    });
+    const url = `http://localhost:5000/api/analyze/inventory?${parameter.toString()}`;
+    //console.log(url);
+    return (await fetch_request(url, {} ,1));
+}
+
+/*
+Return employee data of the store
+    manager_id: manager id of the store
+*/
+export const get_employees = async (manager_id) => {
+    const parameter = new URLSearchParams({
+        employee_id: manager_id
+    });
+    const url = `http://localhost:5000/api/analyze/employee?${parameter.toString()}`;
+    console.log(url);
     return (await fetch_request(url, {} ,1));
 }

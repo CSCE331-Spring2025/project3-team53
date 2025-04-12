@@ -4,7 +4,7 @@ const pool = require("../db");
 const router = express.Router();
 
 /*
-request takes value of (date, start, end) 
+request takes query of (date, start, end) 
     date: yyyy:mm:dd format
     start: start hour in 24-hr format
     end: end hour in 24-hr format
@@ -49,7 +49,7 @@ router.get("/order_history", async (req, res) => {
 });
 
 /*
-request takes value of (start, end) 
+request takes query of (start, end) 
     start: yyyy:mm:dd format
     end: yyyy:mm:dd format
 outputs amount of each ingredient used between the dates
@@ -98,6 +98,65 @@ router.get("/ingredients_use", async (req, res) => {
 
             //console.log(Object.fromEntries(ingredient_count));
             res.status(200).json({data: Object.fromEntries(ingredient_count)});
+        }
+        catch(err){
+            res.status(400).json({message:"Query error", error: err.message});
+        }
+    } 
+    catch (err) {
+        res.status(500).json({message:"Server error", error: err.message});
+    }
+});
+
+/*
+request takes value of (employee_id) 
+    employee_id: id of manager who sent the request
+outputs data on the inventory for the store of the manager
+*/
+router.get("/inventory", async (req, res) => {
+    try {
+        const {employee_id} = req.query;
+        if(!Number.isInteger(Number(employee_id))){
+            return res.status(400).json({error:`Employee id ${employee_id} is not integer`});
+        }
+        let sql = `
+                SELECT id, name, type, quantity FROM inventory 
+                WHERE store_id = (SELECT store_id FROM employees WHERE id = ${employee_id}) 
+                ORDER BY id ASC`;
+        try{
+            //console.log(sql);
+            let result = (await pool.query(sql)).rows;
+            //console.log(result);
+            res.status(200).json({data: result});
+        }
+        catch(err){
+            res.status(400).json({message:"Query error", error: err.message});
+        }
+    } 
+    catch (err) {
+        res.status(500).json({message:"Server error", error: err.message});
+    }
+});
+
+/*
+request takes value of (employee_id) 
+    employee_id: id of manager who sent the request
+outputs data on the employees for the store of the manager
+*/
+router.get("/employee", async (req, res) => {
+    try {
+        const {employee_id} = req.query;
+        if(!Number.isInteger(Number(employee_id))){
+            return res.status(400).json({error:`Employee id ${employee_id} is not integer`});
+        }
+        let sql = `
+                SELECT id, emp_name, position, store_id FROM employees 
+                WHERE store_id = (SELECT store_id FROM employees WHERE id = ${employee_id}) 
+                ORDER BY id ASC`;
+        try{
+            //console.log(sql);
+            let result = (await pool.query(sql)).rows;
+            res.status(200).json({data: result});
         }
         catch(err){
             res.status(400).json({message:"Query error", error: err.message});
