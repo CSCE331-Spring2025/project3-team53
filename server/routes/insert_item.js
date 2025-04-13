@@ -28,13 +28,12 @@ router.put("/drink", async (req, res) => {
         }
         catch(err){
             console.log(err);
-            res.status(400).json({ message:"Query error", error: err.message });
+            return res.status(400).json({ message:"Query error", error: err.message });
         }
-        res.status(200).json({ message:"Drink inserted"});
-        console.log('Drink inserted');
+        return res.status(200).json({ message:"Drink inserted"});
     } 
     catch (err) {
-        res.status(500).json({ message:"Server error", error: err.message });
+        return res.status(500).json({ message:"Server error", error: err.message });
     }
 });
 
@@ -58,13 +57,13 @@ router.put("/inventory", async (req, res) => {
             await pool.query(sql);
         }
         catch(err){
-            res.status(400).json({ message:"Query error", error: err.message });
+            return res.status(400).json({ message:"Query error", error: err.message });
         }
-        res.status(200).json({ message:"Inventory inserted"});
+        return res.status(200).json({ message:"Inventory inserted"});
         console.log('Inventory inserted');
     } 
     catch (err) {
-        res.status(500).json({ message:"Server error", error: err.message });
+        return res.status(500).json({ message:"Server error", error: err.message });
     }
 });
 
@@ -88,14 +87,14 @@ router.put("/employee", async (req, res) => {
             await pool.query(sql);
         }
         catch(err){
-            res.status(400).json({ message:"Query error", error: err.message });
+            return res.status(400).json({ message:"Query error", error: err.message });
         }
-        res.status(200).json({ message:"Employee inserted"});
+        return res.status(200).json({ message:"Employee inserted"});
         console.log('Employee inserted');
     } 
     catch (err) {
         //console.error(err.message);
-        res.status(500).json({ message:"Server error", error: err.message });
+        return res.status(500).json({ message:"Server error", error: err.message });
     }
 });
 

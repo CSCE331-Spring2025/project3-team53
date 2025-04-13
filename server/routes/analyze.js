@@ -37,14 +37,14 @@ router.get("/order_history", async (req, res) => {
                     `;
         try{
             const result = await pool.query(sql);
-            res.status(200).json({data: result.rows});
+            return res.status(200).json({data: result.rows});
         }
         catch(err){
-            res.status(400).json({message:"Query error", error: err.message});
+            return res.status(400).json({message:"Query error", error: err.message});
         }
     } 
     catch (err) {
-        res.status(500).json({message:"Server error", error: err.message});
+        return res.status(500).json({message:"Server error", error: err.message});
     }
 });
 
@@ -77,7 +77,7 @@ router.get("/ingredients_use", async (req, res) => {
             result.forEach(row => {
                 let used = row.ingredients.split(' ');
                 if(row.add_ons){
-                    used.concat(row.add_ons.split(' '));
+                    used = used.concat(row.add_ons.split(' '));
                 }
 
                 used.forEach(element => {
@@ -97,14 +97,14 @@ router.get("/ingredients_use", async (req, res) => {
             });
 
             //console.log(Object.fromEntries(ingredient_count));
-            res.status(200).json({data: Object.fromEntries(ingredient_count)});
+            return res.status(200).json({data: Object.fromEntries(ingredient_count)});
         }
         catch(err){
-            res.status(400).json({message:"Query error", error: err.message});
+            return res.status(400).json({message:"Query error", error: err.message});
         }
     } 
     catch (err) {
-        res.status(500).json({message:"Server error", error: err.message});
+        return res.status(500).json({message:"Server error", error: err.message});
     }
 });
 
@@ -127,14 +127,14 @@ router.get("/inventory", async (req, res) => {
             //console.log(sql);
             let result = (await pool.query(sql)).rows;
             //console.log(result);
-            res.status(200).json({data: result});
+            return res.status(200).json({data: result});
         }
         catch(err){
-            res.status(400).json({message:"Query error", error: err.message});
+            return res.status(400).json({message:"Query error", error: err.message});
         }
     } 
     catch (err) {
-        res.status(500).json({message:"Server error", error: err.message});
+        return res.status(500).json({message:"Server error", error: err.message});
     }
 });
 
@@ -156,14 +156,14 @@ router.get("/employee", async (req, res) => {
         try{
             //console.log(sql);
             let result = (await pool.query(sql)).rows;
-            res.status(200).json({data: result});
+            return res.status(200).json({data: result});
         }
         catch(err){
-            res.status(400).json({message:"Query error", error: err.message});
+            return res.status(400).json({message:"Query error", error: err.message});
         }
     } 
     catch (err) {
-        res.status(500).json({message:"Server error", error: err.message});
+        return res.status(500).json({message:"Server error", error: err.message});
     }
 });
 

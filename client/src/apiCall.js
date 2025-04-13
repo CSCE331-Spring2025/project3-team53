@@ -36,9 +36,7 @@ export const fetch_request = async(url, body, request_type) => {
                 {
                     method: method,
                     body: body,
-                    headers: {
-                        "Content-Type": "application/json",
-                        }
+                    headers: {"Content-Type": "application/json"}
                 });
         }
         else{

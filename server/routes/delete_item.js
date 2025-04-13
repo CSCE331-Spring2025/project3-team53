@@ -26,7 +26,7 @@ router.delete("/", async (req, res) => {
                 table = "inventory";
                 break;
             default:
-                return res.status(400).send('Invalid store id');
+                return res.status(400).send('Invalid table id');
         }
 
         let sql = `DELETE FROM ${table} WHERE id = ${id}`;
@@ -34,13 +34,13 @@ router.delete("/", async (req, res) => {
             const result = await pool.query(sql);
         }
         catch(err){
-            res.status(400).json({ message:"Query error", error: err.message });
+            return res.status(400).json({ message:"Query error", error: err.message });
         }
-        res.status(200).json({ message:"Item deleted"});
+        return res.status(200).json({ message:"Item deleted"});
     } 
     catch (err) {
         //console.error(err.message);
-        res.status(500).json({ message:"Server error", error: err.message });
+        return res.status(500).json({ message:"Server error", error: err.message });
     }
 });
 
