@@ -5,10 +5,11 @@ function Home() {
     return (
         <div>
             <header>
-                <h1>Boba Bliss</h1>
+                <h1>Boba Bobruh Tea</h1>
             </header>
             <main>
-                <h2>Welcome to Boba Bliss</h2>
+                <h2>Welcome to Boba Bobruh Tea</h2>
+                <p>Maybe a short about us</p>
                 <nav>
                     <ul>
                         <li><Link to="/Customer">Customer Login</Link></li>

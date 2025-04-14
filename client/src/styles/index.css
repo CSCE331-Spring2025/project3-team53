@@ -619,3 +619,34 @@ a {
   cursor: pointer;
   margin-top: 0vw;
 }
+.checkout {
+  max-width: 50vw;
+  width: 25vw;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.checkout input, .checkout select, .checkout textarea {
+  display: block;
+  width: 80%;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+.checkout button {
+  padding: 10px 20px;
+  margin-top: 1vw;
+  margin-left:8vw;
+  background-color: #5cb85c;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.checkout button:hover {
+  background-color: #4cae4c;
+}

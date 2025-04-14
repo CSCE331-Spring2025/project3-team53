@@ -58,7 +58,9 @@ const MilkTea = () => {
             <p>Milk Bruhba 1 - $10</p>
             <p>Milk Bruhba 2 - $15</p>
             <p>Total: $25</p>
+            <Link to="/Checkout">
             <button>Proceed to Payment</button>
+            </Link>
           </div>
         </div>
       )}
