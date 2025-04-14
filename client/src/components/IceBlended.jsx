@@ -13,7 +13,7 @@ const IceBlended = () => {
     const [drinks, setDrinks] = useState([]);
     
       useEffect(() => {
-        fetch("http://" + SERVER_DOMAIN + "/api/drinks/ice-blended") 
+        fetch("https://" + SERVER_DOMAIN + "/api/drinks/ice-blended") 
           .then((response) => response.json())
           .then((data) => setDrinks(data))
           .catch((error) => console.error("Error fetching drinks:", error));

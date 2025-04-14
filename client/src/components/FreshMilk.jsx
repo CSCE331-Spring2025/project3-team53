@@ -11,7 +11,7 @@ const FreshMilk = () => {
     };
     const [drinks, setDrinks] = useState([]);  
       useEffect(() => {
-        fetch("http://" + SERVER_DOMAIN + "/api/drinks/fresh-milk") 
+        fetch("https://" + SERVER_DOMAIN + "/api/drinks/fresh-milk") 
           .then((response) => response.json())
           .then((data) => setDrinks(data)) 
           .catch((error) => console.error("Error fetching drinks:", error));

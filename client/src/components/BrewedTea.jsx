@@ -11,7 +11,7 @@ const BrewedTea = () => {
     };
     const [drinks, setDrinks] = useState([]);  
       useEffect(() => {
-        fetch("http://" + SERVER_DOMAIN + "/api/drinks/brewed-tea") 
+        fetch("https://" + SERVER_DOMAIN + "/api/drinks/brewed-tea") 
           .then((response) => response.json())
           .then((data) => setDrinks(data)) 
           .catch((error) => console.error("Error fetching drinks:", error));

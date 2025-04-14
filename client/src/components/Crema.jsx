@@ -12,7 +12,7 @@ const Crema = () => {
     };
     const [drinks, setDrinks] = useState([]);  
       useEffect(() => {
-        fetch("http://" + SERVER_DOMAIN + "/api/drinks/crema") 
+        fetch("https://" + SERVER_DOMAIN + "/api/drinks/crema") 
           .then((response) => response.json())
           .then((data) => setDrinks(data)) 
           .catch((error) => console.error("Error fetching drinks:", error));

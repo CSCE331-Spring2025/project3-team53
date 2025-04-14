@@ -13,7 +13,7 @@ const MilkTea = () => {
     const [showCheckout, setShowCheckout] = useState(false);
 
     useEffect(() => {
-      fetch("http://" + SERVER_DOMAIN + "/api/drinks/milk-tea")
+      fetch("https://" + SERVER_DOMAIN + "/api/drinks/milk-tea")
           .then((response) => response.json())
           .then((data) => setDrinks(data)) 
           .catch((error) => console.error("Error fetching drinks:", error));
