@@ -609,3 +609,13 @@ a {
   padding: 2vh 3vw;
   gap: 2vw;
 }
+
+.login2 {
+  padding: 10px;
+  margin: 10px 0;
+  width: 60%; 
+  background-color: hsl(179, 62%, 43%);
+  border-radius: 7px; 
+  cursor: pointer;
+  margin-top: 0vw;
+}
