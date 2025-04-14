@@ -55,7 +55,11 @@ const OverallLogin = () => {
           onChange={handleCheckboxChange}
         /> Show Password <br />
         <Link to="/Manager">
-          <button className="login">Login</button>
+          <button className="login">Sign In </button>
+        </Link>
+        <p> or</p>
+        <Link to="/Debug">
+          <button className="login2">Login</button>
         </Link>
       </div>
       <p>Username: {username}</p>

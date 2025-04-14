@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { SERVER_DOMAIN } from "./config";
 
 
 const FruitTea = () => {
@@ -10,11 +10,9 @@ const FruitTea = () => {
         // Navigate to the options page for the selected drink
         navigate(`/Options`);
     };
-
-    const [drinks, setDrinks] = useState([]);
-    
+    const [drinks, setDrinks] = useState([]);  
       useEffect(() => {
-        fetch("http://localhost:5000/api/drinks/fruit-tea") 
+        fetch("http://" + SERVER_DOMAIN + "/api/drinks/fruit-tea") 
           .then((response) => response.json())
           .then((data) => setDrinks(data)) 
           .catch((error) => console.error("Error fetching drinks:", error));
@@ -23,6 +21,7 @@ const FruitTea = () => {
       return (
         <div>
           <h2 className="title-m">Fruit Tea Menu</h2>
+          <center>
           <div className="card-container">
             {drinks.map((drink) => (
               <div key={drink.id} className="card" 
@@ -37,6 +36,7 @@ const FruitTea = () => {
               </div>
             ))}
           </div>
+          </center>
           <Link to="/Categories">
           <button className="drinksButton" >Go Back</button>
           </Link>

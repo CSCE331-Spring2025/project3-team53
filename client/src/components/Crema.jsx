@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { SERVER_DOMAIN } from "./config";
 
 const Crema = () => {
     const navigate = useNavigate();
@@ -11,7 +12,7 @@ const Crema = () => {
     };
     const [drinks, setDrinks] = useState([]);  
       useEffect(() => {
-        fetch("http://localhost:5000/api/drinks/crema") 
+        fetch("http://" + SERVER_DOMAIN + "/api/drinks/crema") 
           .then((response) => response.json())
           .then((data) => setDrinks(data)) 
           .catch((error) => console.error("Error fetching drinks:", error));
@@ -20,6 +21,7 @@ const Crema = () => {
       return (
         <div>
           <h2 className="title-m">Crema Menu</h2>
+          <center>
           <div className="card-container">
             {drinks.map((drink) => (
               <div key={drink.id} className="card" 
@@ -34,6 +36,7 @@ const Crema = () => {
               </div>
             ))}
           </div>
+          </center>
           <Link to="/Categories">
           <button className="drinksButton" >Go Back</button>
           </Link>

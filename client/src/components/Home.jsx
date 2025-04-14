@@ -1,26 +1,29 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-
-const Home = () => {
-  return (
-    <div>
-      <h1>Nothing is happening here, pretty neat right?</h1>
-      <img  className = "Hohn" src = "./Nothing.jpg" alt = "picture of the best group"></img><br/>
-      <Link to="/Malogin">
-          <button className="manButton">Go to Manager Login Page</button>
-        </Link>
-        <Link to="/Categories">
-          <button className="drinkButton">Go to Menu Page</button>
-        </Link>
-        <Link to="/Emplogin">
-          <button className="empButton" >Go to Employee Login</button>
-        </Link>
-        <Link to="/Checkout">
-          <button className="empButton" >Go to Checkout</button>
-          </Link>
-    </div>
-  );
-};
+function Home() {
+    return (
+        <div>
+            <header>
+                <h1>Bruhba Bobruh Tea</h1>
+            </header>
+            <main>
+                <h2>Welcome to Bruhba Bobruh Tea</h2>
+                <p>Maybe a short about us</p>
+                <nav>
+                    <ul>
+                        <li><Link to="/Customer">Customer Login</Link></li>
+                        <li><Link to="/Emplogin" >Employee Login</Link></li>
+                        <li><Link to="/Malogin">Manager Login</Link></li>
+                        <li><Link to="/Debug">Debug Page</Link></li>
+                    </ul>
+                </nav>
+            </main>
+            <footer>
+                <p>© 2025 Bruhba. All rights reserved.</p>
+            </footer>
+        </div>
+    );
+}
 
 export default Home;

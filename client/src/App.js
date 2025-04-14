@@ -3,20 +3,30 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ManagerLogin from "./components/ManagerLogin.jsx";
 import EmployeeLogin from "./components/EmplyeeLogin.jsx";
 import Checkout from './components/Checkout.jsx';
-import Home from "./components/Home";
-import Manager from "./components/Manager";
+import Debug from "./components/Debug.jsx";
+import Home from "./components/Home.jsx";
+import OverallLogin from './components/OverallLogin.jsx';
+import Manager from "./components/Manager.jsx";
 import Categories from './components/Categories.jsx';
 import MilkTea from './components/MilkTea.jsx';
-import FruitTea from './components/FruitTea';
-import BrewedTea from './components/BrewedTea';
-import IceBlended from './components/IceBlended';
-import FreshMilk from './components/FreshMilk';
-import Crema from './components/Crema';
-import Mojito from './components/Mojito';
-import Specialty from './components/Specialty';
-import BYOT from './components/BYOT';
+import FruitTea from './components/FruitTea.jsx';
+import BrewedTea from './components/BrewedTea.jsx';
+import IceBlended from './components/IceBlended.jsx';
+import FreshMilk from './components/FreshMilk.jsx';
+import Crema from './components/Crema.jsx';
+import Mojito from './components/Mojito.jsx';
+import Specialty from './components/Specialty.jsx';
+import BYOT from './components/BYOT.jsx';
 import Options from './components/Options.jsx';
-
+import Inventory from './components/Inventory.jsx';
+import OrderHistory from './components/OrderHistory.jsx';
+import Logging from './components/Logging.jsx';
+import ZReport from './components/ZReport.jsx';
+import Settings from './components/Settings.jsx';
+import Editor from './components/Editor.jsx';
+import EmployeeEditor from './components/EmployeeEditor.jsx';
+import PriceEditor from './components/PriceEditor.jsx';
+import MenuEditor from './components/MenuEditor.jsx';
 
 
 function App() {
@@ -24,7 +34,10 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/Debug" element={<Debug />} />
+        <Route path="/Customer" element={<OverallLogin />} />
         <Route path="/Malogin" element={<ManagerLogin />} />
+        <Route path="/Debug" element={<Debug />} />
         <Route path="/Emplogin" element={<EmployeeLogin />} />
         <Route path="/Categories" element={<Categories />} />
         <Route path="/Checkout" element={< Checkout/>} />
@@ -39,6 +52,15 @@ function App() {
         <Route path="/Drinks/specialty" element={<Specialty />} />
         <Route path="/Drinks/byot" element={<BYOT />} />
         <Route path="/Options" element={<Options />} />
+        <Route path="/Inventory" element={<Inventory />} />
+        <Route path="/OrderH" element={<OrderHistory />} />
+        <Route path="/Logging" element={<Logging />} />
+        <Route path="/ZReport" element={<ZReport />} />
+        <Route path="/Settings" element={<Settings />} />
+        <Route path="/Editor" element={<Editor />} />
+        <Route path="/MenuEditor" element={<MenuEditor />} />
+        <Route path="/PriceEditor" element={<PriceEditor />} />
+        <Route path="/EmployeeEditor" element={<EmployeeEditor />} />
       </Routes>
     </Router>
   );
