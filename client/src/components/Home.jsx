@@ -5,10 +5,10 @@ function Home() {
     return (
         <div>
             <header>
-                <h1>Boba Bobruh Tea</h1>
+                <h1>Bruhba Bobruh Tea</h1>
             </header>
             <main>
-                <h2>Welcome to Boba Bobruh Tea</h2>
+                <h2>Welcome to Bruhba Bobruh Tea</h2>
                 <p>Maybe a short about us</p>
                 <nav>
                     <ul>
@@ -20,7 +20,7 @@ function Home() {
                 </nav>
             </main>
             <footer>
-                <p>© 2025 Bobruh. All rights reserved.</p>
+                <p>© 2025 Bruhba. All rights reserved.</p>
             </footer>
         </div>
     );

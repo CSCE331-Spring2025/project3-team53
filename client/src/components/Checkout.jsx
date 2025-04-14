@@ -8,8 +8,8 @@ function Checkout() {
     const [payment, setPayment] = useState("");
     const [shipping, setShipping] = useState("Delivery");
     const [cartItems, setCartItems] = useState([
-        { name: "Milk Tea", price: 5.0, quantity: 2 },
-        { name: "Taro Slush", price: 6.0, quantity: 1 },
+        { name: "Water", price: 999.0, quantity: 2 },
+        { name: "Air", price: 2000.0, quantity: 1 },
     ]);
     const [orderConfirmed, setOrderConfirmed] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
