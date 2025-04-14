@@ -83,16 +83,6 @@ function Checkout() {
                             required
                         />
                     </label>
-                    <label>
-                        Quantity:
-                        <input
-                            value={quantity}
-                            onChange={handleQuantityChange}
-                            type="number"
-                            min="1"
-                            required
-                        />
-                    </label>
 
                     {shipping === "Delivery" && (
                         <label>
