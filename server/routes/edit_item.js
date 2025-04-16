@@ -21,14 +21,14 @@ router.put("/drink", async (req, res) => {
             await pool.query(sql);
         }
         catch(err){
-            res.status(400).json({ message:"Query error", error: err.message });
+            return res.status(400).json({ message:"Query error", error: err.message });
         }
-        res.status(200).json({ message:"Drink price updated"});
+        return res.status(200).json({ message:"Drink price updated"});
         //console.log('Drink updated');
     } 
     catch (err) {
         //console.error(err.message);
-        res.status(500).json({ message:"Server error", error: err.message });
+        return res.status(500).json({ message:"Server error", error: err.message });
     }
 });
 
@@ -47,19 +47,19 @@ router.put("/inventory", async (req, res) => {
         let quantity;
         (set_value)?quantity = value: quantity = `quantity + ${value}`;
         let sql = `UPDATE inventory SET quantity = ${quantity} WHERE id = ${inventory_id};`;
-        console.log(sql);
+        //console.log(sql);
         try{
             await pool.query(sql);
         }
         catch(err){
-            res.status(400).json({ message:"Query error", error: err.message });
+            return res.status(400).json({ message:"Query error", error: err.message });
         }
-        res.status(200).json({ message:"Inventory updated"});
+        return res.status(200).json({ message:"Inventory updated"});
         //console.log('Inventory updated');
     } 
     catch (err) {
         //console.error(err.message);
-        res.status(500).json({ message:"Server error", error: err.message });
+        return res.status(500).json({ message:"Server error", error: err.message });
     }
 });
 
@@ -85,14 +85,14 @@ router.put("/employee", async (req, res) => {
             await pool.query(sql);
         }
         catch(err){
-            res.status(400).json({ message:"Query error", error: err.message });
+            return res.status(400).json({ message:"Query error", error: err.message });
         }
-        res.status(200).json({ message:"Employee updated"});
+        return res.status(200).json({ message:"Employee updated"});
         //console.log('Employee updated');
     } 
     catch (err) {
         //console.error(err.message);
-        res.status(500).json({ message:"Server error", error: err.message });
+        return res.status(500).json({ message:"Server error", error: err.message });
     }
 });
 

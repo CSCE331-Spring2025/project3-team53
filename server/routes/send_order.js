@@ -1,5 +1,6 @@
 const express = require("express");
 const pool = require("../db");
+const { fetch_request } = require("../../client/src/apiCall");
 
 const router = express.Router();
 
@@ -34,7 +35,7 @@ router.post("/", async (req, res) => {
           price = Number(price);
           add_on_text = add_ons_arr.join(" ");
           add_ons_arr.forEach(element => {
-            if(element === "Creama" || element === "Ice Cream"){
+            if(element === "creama" || element === "ice_cream"){
               price += 1;
             }
             else{
@@ -43,19 +44,38 @@ router.post("/", async (req, res) => {
           });
           let sql = `INSERT INTO orders (order_number, employee_id, drink_id, ice_level, sugar_level, add_ons, order_date, price) 
           VALUES (${order_number}, ${employee_id}, ${drink_id}, ${ice_level}, ${sugar_level}, '${add_on_text}', '${timenow}', ${price});`
-          //console.log(sql);
           try{
-            const result = await pool.query(sql);
+            //await pool.query(sql);
+          }          
+          catch(err){
+            return res.status(400).json({message: "Query Error at adding order", error: err.message});
+          }
+
+          try{
+            sql = `SELECT store_id FROM employees WHERE id = ${employee_id};`;
+            let store_id = (await pool.query(sql)).rows[0].store_id;
+
+            sql = `SELECT ingredients FROM drinks WHERE id = ${drink_id}`;
+            let used = (await pool.query(sql)).rows[0].ingredients.split(' ');
+            if(add_ons_arr.length !== 0){
+              used = used.concat(add_ons_arr);
+            }
+            //console.log(used);
+            used.forEach(async (ingredient) => {
+              sql = `SELECT id FROM inventory WHERE name = '${ingredient}' AND store_id = ${store_id}`;
+              let ingredient_id = (await pool.query(sql)).rows[0].id
+              
+              sql = `UPDATE inventory SET quantity = quantity - 1 WHERE id = ${ingredient_id};`;
+              await pool.query(sql);
+            });
           }
           catch(err){
-            res.status(400).json({message: "Query Error", error: err.message});
+            return res.status(400).json({message: "Query Error at logging inventory", error: err.message});
           }
         }
-        //console.log("Order logged");
-        res.status(200).json({message: "Order sent"});
+        return res.status(200).json({message: "Order sent"});
     } catch (err) {
-        //console.error(err.message);
-        res.status(500).json({ message:"Server error", error: err.message });
+        return res.status(500).json({ message:"Server error", error: err.message });
     }
 });
 

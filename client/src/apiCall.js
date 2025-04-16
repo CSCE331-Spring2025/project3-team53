@@ -36,9 +36,7 @@ export const fetch_request = async(url, body, request_type) => {
                 {
                     method: method,
                     body: body,
-                    headers: {
-                        "Content-Type": "application/json",
-                        }
+                    headers: {"Content-Type": "application/json"}
                 });
         }
         else{
@@ -46,19 +44,16 @@ export const fetch_request = async(url, body, request_type) => {
                 url,
                 {
                     method: method,
-                    headers: {
-                        "Content-Type": "application/json",
-                      }
                 });
         }
-
         const repjson = await response.json();
         if(response.ok){
             if(repjson.message){
                 console.log(repjson.message);
             }
-            if(repjson.data)
-                console.log(repjson.data)
+            if(repjson.data){
+                //console.log(repjson.data)
+            }
         }
         else{
             if(repjson.message){
@@ -66,28 +61,93 @@ export const fetch_request = async(url, body, request_type) => {
             }
             console.log(repjson.error);
         }
+        return repjson;
     }
     catch(err){
         console.log(err);
+        return undefined;
     }
 
 }
 
+
+
 /*
-Send a new order
+Send a new drink order
     employee_id: id of te employee who sent the order
     drink_id: id of the drink ordered
     ice_level: ice level of the drink ordered
     surgar_level: surgar level of the drink ordered
     add_ons: array of add ons on the drink ordered
 */
-export const send_order = async (employee_id, drink_id, ice_level, sugar_level, add_ons) => {
+export const send_indv_order = async (employee_id, drink_id, ice_level, sugar_level, add_ons) => {
     const url = 'http://localhost:5000/api/send_orders/';
     const body = JSON.stringify([
         [employee_id, drink_id, ice_level, sugar_level, add_ons]
     ]);
     await fetch_request(url, body, 3);
 }
+
+//global order variables
+let orders = new Map(); 
+let local_id = 1;   
+
+/*
+Stash a new drink order but does not send it
+    employee_id: id of te employee who sent the order
+    drink_id: id of the drink ordered
+    ice_level: ice level of the drink ordered
+    surgar_level: surgar level of the drink ordered
+    add_ons: array of add ons on the drink ordered
+*/
+export const enqueue_order = (employee_id, drink_id, ice_level, sugar_level, add_ons) => {
+    orders.set(local_id++, [employee_id, drink_id, ice_level, sugar_level, add_ons]);
+}
+
+/*
+Delete a saved drink order in the stash
+    id: 
+        temporary id of the drink order saved
+        or 0 to clear the entire stash
+*/
+export const dequeue_order = (id) => {
+    if(id === 0){
+        orders.clear();
+        local_id = 1;
+    }
+    else{
+        orders.delete(local_id--);
+    }
+}
+
+/*
+Returns an object containing on the saved drink orders stash, in format
+    {
+    <temporary id 1>:[employee_id_1, drink_id_1, ice_level_1, sugar_level_1, add_ons_1]
+    <temporary id 2>:[employee_id_2, drink_id_2, ice_level_2, sugar_level_2, add_ons_2]
+    ...
+    }
+*/
+export const get_order_queue = () => {
+    return Object.fromEntries(orders);
+}
+
+/*
+Sends the all the stashed orders
+*/
+export const send_order_queue = async () => {
+    let temp = [];
+    orders.forEach(arr => {
+        temp.push(arr);
+    })
+    orders.clear();
+    local_id = 1;
+    const url = 'http://localhost:5000/api/send_orders/';
+    const body = JSON.stringify(
+        temp
+    );
+    return await fetch_request(url, body, 3);
+};
 
 /*
 Edit price of a drink
@@ -101,7 +161,7 @@ export const edit_drink_price = async (id, new_price) => {
         new_price: new_price,
     }
     );
-    await fetch_request(url, body, 2);
+    return (await fetch_request(url, body, 2));
 }
 
 /*
@@ -120,7 +180,7 @@ export const edit_inventory_quantity = async (id, value, set_value) => {
         set_value: set_value
     }
     );
-    await fetch_request(url, body, 2);
+    return (await fetch_request(url, body, 2));
 }
 
 /*
@@ -139,7 +199,7 @@ export const edit_employee = async (id, name, position, store_id) => {
         store_id: store_id
     }
     );
-    await fetch_request(url, body, 2);
+    return (await fetch_request(url, body, 2));
 }
 
 /*
@@ -160,7 +220,7 @@ export const add_new_drink = async (name, type, ingredient, amount, price) => {
         price: price
     }
     );
-    await fetch_request(url, body, 2);
+    return (await fetch_request(url, body, 2));
 }
 
 /*
@@ -177,7 +237,7 @@ export const add_new_inventory = async (name, type, store_id) => {
         store_id: store_id
     }
     );
-    await fetch_request(url, body, 2);
+    return (await fetch_request(url, body, 2));
 }
 
 /*
@@ -194,7 +254,7 @@ export const add_new_employee = async (name, position, store_id) => {
         store_id: store_id
     }
     );
-    await fetch_request(url, body, 2);
+    return (await fetch_request(url, body, 2));
 }
 
 /*
@@ -210,9 +270,8 @@ export const delete_entry = async (table_id, entry_id) => {
     const body = JSON.stringify({
         table_id: table_id,
         id: entry_id
-    }
-    );
-    await fetch_request(url, body, 4);
+    });
+    return (await fetch_request(url, body, 4));
 }
 
 
@@ -231,9 +290,7 @@ export const order_hist = async (date, start_hour, end_hour) => {
     });
     const url = `http://localhost:5000/api/analyze/order_history?${parameter.toString()}`;
     //console.log(url);
-    await fetch_request(url, {} ,1);
-
-    //TODO: return the data 
+    return (await fetch_request(url, {} ,1));
 }
 
 /*
@@ -248,7 +305,62 @@ export const ingred_hist = async (start_date, end_date) => {
     });
     const url = `http://localhost:5000/api/analyze/ingredients_use?${parameter.toString()}`;
     //console.log(url);
-    await fetch_request(url, {} ,1);
+    return (await fetch_request(url, {} ,1));
+}
 
-    //TODO: return the data 
+/*
+Return inventory of the store
+    manager_id: manager id of the store
+*/
+export const get_inventory = async (manager_id) => {
+    const parameter = new URLSearchParams({
+        employee_id: manager_id
+    });
+    const url = `http://localhost:5000/api/analyze/inventory?${parameter.toString()}`;
+    //console.log(url);
+    return (await fetch_request(url, {} ,1));
+}
+
+/*
+Return employee data of the store
+    manager_id: manager id of the store
+*/
+export const get_employees = async (manager_id) => {
+    const parameter = new URLSearchParams({
+        employee_id: manager_id
+    });
+    const url = `http://localhost:5000/api/analyze/employee?${parameter.toString()}`;
+    return (await fetch_request(url, {} ,1));
+}
+
+/*
+Return the menu data
+*/
+export const get_menu = async () => {
+    const url = `http://localhost:5000/api/analyze/menu`;
+    return (await fetch_request(url, {} ,1));
+}
+
+/*
+Return price of a drink + their add ons
+    drink_id: id of the drink
+    add_ons: string array of the add ons on the drink
+*/
+export const get_order_price = async (drink_id, add_ons) => {
+    const url = 'http://localhost:5000/api/analyze/order_price';
+    const body = JSON.stringify({
+        drink_id: drink_id,
+        add_ons: add_ons
+    });
+    return (await fetch_request(url, body ,2)).data;
+}
+
+export const get_stash_price = async () => {
+    const temp = new Map();
+    await Promise.all(
+        Array.from(orders).map(async ([key, value]) => {
+            temp.set(key, await get_order_price(value[1],value[4]))
+        })
+    );
+    return temp;
 }
