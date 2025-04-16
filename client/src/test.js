@@ -9,14 +9,19 @@ import * as func from './apiCall.js';
 
 func.enqueue_order(1,2,3,4,['mini_pearl','pudding']);
 func.enqueue_order(1,2,3,4,['black_pearl']);
-console.log(func.get_order_queue().get(2));
+//console.log(func.get_order_queue().get(2));
 // func.send_order_queue();
 
 // func.get_employees(1).then((result) => {
 //     console.log(result)
 // });
 
+export const getPrice = async () => {
+    const x = await func.get_order_price(2, ["creama", "oreo", "pudding"]);
+    console.log(x);
+};
+
 //func.get_menu().then((result) => {console.log(result)});
-func.get_order_price(2, ["creama", "oreo", "pudding"]).then((result) => {console.log(result)});
+//func.get_order_price(2, ["creama", "oreo", "pudding"]).then((result) => {console.log(result)});
 
 
