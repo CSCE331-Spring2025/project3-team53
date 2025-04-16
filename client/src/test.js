@@ -9,7 +9,7 @@ import * as func from './apiCall.js';
 
 func.enqueue_order(1,2,3,4,['mini_pearl','pudding']);
 func.enqueue_order(1,2,3,4,['black_pearl']);
-// console.log(func.get_order_queue());
+console.log(func.get_order_queue().get(2));
 // func.send_order_queue();
 
 // func.get_employees(1).then((result) => {
@@ -17,5 +17,6 @@ func.enqueue_order(1,2,3,4,['black_pearl']);
 // });
 
 //func.get_menu().then((result) => {console.log(result)});
-func.get_order_price(1, ["creama"]).then((result) => {console.log(result)});
-func.get_stash_price().then(result => console.log(result));
+func.get_order_price(2, ["creama", "oreo", "pudding"]).then((result) => {console.log(result)});
+
+

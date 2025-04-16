@@ -129,7 +129,7 @@ Returns an object containing on the saved drink orders stash, in format
     }
 */
 export const get_order_queue = () => {
-    return Object.fromEntries(orders);
+    return orders;
 }
 
 /*
