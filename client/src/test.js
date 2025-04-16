@@ -15,3 +15,6 @@ import * as func from './apiCall.js';
 // func.get_employees(1).then((result) => {
 //     console.log(result)
 // });
+
+//func.get_menu().then((result) => {console.log(result)});
+func.get_order_price(1, ["creama"]).then((result) => {console.log(result)});

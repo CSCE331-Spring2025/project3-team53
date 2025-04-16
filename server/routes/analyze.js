@@ -167,4 +167,55 @@ router.get("/employee", async (req, res) => {
     }
 });
 
+/*
+Returns the all drink info in menu 
+*/
+router.get("/menu", async (req, res) => {
+    try {
+        let sql = `SELECT * FROM drinks ORDER BY id ASC`;
+        try{
+            //console.log(sql);
+            let result = (await pool.query(sql)).rows;
+            return res.status(200).json({data: result});
+        }
+        catch(err){
+            return res.status(400).json({message:"Query error", error: err.message});
+        }
+    } 
+    catch (err) {
+        return res.status(500).json({message:"Server error", error: err.message});
+    }
+});
+
+/*
+Returns the price of a drink + addons
+    drink_id: id of the drink
+    add_ons: array containing the add ons on the drink
+*/
+router.put("/order_price", async (req, res) => {
+    try {
+        const {drink_id, add_ons} = req.body;
+        if(!Number.isInteger(drink_id) || !Array.isArray(add_ons)){
+            return res.status(400).json({error:`Invalid input`});
+        }
+        let sql = `SELECT item_price FROM drinks WHERE id = ${drink_id}`;
+        try{
+            let price = Number.parseFloat((await pool.query(sql)).rows[0].item_price);
+            add_ons.forEach(element => {
+                if(element === "creama" || element === "ice_cream"){
+                  price += 1;
+                }
+                else{
+                  price += 0.75;
+                }});
+            return res.status(200).json({data: price});
+        }
+        catch(err){
+            return res.status(400).json({message:"Query error", error: err.message});
+        }
+    } 
+    catch (err) {
+        return res.status(500).json({message:"Server error", error: err.message});
+    }
+});
 module.exports = router;

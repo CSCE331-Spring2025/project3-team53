@@ -46,7 +46,6 @@ export const fetch_request = async(url, body, request_type) => {
                     method: method,
                 });
         }
-
         const repjson = await response.json();
         if(response.ok){
             if(repjson.message){
@@ -271,8 +270,7 @@ export const delete_entry = async (table_id, entry_id) => {
     const body = JSON.stringify({
         table_id: table_id,
         id: entry_id
-    }
-    );
+    });
     return (await fetch_request(url, body, 4));
 }
 
@@ -332,6 +330,27 @@ export const get_employees = async (manager_id) => {
         employee_id: manager_id
     });
     const url = `http://localhost:5000/api/analyze/employee?${parameter.toString()}`;
-    console.log(url);
     return (await fetch_request(url, {} ,1));
+}
+
+/*
+Return the menu data
+*/
+export const get_menu = async () => {
+    const url = `http://localhost:5000/api/analyze/menu`;
+    return (await fetch_request(url, {} ,1));
+}
+
+/*
+Return price of a drink + their add ons
+    drink_id: id of the drink
+    add_ons: string array of the add ons on the drink
+*/
+export const get_order_price = async (drink_id, add_ons) => {
+    const url = 'http://localhost:5000/api/analyze/order_price';
+    const body = JSON.stringify({
+        drink_id: drink_id,
+        add_ons: add_ons
+    });
+    return (await fetch_request(url, body ,2));
 }
