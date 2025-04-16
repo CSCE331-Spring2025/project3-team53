@@ -16,7 +16,7 @@ body {
   margin: 40px 20px;
   text-align: center;
   width: 300px;
-  min-height: 300px; /* Adjust as needed */
+  min-height: 350px; /* Adjust as needed */
   display: inline-flex; /* Use flexbox */
   flex-direction: column; /* Stack items vertically */
   justify-content: space-between; /* Ensures content is evenly spaced */
