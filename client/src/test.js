@@ -7,8 +7,8 @@ import * as func from './apiCall.js';
 //func.order_hist('2024-05-06', 12, 15).then(res => {console.log(res)});
 //func.ingred_hist('2024-06-01', '2024-07-01').then(res => {console.log(res)});
 
-// func.enqueue_order(1,2,3,4,['mini_pearl','pudding']);
-// func.enqueue_order(1,2,3,4,['black_pearl']);
+func.enqueue_order(1,2,3,4,['mini_pearl','pudding']);
+func.enqueue_order(1,2,3,4,['black_pearl']);
 // console.log(func.get_order_queue());
 // func.send_order_queue();
 
@@ -18,3 +18,4 @@ import * as func from './apiCall.js';
 
 //func.get_menu().then((result) => {console.log(result)});
 func.get_order_price(1, ["creama"]).then((result) => {console.log(result)});
+func.get_stash_price().then(result => console.log(result));

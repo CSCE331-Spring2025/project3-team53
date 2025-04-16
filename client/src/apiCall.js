@@ -352,5 +352,15 @@ export const get_order_price = async (drink_id, add_ons) => {
         drink_id: drink_id,
         add_ons: add_ons
     });
-    return (await fetch_request(url, body ,2));
+    return (await fetch_request(url, body ,2)).data;
+}
+
+export const get_stash_price = async () => {
+    const temp = new Map();
+    await Promise.all(
+        Array.from(orders).map(async ([key, value]) => {
+            temp.set(key, await get_order_price(value[1],value[4]))
+        })
+    );
+    return temp;
 }
