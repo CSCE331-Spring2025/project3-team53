@@ -7,6 +7,7 @@ const Options = () => {
   const [topping, setTopping] = useState("");
 
   return (
+    <>
     <div style={{ padding: "20px" }}>
       <h1>Modify Order</h1>
       
@@ -54,10 +55,11 @@ const Options = () => {
           </label>
         ))}
       </div>
+      </div>
       <Link to="/drinks/milkTea">
               <button className="drinksButton" >Go Back</button>
           </Link>
-    </div>
+          </>
   );
 };
 
