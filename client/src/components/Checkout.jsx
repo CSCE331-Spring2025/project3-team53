@@ -145,6 +145,9 @@ function Checkout() {
                     </Link>
                 </div>
             )}
+        <Link to="/drinks/milkTea">
+            <button  >Go Back</button>
+        </Link>
         </div>
     );
 }

@@ -25,6 +25,9 @@ const EmployeeEditor = () => {
     <button className="button-sub2">Add Employee</button>
     <button className="button-sub3">Remove Employee</button>
   </div>
+  <Link to="/Manager">
+          <button className="back">Back</button>
+  </Link>
 </>
   );
 };

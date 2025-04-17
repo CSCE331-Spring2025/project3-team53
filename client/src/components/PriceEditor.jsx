@@ -33,7 +33,12 @@ return (
           onChange={(e) => setID4(e.target.value)}
         />
       </div>
+      <div>
       <button className="button-sub">Submit</button>
+      </div>
+        <Link to="/Manager">
+                <button className="back">Back</button>
+        </Link>
     </>
 );
 };

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Options = () => {
   const [ice, setIce] = useState("");
@@ -53,6 +54,9 @@ const Options = () => {
           </label>
         ))}
       </div>
+      <Link to="/drinks/milkTea">
+              <button className="drinksButton" >Go Back</button>
+          </Link>
     </div>
   );
 };
