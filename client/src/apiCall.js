@@ -355,6 +355,9 @@ export const get_order_price = async (drink_id, add_ons) => {
     return (await fetch_request(url, body ,2)).data;
 }
 
+/*
+Return price of a drink + their add ons in the stash
+*/
 export const get_stash_price = async () => {
     const temp = new Map();
     await Promise.all(
@@ -363,4 +366,14 @@ export const get_stash_price = async () => {
         })
     );
     return temp;
+}
+
+/*
+Return data on the current weather in college station
+Imagine having good cybersecruity practices
+*/
+
+export const get_weather = async () => {
+    const url = "http://api.weatherapi.com/v1/current.json?key=44c96021f40a49f197114416252004&q=77845";
+    return await fetch_request(url, {}, 1)
 }
