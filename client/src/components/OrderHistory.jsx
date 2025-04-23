@@ -69,9 +69,9 @@ const OrderHistory = () => {
       </svg>
       <br/>
       <div className = "range">
-      <input type="date" placeholder="Select a date" />
-      <p>-----</p>
-      <input type="date" placeholder="Select a date" />
+        <input type="date" placeholder="Select a date" />
+        <p>-----</p>
+        <input type="date" placeholder="Select a date" />
       </div>
       <Link to="/Manager">
         <button>Go Back</button>

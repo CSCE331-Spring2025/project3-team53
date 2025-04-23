@@ -67,18 +67,18 @@ const Logging = () => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-              }}
-            ></div>
+              }}>
+            </div>
           </div>
         </div>
         <p className="login-header4">Select Date</p> <br/>
         <input className = "dates"type="date" placeholder="Select a date" />
         <div>
-        <button className="log2">Make Report</button>
-        <button className="log3">Clear</button>
+          <button className="log2">Make Report</button>
+          <button className="log3">Clear</button>
         </div>
         <Link Link to="/Logging">
-        <button className="back_z">Go to X Report</button>
+          <button className="back_z">Go to X Report</button>
         </Link>
 
       </div>

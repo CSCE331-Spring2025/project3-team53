@@ -58,12 +58,12 @@ const Inventory = () => {
         </p>
         <br/>
         <div>
-      <button className="invent">Add Ingredient/s</button>
-      <button className="invent">Remove Ingredient/s</button>
+          <button className="invent">Add Ingredient/s</button>
+          <button className="invent">Remove Ingredient/s</button>
         </div>
         <Link to="/Manager">
-        <button>Go Back</button>
-      </Link>
+          <button>Go Back</button>
+        </Link>
       </div>
     );
   };

@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
-
-
 const EmployeeLogin = () => {
   const [ID, setID] = useState("");
 
@@ -10,9 +8,7 @@ const EmployeeLogin = () => {
     setID(event.target.value);
   }
 
-
   return (
-
     <div className = "login-body">
       <h2 className = "login-header">Welcome!</h2>
       <div className='login-card'>

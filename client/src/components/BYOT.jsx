@@ -1,5 +1,3 @@
-
-
 const BYOT = () => {
     return (
         <>

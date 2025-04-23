@@ -25,15 +25,15 @@ const Logging = () => {
       <input className = "date"type="date" placeholder="Select a date" />
       <br/>
       <div>
-      <button className="log">Make Report</button>
-      <button className="log">Clear</button>
+        <button className="log">Make Report</button>
+        <button className="log">Clear</button>
       </div>
       <Link to="/Manager">
         <button>Go Back</button>
       </Link>
 
       <Link to="/ZReport">
-      <button className="rider">Go to Z Report</button>
+        <button className="rider">Go to Z Report</button>
       </Link>
     </>
   );
