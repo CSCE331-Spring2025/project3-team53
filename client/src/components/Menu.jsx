@@ -12,6 +12,7 @@ const Menu = () => {
   const [drinkPrices, setDrinkPrices] = useState({});
 
   useEffect(() => {
+    console.log(func.get_order_queue());
     fetch(`http://${SERVER_DOMAIN}/api/drinks/${category}`)
       .then((response) => response.json())
       .then((data) => {
@@ -40,7 +41,7 @@ const Menu = () => {
   }, [category]);
 
   const handleCardClick = (drinkId) => {
-    navigate(`/Options?drink=${drinkId}`);
+    navigate(`/Options?drink=${drinkId}`, {state: {category: category}});
   };
 
   return (
