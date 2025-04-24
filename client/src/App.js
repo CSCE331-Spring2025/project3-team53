@@ -28,6 +28,7 @@ import EmployeeEditor from './components/EmployeeEditor.jsx';
 import PriceEditor from './components/PriceEditor.jsx';
 import MenuEditor from './components/MenuEditor.jsx';
 import CustomerOptions from './components/CustomerOptions.jsx';
+import CustomerMilkTea from './components/CustomerMilkTea.jsx';
 
 
 function App() {
@@ -63,6 +64,7 @@ function App() {
         <Route path="/PriceEditor" element={<PriceEditor />} />
         <Route path="/EmployeeEditor" element={<EmployeeEditor />} />
         <Route path="/CustomerOptions" element={<CustomerOptions/>} />
+        <Route path="/CustomerOptions/milk-tea" element={<CustomerMilkTea/>} />
       </Routes>
     </Router>
   );
