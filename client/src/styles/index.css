@@ -708,3 +708,34 @@ a {
   vertical-align: top;
   overflow: hidden;
 }
+
+.popup-overlay {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 95vh; 
+  background: #fff;
+  box-shadow: 0 -0.5vh 2vh rgba(0, 0, 0, 0.3); /* Drop shadow above the pop-up */
+  padding: 2vh 2vw;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: transform 0.3s ease;
+}
+
+.popup-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%; /* Ensure content spans the pop-up width */
+}
+
+.close-btn {
+  cursor: pointer;
+  font-size: 1.5rem;
+  margin-left: 94.5vw;
+  margin-bottom: 50.5vw;
+
+}

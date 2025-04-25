@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { SERVER_DOMAIN } from "./config";
 
-const CustomerMilkTea = () => {
+const CustomerSpecialty = () => {
   const navigate = useNavigate();
 
   const handleCardClick = (drink) => {
@@ -16,7 +16,7 @@ const CustomerMilkTea = () => {
   const [showCheckout, setShowCheckout] = useState(false);
 
   useEffect(() => {
-    fetch("http://" + SERVER_DOMAIN + "/api/drinks/milk-tea")
+    fetch("http://" + SERVER_DOMAIN + "/api/drinks/specialty")
       .then((response) => response.json())
       .then((data) => setDrinks(data)) 
       .catch((error) => console.error("Error fetching drinks:", error));
@@ -24,7 +24,7 @@ const CustomerMilkTea = () => {
 
   return (
     <>
-      <h2 className="title-m">Milk Tea Menu</h2>
+      <h2 className="title-m">Specialty Menu</h2>
       <div>
         <div className="cart">
           <button className="checkoutButton" onClick={() => setShowCheckout(true)}>
@@ -75,7 +75,7 @@ const CustomerMilkTea = () => {
                    </span>
                         </div>
                           </div>
-                        )}
+                )}
 
         <Link to="/CustomerOptions">
           <button className="drinksButton">Go Back</button>
@@ -85,4 +85,4 @@ const CustomerMilkTea = () => {
   );
 };
 
-export default CustomerMilkTea;
+export default CustomerSpecialty;

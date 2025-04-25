@@ -29,6 +29,13 @@ import PriceEditor from './components/PriceEditor.jsx';
 import MenuEditor from './components/MenuEditor.jsx';
 import CustomerOptions from './components/CustomerOptions.jsx';
 import CustomerMilkTea from './components/CustomerMilkTea.jsx';
+import CustomerFruitTea from './components/CustomerFruitTea.jsx';
+import CustomerBrewedTea from './components/CustomerBrewedTea.jsx';
+import CustomerFreshMilk from './components/CustomerFreshMilk.jsx';
+import CustomerIceBlended from './components/CustomerIceBlended.jsx';
+import CustomerTeaMojito from './components/CustomerTeaMojito.jsx';
+import CustomerCrema from './components/CustomerCrema.jsx';
+import CustomerSpecialty from './components/CustomerSpecialty.jsx';
 
 
 function App() {
@@ -65,6 +72,13 @@ function App() {
         <Route path="/EmployeeEditor" element={<EmployeeEditor />} />
         <Route path="/CustomerOptions" element={<CustomerOptions/>} />
         <Route path="/CustomerOptions/milk-tea" element={<CustomerMilkTea/>} />
+        <Route path="/CustomerOptions/fruit-tea" element={<CustomerFruitTea/>} />
+        <Route path="/CustomerOptions/brewed-tea" element={<CustomerBrewedTea/>} />
+        <Route path="/CustomerOptions/fresh-milk" element={<CustomerFreshMilk/>} />
+        <Route path="/CustomerOptions/ice-blended" element={<CustomerIceBlended/>} />
+        <Route path="/CustomerOptions/tea-mojito" element={<CustomerTeaMojito/>} />
+        <Route path="/CustomerOptions/creme" element={<CustomerCrema/>} />
+        <Route path="/CustomerOptions/specialty" element={<CustomerSpecialty/>} />
       </Routes>
     </Router>
   );
