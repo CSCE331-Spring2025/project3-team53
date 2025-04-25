@@ -34,6 +34,11 @@ return (
         />
       </div>
       <button className="button-sub">Submit</button>
+      <div>
+          <Link to="/Editor">
+            <button className="back">Back</button>
+          </Link>
+      </div>
     </>
 );
 };

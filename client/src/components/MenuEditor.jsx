@@ -1,51 +1,60 @@
-import { Link } from "react-router-dom";
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import IngredientsSelector from './IngredientsSelector';
+import { add_new_drink, delete_entry } from '../apiCall.js';
 
-const IngredientsSelector = () => {
-  const [selectedIngredient, setSelectedIngredient] = useState(null);
+const MenuEditor = () => {
+  const [name, setName] = useState("");
+  const [ID3, setID3] = useState(""); 
+  const [ID5, setID5] = useState(""); 
+  const [selectedIngredients, setSelectedIngredients] = useState([]);
+  const [ingredientCounts, setIngredientCounts] = useState({});
 
-  const handleSelect = (ingredient) => {
-    setSelectedIngredient(ingredient);
+  const handleAddDrink = async () => {
+    const price = parseFloat(ID3);
+    if (!name) {
+      alert("Please enter a drink name.");
+      return;
+    }
+    if(isNaN(price)){
+      alert("Please enter a valid price");
+      return;
+    }
+    if(selectedIngredients.length === 0){
+      alert("Please select at least 1 ingredient");
+      return;
+    }
+
+    const ingredients = selectedIngredients;
+    const amounts = selectedIngredients.map((ingredient) => ingredientCounts[ingredient]);
+
+    try {
+      await add_new_drink(name, "Specialty", ingredients, amounts, price);
+      alert("Drink added successfully!");
+    } catch (error) {
+      alert("Error adding drink.");
+      console.error(error);
+    }
   };
 
-  const ingredients = [
-    "aloe_vera", "wintermelon", "black_pearl", "creamer", "creama",
-    "ice_cream", "matcha", "strawberry_juice", "mint", "pineapple_jam",
-    "honey", "mango_jam", "ginger_tea", "oreo", "thai_tea",
-    "cocoa_powder", "mini_pearl", "red_bean", "green_tea", "passion_fruit",
-    "orange_jam", "pudding", "black_tea", "lime_juice", "crystal_boba",
-    "wintermelon_tea", "lime_slice", "kiwi_jam", "oolong_tea", "aiju_jelly",
-    "grapefruit_jam", "milk", "taro_paste", "lemonade", "coffee",
-  ];
+  const handleRemoveDrink = async () => {
+    const id = parseInt(ID5);
+    if (isNaN(id)) {
+      alert("Enter a valid drink ID.");
+      return;
+    }
+
+    try {
+      await delete_entry(1, id);
+      alert("Drink removed successfully!");
+    } catch (error) {
+      alert("Error removing drink.");
+      console.error(error);
+    }
+  };
 
   return (
     <>
-      <div className="scrollable-container">
-        {ingredients.map((ingredient) => (
-          <div
-            key={ingredient}
-            className={`ingredient-item ${selectedIngredient === ingredient ? "selected" : ""}`}
-            onClick={() => handleSelect(ingredient)}
-          >
-            {ingredient}
-          </div>
-        ))}
-      </div>
-      <div className="sides">
-        <button className="button-ing">Add Item</button>
-        <button className="button-ing2">Add Ingredient</button>
-      </div>
-    </>
-  );
-};
-
-const MenuEditor = () => {  
-  const [name, setName] = useState("BoBruh");
-  const [ID3, setID3] = useState("");
-  const [ID5, setID5] = useState("");
-
-  return (
-    <>  
       <p className="edit-header">Edit Menu</p>
       <div className="Enter_ID">
         <label>Enter Name of the Drink to Add:</label>
@@ -70,7 +79,15 @@ const MenuEditor = () => {
           onChange={(e) => setID3(e.target.value)}
         />
       </div>
-      <IngredientsSelector/>
+
+      <IngredientsSelector 
+        selectedIngredients={selectedIngredients}
+        setSelectedIngredients={setSelectedIngredients}
+        ingredientCounts={ingredientCounts}
+        setIngredientCounts={setIngredientCounts}
+      />
+
+      <button className="button-ing" onClick={handleAddDrink}>Add Item</button>
 
       <div className="ID6">
         <label>Enter ID of the Drink to Remove:</label>
@@ -83,12 +100,12 @@ const MenuEditor = () => {
           onChange={(e) => setID5(e.target.value)}
         />
       </div>
-      <button className="button-ing3">Remove Item</button>
-      <div>
-        <Link to="/Manager">
-          <button className="back">Back</button>
-        </Link>
-      </div>
+
+      <button className="button-ing3" onClick={handleRemoveDrink}>Remove Item</button>
+
+      <Link to="/Editor">
+        <button className="back">Back</button>
+      </Link>
     </>
   );
 };

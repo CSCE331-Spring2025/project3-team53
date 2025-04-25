@@ -24,4 +24,4 @@ import * as func from './apiCall.js';
 //func.get_menu().then((result) => {console.log(result)});
 //func.get_order_price(2, ["creama", "oreo", "pudding"]).then((result) => {console.log(result)});
 
-func.get_weather().then(result => console.log(result))
+func.add_new_drink('fdhsj', 'test', ["nuke"], [20], 120).then((result) => {console.log(result)});
