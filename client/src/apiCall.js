@@ -70,6 +70,10 @@ export const fetch_request = async(url, body, request_type) => {
 
 }
 
+//global backend variables
+let menu;
+let orders = new Map(); 
+let local_id = 1;   
 
 
 /*
@@ -87,10 +91,6 @@ export const send_indv_order = async (employee_id, drink_id, ice_level, sugar_le
     ]);
     await fetch_request(url, body, 3);
 }
-
-//global order variables
-let orders = new Map(); 
-let local_id = 1;   
 
 /*
 Stash a new drink order but does not send it
@@ -334,13 +334,21 @@ export const get_employees = async (manager_id) => {
     return (await fetch_request(url, {} ,1));
 }
 
+
+
 /*
 Return the menu data
 */
-let menu;
-fetch_request("http://localhost:5000/api/analyze/menu", {} ,1).then(result => menu = result.data);
+menu = (await fetch_request("http://localhost:5000/api/analyze/menu", {} ,1)).data;
 export const get_menu = () => {
     return menu;
+}
+
+/*
+Updates the global menu variable; used after changes to menu data table
+*/
+export const refresh_menu = async () => {
+    menu = (await fetch_request("http://localhost:5000/api/analyze/menu", {} ,1)).data;
 }
 
 /*

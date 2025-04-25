@@ -18,6 +18,7 @@ const Menu = () => {
   const [cartChanged, setCartChanged] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
 
+  //fetch infomation about drinks and their prices
   useEffect(() => {
     fetch(`http://${SERVER_DOMAIN}/api/drinks/${category}`)
       .then((response) => response.json())
@@ -46,6 +47,7 @@ const Menu = () => {
       .catch((error) => console.error("Error fetching drinks:", error));
   }, [category]);
 
+  //updates the cart whenever stash gets changed
   useEffect(() =>{
     let newCart = new Map();
     (async () => {
@@ -73,6 +75,7 @@ const Menu = () => {
         </button>
       </div>
 
+      {/*drinks mapping*/}
       <center>
         <div className="card-container">
           {drinks.map((drink) => (
@@ -98,6 +101,7 @@ const Menu = () => {
         </div>
       </center>
 
+      {/*cart overlay*/}
       {showCheckout && (
         <div className="checkout-overlay">
           <div className="overlay-content">

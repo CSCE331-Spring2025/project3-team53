@@ -1,22 +1,27 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { Link } from "react-router-dom";
+import { get_inventory } from '../apiCall';
 
 const Inventory = () => {
-    const tableData = [
-      { id: 1, name: "mini_pearl", type: "Ingredient", store_id: 1, quantity: 100  },
-      { id: 1, name: "mini_pearl", type: "Ingredient", store_id: 1, quantity: 100  },
-    ];
+    // const tableData = [
+    //   { id: 1, name: "mini_pearl", type: "Ingredient", store_id: 1, quantity: 100  },
+    //   { id: 1, name: "mini_pearl", type: "Ingredient", store_id: 1, quantity: 100  },
+    // ];
   
     const tableColumns = [
       { key: 'id', title: 'ID' },
       { key: 'name', title: 'Name' },
       { key: 'type', title: 'Type' },
-      { key: 'store_id', title: 'Store ID' },
       { key: 'quantity', title: 'Quantity' },
     ];
 
     const[ID, setID] = useState(0);
     const[quantity, setQuantity] = useState(1);
+    const [tableData, setTable] = useState([]);
+
+    useEffect(() => {
+      get_inventory(1).then(res => {setTable(res.data)});
+    },[])
 
     function handleIDChange(event) {
         setID(event.target.value);

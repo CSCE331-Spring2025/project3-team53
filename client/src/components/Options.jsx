@@ -35,6 +35,7 @@ const Options = () => {
     <div style={{ padding: "20px" }}>
       <h1>Modify Order</h1>
       
+      {/*ice options*/}
       <div>
         <h3>Ice</h3>
         {["No Ice", "Little Ice", "Medium Ice", "Large Ice"].map((option) => (
@@ -50,6 +51,7 @@ const Options = () => {
         ))}
       </div>
 
+      {/*sugar options*/}
       <div>
         <h3>Sugar</h3>
         {["0%", "25%", "50%", "75%", "100%"].map((level) => (
@@ -65,20 +67,10 @@ const Options = () => {
         ))}
       </div>
 
+      {/*extra add ons options*/}
       <div>
         <h3>Toppings</h3>
         {
-          /*{["None", "Tapioca", "Lychee Jelly", "Grape Jelly"].map((toppingOption) => (
-            <label key={toppingOption}>
-              <input
-                type="radio"
-                value={toppingOption}
-                checked={topping === toppingOption}
-                onChange={(e) => setTopping(e.target.value)}
-              />
-              {toppingOption}
-            </label>
-          ))*/
           ["None", "Pearl", "Mini Pearl", "Ice Cream",
            "Pudding", "Aloe Vera", "Red Bean", "Creama", 
            "Aiyu Jelly", "Crystal Boba"].map((toppingOption) => (
@@ -107,10 +99,12 @@ const Options = () => {
         }
 
       </div>
+
       <div>
       <Link to={`/menu/${category}`}>
         <button className="drinksButton">Go Back</button>
       </Link>
+
       <button className="drinksButton"
         onClick = {() => {
           const add_ons = [];
