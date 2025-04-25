@@ -339,7 +339,7 @@ export const get_employees = async (manager_id) => {
 /*
 Return the menu data
 */
-menu = (await fetch_request("http://localhost:5000/api/analyze/menu", {} ,1)).data;
+fetch_request("http://localhost:5000/api/analyze/menu", {} ,1).then(res => {menu = res.data});
 export const get_menu = () => {
     return menu;
 }
