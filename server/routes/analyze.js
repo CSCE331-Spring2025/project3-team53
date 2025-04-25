@@ -96,8 +96,8 @@ router.get("/ingredients_use", async (req, res) => {
                 });
             });
 
-            //console.log(Object.fromEntries(ingredient_count));
-            return res.status(200).json({data: Object.fromEntries(ingredient_count)});
+            //console.log(ingredient_count);
+            return res.status(200).json({data: Array.from(ingredient_count.entries())});
         }
         catch(err){
             return res.status(400).json({message:"Query error", error: err.message});

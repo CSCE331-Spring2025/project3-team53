@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import { ingred_hist } from "../apiCall";
 const OrderHistory = () => {
-  // Example data
-  const data = [
-    { label: "Ingredient 1", value: 10 },
-    { label: "Ingredient 2", value: 20 },
-    { label: "Ingredient 3", value: 15 }, //TODO, fetch from database
-    { label: "Ingredient 4", value: 5 },
-    { label: "Bruhbas", value: 50}
-  ];
+  const [data, setData] = useState([]);
+  const [startDate, setSDate] = useState("");
+  const [endDate, setEDate] = useState("");
+
+  const handleButton = async (start_date, end_date) => {
+    let temp = [];
+    let arr = (await ingred_hist(start_date, end_date)).data;
+    arr.forEach(element => {
+      temp.push({label: element[0], value: element[1]});
+    });
+    setData(temp);
+  };
 
   // Calculate the maximum value for scaling
   const maxValue = Math.max(...data.map((item) => item.value));
@@ -69,9 +73,12 @@ const OrderHistory = () => {
       </svg>
       <br/>
       <div className = "range">
-        <input type="date" placeholder="Select a date" />
+        <input type="date" placeholder="Select a date" onChange={(e) => {setSDate(e.target.value)}}/>
         <p>-----</p>
-        <input type="date" placeholder="Select a date" />
+        <input type="date" placeholder="Select a date" onChange={(e) => {setEDate(e.target.value)}}/>
+      </div>
+      <div>
+        <button onClick={() => {handleButton(startDate,endDate)}}>Generate graph</button>
       </div>
       <Link to="/Manager">
         <button>Go Back</button>
