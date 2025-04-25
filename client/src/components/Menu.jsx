@@ -3,6 +3,10 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import * as func from '../apiCall.js';
 import { SERVER_DOMAIN } from "./config";
 
+const ice_encoding = new Map([[0,"No Ice"], [1,"Little Ice"], [2,"Medium Ice"], [3,"Large Ice"]]);
+const sugar_encoding = new Map([[0,"0%"], [1,"25%"], [2,"50%"], [3,"75%"], [4,"100%"]]);
+
+
 const Menu = () => {
   const { category } = useParams();
   const navigate = useNavigate();
@@ -49,7 +53,7 @@ const Menu = () => {
       setTotalPrice(prices.get(0));
       func.get_order_queue().forEach((value, key, _) => {
         let name = func.get_menu().find(obj => obj.id === value[1]).drink_name;
-        newCart.set(key, [name, prices.get(key)]);
+        newCart.set(key, [name, ice_encoding.get(value[2]), sugar_encoding.get(value[3]), prices.get(key)]);
       });
       setCart(newCart);
     })();
@@ -105,7 +109,7 @@ const Menu = () => {
               Array.from(cart).map(([key, values]) => {
                 return  <>
                           <p>
-                            {values[0]} - ${values[1]}
+                            {values[0]} - {values[1]} - {values[2]} - ${values[3]}
                             <span className="close-btn" onClick={() => {func.dequeue_order(key); setCartChanged(!cartChanged)}}>&times;</span>
                           </p>
                         </>
