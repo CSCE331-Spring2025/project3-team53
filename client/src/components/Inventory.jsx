@@ -1,13 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import { Link } from "react-router-dom";
-import { get_inventory } from '../apiCall';
+import { get_inventory, edit_inventory_quantity } from '../apiCall';
 
-const Inventory = () => {
-    // const tableData = [
-    //   { id: 1, name: "mini_pearl", type: "Ingredient", store_id: 1, quantity: 100  },
-    //   { id: 1, name: "mini_pearl", type: "Ingredient", store_id: 1, quantity: 100  },
-    // ];
-  
+const Inventory = () => {  
     const tableColumns = [
       { key: 'id', title: 'ID' },
       { key: 'name', title: 'Name' },
@@ -23,12 +18,21 @@ const Inventory = () => {
       get_inventory(1).then(res => {setTable(res.data)});
     },[])
 
+    const handleButton = async (isAdd) => {
+      if(isAdd === true){
+        await edit_inventory_quantity(ID, quantity, false);
+      }
+      else{
+        await edit_inventory_quantity(ID, -quantity, false);
+      }
+      get_inventory(1).then(res => {setTable(res.data)});
+    }
     function handleIDChange(event) {
-        setID(event.target.value);
+        setID(Number(event.target.value));
     } 
 
     function handleQuantityChange(event) {
-        setQuantity(event.target.value);
+        setQuantity(Number(event.target.value));
     } 
 
   
@@ -63,8 +67,8 @@ const Inventory = () => {
         </p>
         <br/>
         <div>
-          <button className="invent">Add Ingredient/s</button>
-          <button className="invent">Remove Ingredient/s</button>
+          <button className="invent" onClick={() => {handleButton(true)}}>Add Ingredient/s</button>
+          <button className="invent" onClick={() => {handleButton(false)}}>Remove Ingredient/s</button>
         </div>
         <Link to="/Manager">
           <button>Go Back</button>
