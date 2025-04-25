@@ -3,6 +3,10 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import * as func from '../apiCall.js';
 import { SERVER_DOMAIN } from "./config";
 
+const ice_encoding = new Map([[0,"No Ice"], [1,"Little Ice"], [2,"Medium Ice"], [3,"Large Ice"]]);
+const sugar_encoding = new Map([[0,"0%"], [1,"25%"], [2,"50%"], [3,"75%"], [4,"100%"]]);
+
+
 const Menu = () => {
   const { category } = useParams();
   const navigate = useNavigate();
@@ -10,9 +14,11 @@ const Menu = () => {
   const [drinks, setDrinks] = useState([]);
   const [showCheckout, setShowCheckout] = useState(false);
   const [drinkPrices, setDrinkPrices] = useState({});
+  const [cart, setCart] = useState(new Map());
+  const [cartChanged, setCartChanged] = useState(false);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
-    console.log(func.get_order_queue());
     fetch(`http://${SERVER_DOMAIN}/api/drinks/${category}`)
       .then((response) => response.json())
       .then((data) => {
@@ -39,6 +45,19 @@ const Menu = () => {
       })
       .catch((error) => console.error("Error fetching drinks:", error));
   }, [category]);
+
+  useEffect(() =>{
+    let newCart = new Map();
+    (async () => {
+      let prices = await func.get_stash_price();
+      setTotalPrice(prices.get(0));
+      func.get_order_queue().forEach((value, key, _) => {
+        let name = func.get_menu().find(obj => obj.id === value[1]).drink_name;
+        newCart.set(key, [name, ice_encoding.get(value[2]), sugar_encoding.get(value[3]), prices.get(key)]);
+      });
+      setCart(newCart);
+    })();
+  },[cartChanged]);
 
   const handleCardClick = (drinkId) => {
     navigate(`/Options?drink=${drinkId}`, {state: {category: category}});
@@ -86,9 +105,17 @@ const Menu = () => {
               &times;
             </span>
             <h2>Your Cart</h2>
-            <p>Milk Bruhba 1 - $10</p>
-            <p>Milk Bruhba 2 - $15</p>
-            <p>Total: $25</p>
+            {
+              Array.from(cart).map(([key, values]) => {
+                return  <>
+                          <p>
+                            {values[0]} - {values[1]} - {values[2]} - ${values[3]}
+                            <span className="close-btn" onClick={() => {func.dequeue_order(key); setCartChanged(!cartChanged)}}>&times;</span>
+                          </p>
+                        </>
+              })
+            }
+            {<p>Total: ${totalPrice}</p>}
             <button>Proceed to Payment</button>
           </div>
         </div>

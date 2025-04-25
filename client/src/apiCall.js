@@ -116,7 +116,8 @@ export const dequeue_order = (id) => {
         local_id = 1;
     }
     else{
-        orders.delete(local_id--);
+        orders.delete(id);
+        --local_id;
     }
 }
 
@@ -336,9 +337,10 @@ export const get_employees = async (manager_id) => {
 /*
 Return the menu data
 */
-export const get_menu = async () => {
-    const url = `http://localhost:5000/api/analyze/menu`;
-    return (await fetch_request(url, {} ,1));
+let menu;
+fetch_request("http://localhost:5000/api/analyze/menu", {} ,1).then(result => menu = result.data);
+export const get_menu = () => {
+    return menu;
 }
 
 /*
@@ -360,11 +362,15 @@ Return price of a drink + their add ons in the stash
 */
 export const get_stash_price = async () => {
     const temp = new Map();
+    let total_price = 0;
     await Promise.all(
         Array.from(orders).map(async ([key, value]) => {
-            temp.set(key, await get_order_price(value[1],value[4]))
+            const price = await get_order_price(value[1],value[4]);
+            temp.set(key, price);
+            total_price += price;
         })
     );
+    temp.set(0, total_price);
     return temp;
 }
 
@@ -372,8 +378,8 @@ export const get_stash_price = async () => {
 Return data on the current weather in college station
 Imagine having good cybersecruity practices
 */
-
 export const get_weather = async () => {
     const url = "http://api.weatherapi.com/v1/current.json?key=44c96021f40a49f197114416252004&q=77845";
     return await fetch_request(url, {}, 1)
 }
+
