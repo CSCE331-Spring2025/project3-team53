@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Link } from "react-router-dom";
 
+//Component for viewing and editing inventory table
 const Inventory = () => {
     const tableData = [
       { id: 1, name: "mini_pearl", type: "Ingredient", store_id: 1, quantity: 100  },
