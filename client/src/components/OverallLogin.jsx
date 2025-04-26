@@ -43,7 +43,7 @@ const OverallLogin = () => {
         /> <br />
         <input
           className="password-text"
-          type={showPassword ? "text" : "password"} // Toggle password visibility
+          type={showPassword ? "text" : "password"} 
           value={password}
           placeholder="Password"
           onChange={handlePasswordChange}
@@ -51,11 +51,15 @@ const OverallLogin = () => {
         <input
           className="show"
           type="checkbox"
-          checked={showPassword} // Controlled checkbox state
+          checked={showPassword} 
           onChange={handleCheckboxChange}
         /> Show Password <br />
-        <Link to="/Manager">
-          <button className="login">Login</button>
+        <Link to="/CustomerOptions">
+          <button className="login">Sign In </button>
+        </Link>
+        <p> or</p>
+        <Link to="/Debug">
+          <button className="login2">Login</button>
         </Link>
       </div>
       <p>Username: {username}</p>

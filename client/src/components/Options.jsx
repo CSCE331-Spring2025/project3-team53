@@ -32,6 +32,7 @@ const Options = () => {
   ));
 
   return (
+    <>
     <div style={{ padding: "20px" }}>
       <h1>Modify Order</h1>
       
@@ -122,7 +123,11 @@ const Options = () => {
         Send it Baby
       </button>
       </div>
-    </div>
+      </div>
+      <Link to="/drinks/milkTea">
+              <button className="drinksButton" >Go Back</button>
+          </Link>
+          </>
   );
 };
 

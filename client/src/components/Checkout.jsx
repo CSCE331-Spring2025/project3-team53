@@ -1,64 +1,155 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-function Checkout() { 
-  //I took this entire thing with Bro Code but we can expand on it
-  const[name, setName] = useState("Guest");
-  const[quantity, setQuantity] = useState(1);
-  const[comment, setComment] = useState("");
-  const[payment, setPayment] = useState("");
-  const[shipping, setShipping] = useState("Delivery");
 
-  function handleNameChange(event) {
-      setName(event.target.value);
-  } 
+function Checkout() {
+    const [name, setName] = useState("Guest");
+    const [quantity, setQuantity] = useState(1);
+    const [comment, setComment] = useState("");
+    const [payment, setPayment] = useState("");
+    const [shipping, setShipping] = useState("Delivery");
+    const [cartItems, setCartItems] = useState([
+        { name: "Water", price: 999.0, quantity: 2 },
+        { name: "Air", price: 2000.0, quantity: 1 },
+    ]);
+    const [orderConfirmed, setOrderConfirmed] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
-  function handleQuantityChange(event) {
-      setQuantity(event.target.value);
-  } 
+    const deliveryFee = shipping === "Delivery" ? 3.0 : 0.0;
 
-  function handleCommentChange(event) {
-      setComment(event.target.value);
-  } 
+    function handleNameChange(event) {
+        setName(event.target.value);
+    }
 
-  function handlePaymentChange(event) {
-      setPayment(event.target.value);
-  } 
+    function handleQuantityChange(event) {
+        setQuantity(event.target.value);
+    }
 
-  function handleShippingChange(event) {
-      setShipping(event.target.value);
-  } 
+    function handleCommentChange(event) {
+        setComment(event.target.value);
+    }
 
-  return(<div className='checkout'>
-    <input value = {name} onChange = {handleNameChange}/>
-    <p>Name: {name}</p>
+    function handlePaymentChange(event) {
+        setPayment(event.target.value);
+    }
 
-    <input value = {quantity} onChange = {handleQuantityChange} type = "number"/>
-    <p>Quantity: {quantity}</p>
+    function handleShippingChange(event) {
+        setShipping(event.target.value);
+    }
 
-    <textarea value = {comment} onChange = {handleCommentChange}
-    placeholder = "Enter delivery instructions"/>
-    <p>Comment: {comment}</p>
+    function handlePlaceOrder(event) {
+        event.preventDefault();
 
-    <select value = {payment} onChange = {handlePaymentChange}>
-      <option value = "">Select an option</option>
-      <option value = "Visa">Visa</option>
-      <option value = "Mastercard">Mastercard</option>
-      <option value = "Gift card">Gift card</option>
-    </select>
-    <p>Payment: {payment}</p>
+        // Validation
+        if (!name) {
+            alert("Please enter your name!");
+            return;
+        }
+        if (!payment) {
+            alert("Please select a payment method!");
+            return;
+        }
+        if (shipping === "Delivery" && !comment) {
+            alert("Please provide delivery instructions!");
+            return;
+        }
 
-    <label>
-      <input type = "radio" value = "Pick Up" checked = {shipping === "Pick Up"} onChange = {handleShippingChange}/>
-      Pick Up
-    </label><br/>
-    <label>
-      <input type = "radio" value = "Delivery" checked = {shipping === "Delivery"} onChange = {handleShippingChange}/>
-      Delivery
-    </label>
-    <p>Shipping: {shipping}</p>
-    <Link to="/">
-      <button>Go to Home Page</button>
-    </Link>
-  </div>)
+        setIsLoading(true);
+    }
+
+    return (
+        <div className="checkout">
+            {!orderConfirmed ? (
+                <form onSubmit={handlePlaceOrder}>
+                    <h2>Checkout</h2>
+
+                    <h3>Order Summary</h3>
+                    <ul>
+                        {cartItems.map((item, index) => (
+                            <li key={index}>
+                                {item.name} x {item.quantity} - $
+                                {(item.price * item.quantity).toFixed(2)}
+                            </li>
+                        ))}
+                    </ul>
+                    <p>Subtotal: $0</p>
+                    <p>Delivery Fee: $0</p>
+                    <p>Grand Total: $0</p>
+                    <div>
+                    <label>
+                        Name:
+                        <input
+                            value={name}
+                            onChange={handleNameChange}
+                            required
+                        />
+                    </label>
+
+                    {shipping === "Delivery" && (
+                        <label>
+                            Delivery Instructions:
+                            <textarea
+                                value={comment}
+                                onChange={handleCommentChange}
+                                placeholder="Enter delivery instructions"
+                            />
+                        </label>
+                    )}
+
+                    <label>
+                        Payment:
+                        <select
+                            value={payment}
+                            onChange={handlePaymentChange}
+                            required
+                        >
+                            <option value="">Select an option</option>
+                            <option value="Visa">Visa</option>
+                            <option value="Mastercard">Mastercard</option>
+                            <option value="Gift card">Gift card</option>
+                        </select>
+                    </label>
+
+                    <h3>Shipping</h3>
+                    <div >
+                    <label className="pickup">
+                    <input
+                    type="radio"
+                    value="Pick Up"
+                    checked={shipping === "Pick Up"}
+                    onChange={handleShippingChange}
+                     />
+                    <p>Pick Up</p>
+                    </label>
+                    <label>
+                    <input
+                         type="radio"
+                        value="Delivery"
+                        checked={shipping === "Delivery"}
+                        onChange={handleShippingChange}
+                        />
+                        Delivery
+                     </label>
+                    </div>
+                    </div>
+                    <button type="submit" disabled={isLoading}>
+                        {isLoading ? "Placing Order..." : "Place Order"}
+                    </button>
+                </form>
+            ) : (
+                <div>
+                    <h2>Thank you, {name}!</h2>
+                    <p>Your order has been placed.</p>
+                    <p>Your order will be prepared shortly</p>
+                    <Link to="/">
+                        <button>Back to Home</button>
+                    </Link>
+                </div>
+            )}
+        <Link to="/drinks/milkTea">
+            <button  >Go Back</button>
+        </Link>
+        </div>
+    );
 }
-export default Checkout
+
+export default Checkout;
