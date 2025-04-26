@@ -18,8 +18,8 @@ import Editor from './components/Editor.jsx';
 import EmployeeEditor from './components/EmployeeEditor.jsx';
 import PriceEditor from './components/PriceEditor.jsx';
 import MenuEditor from './components/MenuEditor.jsx';
-import CustomerOptions from './components/CustomerOptions.jsx';
-import CustomerMilkTea from './components/CustomerMilkTea.jsx';
+import CustomerOptions from './components/CustomerCategories.jsx';
+import CustomerMenu from './components/CustomerMenu.jsx';
 import Menu from './components/Menu.jsx';
 
 
@@ -47,7 +47,7 @@ function App() {
         <Route path="/PriceEditor" element={<PriceEditor />} />
         <Route path="/EmployeeEditor" element={<EmployeeEditor />} />
         <Route path="/CustomerOptions" element={<CustomerOptions/>} />
-        <Route path="/CustomerOptions/milk-tea" element={<CustomerMilkTea/>} />
+        <Route path="/CustomerMenu/:category" element={<CustomerMenu/>} />
         <Route path="/menu/:category" element={<Menu />} />
       </Routes>
     </Router>

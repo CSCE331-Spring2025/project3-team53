@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import React, { useState, useEffect} from "react";
+import { useNavigate, Link, useParams  } from "react-router-dom";
 import { SERVER_DOMAIN } from "./config";
 
 //TODO - refactor for each drink type
-const CustomerMilkTea = () => {
+const CustomerMenu = () => {
   const navigate = useNavigate();
+  const { category } = useParams();
+
 
   const handleCardClick = (drink) => {
     setSelectedDrink(drink); 
@@ -17,15 +19,18 @@ const CustomerMilkTea = () => {
   const [showCheckout, setShowCheckout] = useState(false);
 
   useEffect(() => {
-    fetch("http://" + SERVER_DOMAIN + "/api/drinks/milk-tea")
+    fetch(`http://${SERVER_DOMAIN}/api/drinks/${category}`)
       .then((response) => response.json())
-      .then((data) => setDrinks(data)) 
+      .then((data) => {
+        console.log("Fetched drinks:", data)
+        setDrinks(data);
+      })
       .catch((error) => console.error("Error fetching drinks:", error));
-  }, []);
+  }, [category]);
 
   return (
     <>
-      <h2 className="title-m">Milk Tea Menu</h2>
+      <h2 className="title-m">{category.replace("-", " ")} Menu</h2>
       <div>
         <div className="cart">
           <button className="checkoutButton" onClick={() => setShowCheckout(true)}>
@@ -38,7 +43,7 @@ const CustomerMilkTea = () => {
               <div
                 key={drink.id}
                 className="card3"
-                onClick={() => handleCardClick(drink.id)}
+                onClick={() => handleCardClick(drink)}
                 style={{ cursor: "pointer" }}
               >
                 <img
@@ -59,7 +64,7 @@ const CustomerMilkTea = () => {
                 &times;
               </span>
               <h2>Your Cart</h2>
-              <p>Milk Bruhba 1 - $10</p>
+              <p>Milk Bruhba 1 - $10</p> {/*TODO: Carry over cart logic from employees*/}
               <p>Milk Bruhba 2 - $15</p>
               <p>Total: $25</p>
               <Link to="/Checkout">
@@ -86,4 +91,4 @@ const CustomerMilkTea = () => {
   );
 };
 
-export default CustomerMilkTea;
+export default CustomerMenu;

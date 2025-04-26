@@ -22,21 +22,21 @@ const CustomerOptions = () => {
       title: "Milk Tea",
       description: "A smooth blend of rich tea and creamy milk for the perfect balance of flavor.",
       alt: "Our Mascot",
-      link: "/CustomerOptions/milk-tea",
+      link: "/CustomerMenu/Milk-Tea",
     },
     {
       id: 2,
       title: "Fruit Tea",
       description: "A vibrant mix of fruit flavors and tea, refreshingly light with a hint of love.",
       alt: "Hohn Jina",
-      link: "/CustomerOptions/fruit-tea",
+      link: "/CustomerMenu/Fruit-Tea",
     },
     {
       id: 3,
       title: "Brewed Tea",
       description: "Classic fresh tea brewed daily for a clean, crisp, and energizing experience.",
       alt: "Our Boy",
-      link: "/CustomerOptions/brewed-tea",
+      link: "/CustomerMenu/Brewed-Tea",
     },
   ];
 
@@ -46,21 +46,21 @@ const CustomerOptions = () => {
       title: "Fresh Milk",
       description: "Start your day with a nice blend of milk and some Bobruh goodness.",
       alt: "Milk Drink",
-      link: "/CustomerOptions/fresh-milk",
+      link: "/CustomerMenu/Fresh-Milk",
     },
     {
       id: 5,
       title: "Ice Blended",
       description: "Cold, creamy, and perfect all year round.",
       alt: "Ice Blended Drink",
-      link: "/CustomerOptions/ice-blended",
+      link: "/CustomerMenu/Ice-Blended",
     },
     {
       id: 6,
       title: "Tea Mojito",
       description: "The flavors of a mojito combined with signature Bobruh flavors. What could go wrong?",
       alt: "Mojito Tea",
-      link: "/CustomerOptions/tea-mojito",
+      link: "/CustomerMenu/Tea-Mojito",
     },
   ];
 
@@ -70,21 +70,21 @@ const CustomerOptions = () => {
       title: "Cremé",
       description: "smooth and rich. Cremé drinks elevate the experience of the user tenfold.",
       alt: "Cream",
-      link: "/CustomerOptions/creme",
+      link: "/CustomerMenu/Crema",
     },
     {
       id: 8,
       title: "Specialty",
       description: "The real creme of the crop. Order them fast because some of them will be gone forever.",
       alt: "Spec/Promo",
-      link: "/CustomerOptions/specialty",
+      link: "/CustomerMenu/Specialty",
     },
     {
       id: 9,
       title: "Build Your Own Tea",
       description: "When it comes to choices you know best. Cut out the middle-man and choose your own combinations.",
       alt: "BYOT",
-      link: "/CustomerOptions/build-your-own-tea",
+      link: "/CustomerMenu/build-your-own-tea",
     },
   ];
 
