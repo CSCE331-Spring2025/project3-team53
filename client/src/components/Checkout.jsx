@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
+//Component for checking out as a customer, subject to change
 function Checkout() {
     const [name, setName] = useState("Guest");
     const [quantity, setQuantity] = useState(1);

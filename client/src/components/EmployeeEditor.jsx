@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import React, { useState } from 'react';
 
+//Component for adding/removing employees from the registry.
 const EmployeeEditor = () => {
-
 
   const [ID2, setID2] = useState("");
   return(

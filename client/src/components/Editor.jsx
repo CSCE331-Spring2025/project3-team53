@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import React, { useState } from 'react';
 
 
-
+//Editor home page
 const Editor = () => {
 
   return (

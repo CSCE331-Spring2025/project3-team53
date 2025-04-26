@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { SERVER_DOMAIN } from "./config";
 
+//TODO - refactor all drink pages to function as one "Menu.jsx" and fetch drinks based on URL params
 const MilkTea = () => {
   const navigate = useNavigate();
 
@@ -9,9 +10,11 @@ const MilkTea = () => {
         // Navigate to the options page for the selected drink
         navigate(`/Options`);
     };
+    //testing the cart feature
     const [drinks, setDrinks] = useState([]);  
     const [showCheckout, setShowCheckout] = useState(false);
 
+    //fetching the array of drinks to display from the backend
     useEffect(() => {
       fetch("https://" + SERVER_DOMAIN + "/api/drinks/milk-tea")
           .then((response) => response.json())

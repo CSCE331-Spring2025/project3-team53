@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 
+
+//Buttons for each category in a panel layout
 const Categories = () => {
     return(
         <>

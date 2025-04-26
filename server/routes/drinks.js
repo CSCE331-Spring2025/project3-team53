@@ -3,8 +3,8 @@ const pool = require("../db");
 
 const router = express.Router();
 
-// Fetch Fresh Milk Drinks
 
+//API calls to dynamically fetch drink categories from DB
 router.get("/milk-tea", async (req, res) => {
     try {
         const result = await pool.query("SELECT id, drink_name FROM drinks WHERE drink_type = 'Milk Tea'");

@@ -10,8 +10,8 @@ const IceBlended = () => {
         // Navigate to the options page for the selected drink
         navigate(`/Options`);
     };
+    //fetching the array of drinks to display from the backend
     const [drinks, setDrinks] = useState([]);
-    
       useEffect(() => {
         fetch("https://" + SERVER_DOMAIN + "/api/drinks/ice-blended") 
           .then((response) => response.json())

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import React, { useState } from 'react';
 
+//Child component for a scrollable view to select any desired ingredients for the new drink.
 const IngredientsSelector = () => {
   const [selectedIngredient, setSelectedIngredient] = useState(null);
 
@@ -39,6 +40,7 @@ const IngredientsSelector = () => {
   );
 };
 
+//Editor component with input fields for drink_name, ID, price.
 const MenuEditor = () => {  
   const [name, setName] = useState("BoBruh");
   const [ID3, setID3] = useState("");

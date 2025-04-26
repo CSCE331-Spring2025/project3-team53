@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import React, { useState } from 'react';
 
+
+//Component to allow for the editing of prices for pre-existing drinks
 const PriceEditor = () => {
 
 const [ID, setID] = useState("");

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
 
-
+//Dummy login system, TODO - authentication
 const EmployeeLogin = () => {
   const [ID, setID] = useState("");
 

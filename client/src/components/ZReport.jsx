@@ -13,7 +13,7 @@ const Logging = () => {
           margin: "0 auto",
           marginBottom: "2vw",
           display: "flex",
-          flexDirection: "column", // Ensures elements stack vertically
+          flexDirection: "column",
           alignItems: "center",
         }}
       >

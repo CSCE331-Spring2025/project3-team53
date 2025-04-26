@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+//Page for selecting drink options
 const Options = () => {
   const [ice, setIce] = useState("");
   const [sugar, setSugar] = useState("");
@@ -8,7 +9,7 @@ const Options = () => {
   return (
     <div style={{ padding: "20px" }}>
       <h1>Modify Order</h1>
-      
+      {/*Prompt the user to choose the Ice/Sugar level and any toppings*/}
       <div>
         <h3>Ice</h3>
         {["No Ice", "Little Ice", "Medium Ice", "Large Ice"].map((option) => (
