@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 
+//Card layout for manager features
 const Manager = () => {
 
 return(

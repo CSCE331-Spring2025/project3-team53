@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Logging = () => {
+const ZReport = () => {
   return (
     <>
       <div
@@ -86,4 +86,4 @@ const Logging = () => {
   );
 };
 
-export default Logging;
+export default ZReport;
