@@ -71,7 +71,7 @@ const CustomerMilkTea = () => {
           {showPopup && (
             <div className="popup-overlay">
             <div className="popup-content">
-                <span className="close-btn" onClick={() => setShowPopup(false)}>
+                <span className="close-btn2" onClick={() => setShowPopup(false)}>
                         &times;
                    </span>
                         </div>

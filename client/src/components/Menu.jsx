@@ -112,14 +112,14 @@ const Menu = () => {
             {
               Array.from(cart).map(([key, values]) => {
                 return  <>
-                          <p>
+                          <p className="cart-item">
                             {values[0]} - {values[1]} - {values[2]} - ${values[3]}
                             <span className="close-btn" onClick={() => {func.dequeue_order(key); setCartChanged(!cartChanged)}}>&times;</span>
                           </p>
                         </>
               })
             }
-            {<p>Total: ${totalPrice}</p>}
+            {<p>Total: ${totalPrice.toFixed(2)}</p>}
             <button>Proceed to Payment</button>
           </div>
         </div>
