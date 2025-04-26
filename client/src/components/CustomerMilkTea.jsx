@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { SERVER_DOMAIN } from "./config";
 
+//TODO - refactor for each drink type
 const CustomerMilkTea = () => {
   const navigate = useNavigate();
 
