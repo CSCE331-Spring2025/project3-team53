@@ -5,4 +5,4 @@ dist/
 # Ignore environment variables
 .env
 test.js
-credientials/translate-key.json
+credentials/translate-key.json
