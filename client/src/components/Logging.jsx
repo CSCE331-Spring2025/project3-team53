@@ -21,7 +21,6 @@ const Logging = () => {
       let data = res.data
       let newHrs = [], newData = [];
       data.forEach((row) => {
-        newHrs.push(row.hr)
         newData.push({hrs: row.hr, sum_dollars: Number(row.sum_dollar), sum_drinks:Number(row.sum_drinks), sum_orders:Number(row.sum_orders)});
       })
       setData(newData);
@@ -75,7 +74,7 @@ const Logging = () => {
 
       <div>
         <button className="log" onClick={() => {handleMakeReport()}}>Make Report</button>
-        <button className="log">Clear</button>
+        <button className="log" onClick={() => {setData([])}}>Clear</button>
       </div>
       <Link to="/Manager">
         <button>Go Back</button>
