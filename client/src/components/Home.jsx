@@ -8,27 +8,26 @@ function Home() {
     const [translatedMessage, setTranslatedMessage] = useState("");
     const [weather, setWeather] = useState([]);
 
-    // The original message in English
-    const originalMessage = "Bruhba Bobruh is dedicated to surpassing customer expectations through carefully crafted and reliable solutions. Established by Alex Pierce, Aaron Mai, Jianwei Gao, and Chris Maldonado, our company is driven by one goal: putting customers at the center of everything we do. With a mission to deliver products that meet your needs at exceptional value and quality, Bruhba Bobruh ensures every order is tailored to your satisfaction. Why wait? Experience Bruhba Bobruh today!";
+    
+    const aboutEng = "Bruhba Bobruh is dedicated to surpassing customer expectations through carefully crafted and reliable solutions. Established by Alex Pierce, Aaron Mai, Jianwei Gao, and Chris Maldonado, our company is driven by one goal: putting customers at the center of everything we do. With a mission to deliver products that meet your needs at exceptional value and quality, Bruhba Bobruh ensures every order is tailored to your satisfaction. Why wait? Experience Bruhba Bobruh today!";
 
-    // Handle the language toggle
+    // language toggle
     const toggleLanguage = async () => {
-        const targetLang = language === "en" ? "es" : "en";  // Switch between English (en) and Spanish (es)
+        const targetLang = language === "en" ? "es" : "en";  
         setLanguage(targetLang);
 
-        // Translate the message based on the target language
-        const translated = await translateText(originalMessage, targetLang);
+        const translated = await translateText(aboutEng, targetLang);
         setTranslatedMessage(translated);
     };
 
     useEffect(() => {
-        // Default message in English when the page loads
-        setTranslatedMessage(originalMessage);
+
+        setTranslatedMessage(aboutEng);
 
         const fetchWeather = async () => {
             const weatherData = await get_weather();
             console.log(weatherData);
-            setWeather(weatherData);  // Also sets your weather state if you want to display it
+            setWeather(weatherData);  
         };
     
         fetchWeather();
@@ -52,8 +51,10 @@ function Home() {
                     <li><Link to="/Malogin">Manager Login</Link></li>
                     {/* <li><Link to="/Debug">Debug Page</Link></li> */}
                 </nav>
-
-                <p>Weather: {weather?.current?.temp_f}°F {weather?.current?.condition?.text} - {weather?.location?.name}, {weather?.location?.region}</p>
+                {/* display weather info */}
+                <p>{Math.round(weather?.current?.temp_f)}°F {weather?.current?.condition?.text} <img src={weather?.current?.condition?.icon}
+                   style={{ verticalAlign: "middle", marginLeft: "-15px", marginRight: "-18px", scale: "50%"}}></img> 
+                 - {weather?.location?.name}, {weather?.location?.region}</p>
             </main>
             <footer>
                 <p>© 2025 Bruhba. All rights reserved.</p>
