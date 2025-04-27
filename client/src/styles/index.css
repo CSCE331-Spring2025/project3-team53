@@ -212,6 +212,8 @@ color: hsl(0, 0%, 20%);
 .date{
   width: 7vw;
   height: 2vw;
+  margin-left: 37vw;
+  margin-bottom: 2vw;
 }
 
 .log {
@@ -750,3 +752,28 @@ a {
 .custback-btn {
   margin-top: 1vh;
 }
+
+.pickup {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0; /* Optional spacing between options */
+}
+
+.pickup input {
+  margin-left: 0.25vw;
+  margin-top: 1vw;
+  margin-right: -17vw;
+}
+
+.delivery {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0; /* Optional spacing between options */
+}
+
+.delivery input {
+  margin-left: 0.25vw;
+  margin-top: 1vw;
+  margin-right: -17vw;
+}
+

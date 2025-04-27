@@ -19,7 +19,6 @@ const Logging = () => {
         }}
       >
         <div style={{ textAlign: "center" }}>
-          <p>This is placeholder to make sure it can store the X Report.</p>
         </div>
       </div>
       <input className = "date"type="date" placeholder="Select a date" />

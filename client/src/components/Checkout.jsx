@@ -120,7 +120,7 @@ function Checkout() {
                      />
                     <p>Pick Up</p>
                     </label>
-                    <label>
+                    <label className="delivery">
                     <input
                          type="radio"
                         value="Delivery"
