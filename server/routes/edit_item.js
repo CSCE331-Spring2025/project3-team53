@@ -8,7 +8,8 @@ request takes value of (drink_id, new_price)
     updates the price of the drink
 */
 router.put("/drink", async (req, res) => {
-    //console.log("Editing drinks");
+    console.log("Editing drinks");
+    console.log("Request body:", req.body);
     try {
         const {drink_id, new_price} = req.body;
         if(!Number.isInteger(drink_id) || !(typeof new_price === 'number')){

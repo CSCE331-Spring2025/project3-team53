@@ -750,3 +750,24 @@ a {
 .custback-btn {
   margin-top: 1vh;
 }
+
+.menu-editor-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.editor-section {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.section-title {
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.5em;
+}
