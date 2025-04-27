@@ -391,3 +391,15 @@ export const get_weather = async () => {
     return await fetch_request(url, {}, 1)
 }
 
+
+export const translateText = async (text, targetLang) => {
+    const url = 'http://localhost:5000/api/translate/translate';
+    const body = JSON.stringify({ text, target: targetLang });
+    const request_type = 3; 
+
+    
+    const response = await fetch_request(url, body, request_type);
+    console.log(response);
+    // Assuming the response contains the translated text
+    return response.translatedText;
+};

@@ -8,7 +8,7 @@ const deleteItem = require("./routes/delete_item");
 const editItem = require("./routes/edit_item");
 const insertItem = require("./routes/insert_item");
 const analyze = require("./routes/analyze");
-
+const translateRouter = require("./routes/translate");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -23,6 +23,7 @@ app.use("/api/delete", deleteItem);
 app.use("/api/edit", editItem);
 app.use("/api/insert", insertItem);
 app.use("/api/analyze", analyze);
+app.use("/api/translate", translateRouter);
 
 
 // Test route
