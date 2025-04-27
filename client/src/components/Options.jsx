@@ -124,10 +124,7 @@ const Options = () => {
       </button>
       </div>
       </div>
-      <Link to="/drinks/milkTea">
-              <button className="drinksButton" >Go Back</button>
-          </Link>
-          </>
+    </>
   );
 };
 

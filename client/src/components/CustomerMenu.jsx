@@ -1,10 +1,9 @@
 import React, { useState, useEffect} from "react";
-import { useNavigate, Link, useParams  } from "react-router-dom";
+import { Link, useParams  } from "react-router-dom";
 import { SERVER_DOMAIN } from "./config";
 
 //TODO - refactor for each drink type
 const CustomerMenu = () => {
-  const navigate = useNavigate();
   const { category } = useParams();
 
 
@@ -73,15 +72,44 @@ const CustomerMenu = () => {
             </div>
           </div>
         )}
-          {showPopup && (
-            <div className="popup-overlay">
-            <div className="popup-content">
-                <span className="close-btn2" onClick={() => setShowPopup(false)}>
-                        &times;
-                   </span>
-                        </div>
-                          </div>
-                        )}
+{showPopup && (
+  <div className="popup-overlay">
+    <div className="popup-content">
+      <span className="close-btn2" onClick={() => setShowPopup(false)}>
+        &times;
+      </span>
+      <b>Level Of Ice</b>
+      <div className="button-container">
+        <button className = "b1">None</button>
+        <button className = "b1">25%</button>
+        <button className = "b1">50%</button>
+        <button className = "b1">75%</button>
+      </div>
+      <b className="Sugar">Level Of Sugar</b>
+      <div className="button-container">
+        <button className = "b1">None</button>
+        <button className = "b1">25%</button>
+        <button className = "b1">50%</button>
+        <button className = "b1">75%</button>
+        <button className = "b1">100%</button>
+      </div>
+      <b className="Sugar">Toppings</b>
+      <div className="button-container">
+        <button className = "b1">None</button>
+        <button className = "b1">Pearl</button>
+        <button className = "b1">Mini Pearl</button>
+        <button className = "b1">Ice Cream</button>
+        <button className = "b1">Pudding</button>
+        <button className = "b1">Aloe Vera</button>
+        <button className = "b1">Red Bean</button>
+        <button className = "b1">Crema</button>
+        <button className = "b1">Aiju Jelly</button>
+        <button className = "b1">Crystal Boba</button>
+      </div>
+    </div>
+  </div>
+)}
+
 
         <Link to="/CustomerOptions">
           <button className="drinksButton">Go Back</button>

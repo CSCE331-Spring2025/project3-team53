@@ -731,16 +731,23 @@ a {
 
 .popup-content {
   display: flex;
+  flex-direction: column;
+  margin-top: -24vw;
+  margin-left: 2vw;
+  padding: 2vh 2vw;
   justify-content: space-between;
   align-items: center;
-  width: 100%; /* Ensure content spans the pop-up width */
+  font-size: 2.2rem;
+
 }
 
 .close-btn2 {
   cursor: pointer;
   font-size: 1.5rem;
-  margin-left: 94.5vw; 
-  margin-bottom: 50.5vw;
+  margin-left: -59.5vw;
+  margin-right: 38vw; 
+  margin-top: 16vw;
+  margin-bottom: 1.5vw;
 
 }
 
@@ -777,3 +784,67 @@ a {
   margin-right: -17vw;
 }
 
+
+.pickup {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0; /* Optional spacing between options */
+}
+
+.pickup input {
+  margin-left: 0.25vw;
+  margin-top: 1vw;
+  margin-right: -17vw;
+}
+
+.delivery {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0; /* Optional spacing between options */
+}
+
+.delivery input {
+  margin-left: 0.25vw;
+  margin-top: 1vw;
+  margin-right: -17vw;
+}
+
+
+.menu-editor-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.editor-section {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.section-title {
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.5em;
+}
+
+.button-container {
+  display: flex;
+  gap: 2rem; 
+  margin-top: 7vh;
+}
+
+.b1 {
+  font-size: 1.6rem; 
+  cursor: pointer;
+  width: 7vw;
+  height: 7vw;
+  margin-top: -2vw;
+}
+
+.Sugar {
+  margin-top: 3vw;
+}

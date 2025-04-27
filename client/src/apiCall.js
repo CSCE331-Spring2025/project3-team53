@@ -389,7 +389,6 @@ Imagine having good cybersecruity practices
 export const get_weather = async () => {
     const url = "http://api.weatherapi.com/v1/current.json?key=44c96021f40a49f197114416252004&q=77845";
     let result = await fetch_request(url, {}, 1);
-    console.log("skibiidi");
     return result;
 }
 
