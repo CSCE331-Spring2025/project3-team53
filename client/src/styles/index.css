@@ -785,31 +785,6 @@ a {
 }
 
 
-.pickup {
-  display: flex;
-  align-items: center;
-  margin-bottom: 0; /* Optional spacing between options */
-}
-
-.pickup input {
-  margin-left: 0.25vw;
-  margin-top: 1vw;
-  margin-right: -17vw;
-}
-
-.delivery {
-  display: flex;
-  align-items: center;
-  margin-bottom: 0; /* Optional spacing between options */
-}
-
-.delivery input {
-  margin-left: 0.25vw;
-  margin-top: 1vw;
-  margin-right: -17vw;
-}
-
-
 .menu-editor-page {
   max-width: 800px;
   margin: 0 auto;
