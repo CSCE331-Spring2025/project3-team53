@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
+import { GoogleSignIn } from './GoogleSignIn';
 
 const OverallLogin = () => {
   const [username, setUsername] = useState("");
@@ -58,9 +59,10 @@ const OverallLogin = () => {
           <button className="login">Sign In </button>
         </Link>
         <p> or</p>
-        <Link to="/Debug">
+        {/* <Link to="/Debug">
           <button className="login2">Login</button>
-        </Link>
+        </Link> */}
+        <GoogleSignIn/>
       </div>
       <p>Username: {username}</p>
       <p>Password: {password}</p>
