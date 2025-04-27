@@ -732,7 +732,7 @@ a {
 .popup-content {
   display: flex;
   flex-direction: column;
-  margin-top: -24vw;
+  margin-top: -16vw;
   margin-left: 2vw;
   padding: 2vh 2vw;
   justify-content: space-between;
@@ -822,4 +822,14 @@ a {
 
 .Sugar {
   margin-top: 3vw;
+}
+
+.b2 {
+  font-size: 1.2rem;
+  cursor: pointer;
+  width: 7vw;
+  height: 3vw;
+  margin-top: 5vw;
+  margin-left: 75vw;
+  background-color: hsl(85, 71%, 45%);
 }

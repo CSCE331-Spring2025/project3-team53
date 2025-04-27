@@ -106,6 +106,7 @@ const CustomerMenu = () => {
         <button className = "b1">Aiju Jelly</button>
         <button className = "b1">Crystal Boba</button>
       </div>
+      <button className = "b2"> Add to cart</button>
     </div>
   </div>
 )}
