@@ -6,7 +6,7 @@ const router = express.Router();
 
 const translator = new Translate({
     projectId: 'csce331project3-458102',       
-    keyFilename: path.join(__dirname, '../credentials/translate-key.json'),  
+    keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS,  
   });
 
 
