@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { BarChart } from "@mui/x-charts/BarChart"
 import * as func from "../apiCall"
+import { Bar } from 'react-chartjs-2';
+import {Chart as ChartJS, CategoryScale, LinearScale,
+  BarElement, Title, Tooltip, Legend} from 'chart.js';
+
+ChartJS.register(CategoryScale, LinearScale, BarElement,
+  Title, Tooltip, Legend);
+
 
 const Logging = () => {
-  const series = [
-    {dataKey: "sum_dollars", label: "dollar earned"},
-    {dataKey: "sum_drinks", label: "indivdual drinks ordered"},
-    {dataKey: "sum_orders", label: "total orders"},
-  ]
-
-  const [data, setData] = useState([]);
+  const [hr, setHr] = useState([]);
+  const [data, setData] = useState([[],[],[]]);
   const [date, setDate] = useState("");
   const [hourF, sethourF] = useState("11");
   const [hourT, sethourT] = useState("22");
@@ -19,11 +20,65 @@ const Logging = () => {
     let res = (await func.order_hist(date, hourF, hourT));
     if(res.hasOwnProperty('data')){
       let data = res.data
-      let newHrs = [], newData = [];
+      let newHrs = [], newData = [[],[],[]];
       data.forEach((row) => {
-        newData.push({hrs: row.hr, sum_dollars: Number(row.sum_dollar), sum_drinks:Number(row.sum_drinks), sum_orders:Number(row.sum_orders)});
+        newHrs.push(row.hr);
+        newData[0].push(Number(row.sum_dollar));
+        newData[1].push(Number(row.sum_drinks));
+        newData[2].push(Number(row.sum_orders));
       })
+      setHr(newHrs);
       setData(newData);
+    }
+  }
+
+  const chartData = {
+    labels: hr,
+    datasets: [
+      {
+        label: "Dollar earned",
+        data: data[0],
+        backgroundColor: 'rgba(255, 99, 132, 0.7)',
+      },
+      {
+        label: "Drinks ordered",
+        data: data[1],
+        backgroundColor: 'rgba(54, 162, 235, 0.7)'
+      },
+      {
+        label: "Total orders",
+        data: data[2],
+        backgroundColor: 'rgba(75, 192, 192, 0.7)',
+      }
+    ]
+  };
+
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Grouped Bar Chart',
+      },
+    },
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'X-Axis Values',
+        },
+      },
+      y: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: 'Value',
+        },
+      },
     }
   }
 
@@ -44,12 +99,7 @@ const Logging = () => {
         }}
       >
         <center style={{width: "80vw", height: "30vw"}}>
-          <BarChart
-            xAxis={[{ scaleType: 'band', dataKey: "hrs", label: "Hour" }]}
-            series={series}
-            dataset = {data}
-            height={500}
-          />
+          <Bar data={chartData} options={options}/>
         </center>
       </div>
       <input className = "date" type="date" placeholder="Select a date" onChange={(e) => {setDate(e.target.value)}}/>
