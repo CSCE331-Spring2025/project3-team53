@@ -14,6 +14,7 @@ const addon_encoding = new Map([["black_pearl", "Pearl"], ["mini_pearl", "Mini P
 function Checkout() {
     const { state } = useLocation();
     const { back_page } = state;
+    const { stashedZ, setStashedZ } = useContext(GlobalContext);
 
     const [name, setName] = useState("Guest");
     const [comment, setComment] = useState("");
@@ -81,6 +82,7 @@ function Checkout() {
 
         setIsLoading(true);
         await func.send_order_queue();
+        setStashedZ(stashedZ + totalPrice[0]);
         setOrderConfirmed(true);
     }
 
