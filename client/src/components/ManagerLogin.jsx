@@ -1,13 +1,19 @@
-import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from 'react';
+import { Link, useNavigate } from "react-router-dom";
+import { GlobalContext } from './GlobalContext';
 
 const ManagerLogin = () => {
+  const navigate = useNavigate();
+  const {setLoginID} = useContext(GlobalContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false); // State for checkbox
 
   function handleUsernameChange(event) {
-    setUsername(event.target.value);
+    const val = event.target.value;
+    if(val === "" || /^\d+$/.test(val)){
+      setUsername(val);
+    }
     checkInputs(event.target.value, password); // Update checkbox state
   }
 
@@ -27,6 +33,13 @@ const ManagerLogin = () => {
   function checkInputs(user, pass) {
     if (!user && !pass) {
       setShowPassword(false); // Uncheck if both fields are empty
+    }
+  }
+
+  const handleLogin = () => {
+    if(/^\d+$/.test(username)){
+      setLoginID(Number(username));
+      navigate(`/Manager`);
     }
   }
 
@@ -54,9 +67,7 @@ const ManagerLogin = () => {
           checked={showPassword} // Controlled checkbox state
           onChange={handleCheckboxChange}
         /> Show Password <br />
-        <Link to="/Manager">
-          <button className="login">Login</button>
-        </Link>
+        <button className="login" onClick={handleLogin}>Login</button>
       </div>
       <p>Username: {username}</p>
       <p>Password: {password}</p>

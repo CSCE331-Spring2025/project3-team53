@@ -21,36 +21,38 @@ import MenuEditor from './components/MenuEditor.jsx';
 import CustomerOptions from './components/CustomerCategories.jsx';
 import CustomerMenu from './components/CustomerMenu.jsx';
 import Menu from './components/Menu.jsx';
-
+import { GlobalProvider } from './components/GlobalContext.jsx';
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/Debug" element={<Debug />} />
-        <Route path="/Customer" element={<OverallLogin />} />
-        <Route path="/Malogin" element={<ManagerLogin />} />
-        <Route path="/Debug" element={<Debug />} />
-        <Route path="/Emplogin" element={<EmployeeLogin />} />
-        <Route path="/Categories" element={<Categories />} />
-        <Route path="/Checkout" element={< Checkout/>} />
-        <Route path="/Manager" element={< Manager/>} />
-        <Route path="/Options" element={<Options />} />
-        <Route path="/Inventory" element={<Inventory />} />
-        <Route path="/OrderH" element={<OrderHistory />} />
-        <Route path="/Logging" element={<Logging />} />
-        <Route path="/ZReport" element={<ZReport />} />
-        <Route path="/Settings" element={<Settings />} />
-        <Route path="/Editor" element={<Editor />} />
-        <Route path="/MenuEditor" element={<MenuEditor />} />
-        <Route path="/PriceEditor" element={<PriceEditor />} />
-        <Route path="/EmployeeEditor" element={<EmployeeEditor />} />
-        <Route path="/CustomerOptions" element={<CustomerOptions/>} />
-        <Route path="/CustomerMenu/:category" element={<CustomerMenu/>} />
-        <Route path="/menu/:category" element={<Menu />} />
-      </Routes>
-    </Router>
+    <GlobalProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/Debug" element={<Debug />} />
+          <Route path="/Customer" element={<OverallLogin />} />
+          <Route path="/Malogin" element={<ManagerLogin />} />
+          <Route path="/Debug" element={<Debug />} />
+          <Route path="/Emplogin" element={<EmployeeLogin />} />
+          <Route path="/Categories" element={<Categories />} />
+          <Route path="/Checkout" element={< Checkout/>} />
+          <Route path="/Manager" element={< Manager/>} />
+          <Route path="/Options" element={<Options />} />
+          <Route path="/Inventory" element={<Inventory />} />
+          <Route path="/OrderH" element={<OrderHistory />} />
+          <Route path="/Logging" element={<Logging />} />
+          <Route path="/ZReport" element={<ZReport />} />
+          <Route path="/Settings" element={<Settings />} />
+          <Route path="/Editor" element={<Editor />} />
+          <Route path="/MenuEditor" element={<MenuEditor />} />
+          <Route path="/PriceEditor" element={<PriceEditor />} />
+          <Route path="/EmployeeEditor" element={<EmployeeEditor />} />
+          <Route path="/CustomerOptions" element={<CustomerOptions/>} />
+          <Route path="/CustomerMenu/:category" element={<CustomerMenu/>} />
+          <Route path="/menu/:category" element={<Menu />} />
+        </Routes>
+      </Router>
+    </GlobalProvider>
   );
 }
 
