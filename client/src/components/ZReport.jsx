@@ -1,7 +1,21 @@
-import React from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { Link } from "react-router-dom";
+import { GlobalContext } from './GlobalContext';
 
 const Logging = () => {
+  const { stashedZ, setStashedZ } = useContext(GlobalContext);
+  const [zData, setZ] = useState([0,0,0]);
+
+  const handleMakeReport = () => {
+    setZ([stashedZ, stashedZ*0.0825, stashedZ*0.9175]);
+    setStashedZ(0);
+  };
+
+  const handleClear = () => {
+    setZ([0,0,0]);
+  };
+
+
   return (
     <>
       <div
@@ -24,7 +38,7 @@ const Logging = () => {
           <p className="login-header35">College Station, USA</p>
           
           <div style={{ display: "flex", alignItems: "center", marginBottom: "1vw" }}>
-            <p className="login-header4" style={{ marginRight: "1vw" }}>Gross Profit:</p>
+            <p className="login-header4" style={{ marginRight: "1vw" }}>Gross Profit: </p>
             <div
               style={{
                 width: "10vw",
@@ -36,11 +50,13 @@ const Logging = () => {
                 alignItems: "center",
                 justifyContent: "center",
               }}
-            ></div>
+            >
+            {zData[0].toFixed(2)}
+            </div>
           </div>
           
           <div style={{ display: "flex", alignItems: "center", marginBottom: "1vw" }}>
-            <p className="login-header4" style={{ marginRight: "1vw" }}>Sales Tax:</p>
+            <p className="login-header4" style={{ marginRight: "1vw" }}>Sales Tax: </p>
             <div
               style={{
                 width: "10vw",
@@ -52,7 +68,9 @@ const Logging = () => {
                 alignItems: "center",
                 justifyContent: "center",
               }}
-            ></div>
+            >
+            ${zData[1].toFixed(2)}
+            </div>
           </div>
           
           <div style={{ display: "flex", alignItems: "center" }}>
@@ -68,13 +86,14 @@ const Logging = () => {
                 alignItems: "center",
                 justifyContent: "center",
               }}>
+              ${zData[2].toFixed(2)}
             </div>
           </div>
         </div>
-        <p className="login-header4">Select Date</p> <br/>
-        <input className = "dates"type="date" placeholder="Select a date" />
+        {/* <p className="login-header4">Select Date</p> <br/>
+        <input className = "dates"type="date" placeholder="Select a date" /> */}
         <div>
-          <button className="log2">Make Report</button>
+          <button className="log2" onClick={handleMakeReport}>Make Report</button>
           <button className="log3">Clear</button>
         </div>
         <Link Link to="/Logging">
