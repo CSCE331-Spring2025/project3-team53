@@ -5,9 +5,11 @@ import * as func from "../apiCall";
 
 const ice_encoding = new Map([[0,"No Ice"], [1,"Light Ice"], [2,"Normal Ice"], [3,"Extra Ice"]]);
 const sugar_encoding = new Map([[0,"0% Sugar"], [1,"25% Sugar"], [2,"50% Sugar"], [3,"75% Sugar"], [4,"100% Sugar"]]);
-const addon_encoding = [["black_pearl", "Pearl"], ["mini_pearl", "Mini Pearl"], ["ice_cream", "Ice Cream"], 
+const addon_options =  ["black_pearl", "mini_pearl", "ice_cream", "pudding", 
+                        "aloe_vera", "red_bean", "creama", "aiyu_jelly", "crystal_boba"]
+const addon_encoding = new Map([["black_pearl", "Pearl"], ["mini_pearl", "Mini Pearl"], ["ice_cream", "Ice Cream"], 
   ["pudding", "Pudding"], ["aloe_vera", "Aloe Vera"], ["red_bean", "Red Bean"], 
-  ["creama", "Creama"], ["aiyu_jelly", "Aiyu Jelly"], ["crystal_boba", "Crystal Boba"]]
+  ["creama", "Creama"], ["aiyu_jelly", "Aiyu Jelly"], ["crystal_boba", "Crystal Boba"]])
 
 //TODO - refactor for each drink type
 const CustomerMenu = () => {
@@ -23,12 +25,13 @@ const CustomerMenu = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [selectedDrink, setSelectedDrink] = useState(null);
   const [showCheckout, setShowCheckout] = useState(false);
-  const [sugar, setSugar] = useState(0);
-  const [ice, setIce] = useState(0);
+  const [sugar, setSugar] = useState(4);
+  const [ice, setIce] = useState(2);
   const [addons, setAddons] = useState([true, false, false, false, false, false,
   false, false, false, false]);
   const [cart, setCart] = useState(new Map());
-
+  const [cartChanged, setCartChanged] = useState(false);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
     fetch(`http://${SERVER_DOMAIN}/api/drinks/${category}`)
@@ -39,6 +42,22 @@ const CustomerMenu = () => {
       })
       .catch((error) => console.error("Error fetching drinks:", error));
   }, [category]);
+
+    //updates the cart whenever stash gets changed
+    useEffect(() =>{
+      let newCart = new Map();
+      (async () => {
+        let prices = await func.get_stash_price();
+        setTotalPrice(prices.get(0));
+        func.get_order_queue().forEach((value, key, _) => {
+          let name = func.get_menu().find(obj => obj.id === value[1]).drink_name;
+          newCart.set(key, 
+            [name, ice_encoding.get(value[2]), sugar_encoding.get(value[3]), prices.get(key), 
+            value[4].map((element, index) => addon_encoding.get(element)).join(", ")]);
+        });
+        setCart(newCart);
+      })();
+    },[cartChanged]);
 
   const handleCardClick = (drink) => {
     setSelectedDrink(drink); 
@@ -62,17 +81,24 @@ const CustomerMenu = () => {
     }
     setAddons(newAddons);
   }
+
   const handleAddToCart = () => {
     let temp = [];
     if(!addons[0]){
       addons.slice(1).forEach((bool, index) => {
         if(bool){
-          temp.push(addon_encoding[index][0]);
+          temp.push(addon_options[index]);
         }
       })};
     //console.log(0, selectedDrink.id, ice, sugar, temp);
     func.enqueue_order(0, selectedDrink.id, ice, sugar, temp);
+    setIce(2);
+    setSugar(4);
+    setAddons([true, false, false, false, false, false,
+      false, false, false, false]);
+    setShowPopup(false)
   }
+
   return (
     <>
       <h2 className="title-m">{category.replace("-", " ")} Menu</h2>
@@ -109,9 +135,17 @@ const CustomerMenu = () => {
                 &times;
               </span>
               <h2>Your Cart</h2>
-              <p>Milk Bruhba 1 - $10</p> {/*TODO: Carry over cart logic from employees*/}
-              <p>Milk Bruhba 2 - $15</p>
-              <p>Total: $25</p>
+              {Array.from(cart).map(([key, values]) => {
+                return <><p className="cart-item">
+                        <span className="close-btn" onClick={() => {func.dequeue_order(key); setCartChanged(!cartChanged)}}>&times;</span>
+                        {values[0]} - ${values[3]}<br/>
+                        <span style={{margin: "0em 0em 0em 2em"}}>{values[1]} - {values[2]}</span> <br/>
+                        <span style={{margin: "0em 0em 0em 2em"}}>{values[4]}</span>
+                      </p></>
+              })
+
+              }
+              <p>Total: ${totalPrice}</p>
               <Link to="/Checkout">
                 <button>Proceed to Payment</button>
               </Link>
