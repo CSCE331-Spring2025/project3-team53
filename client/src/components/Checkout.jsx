@@ -12,7 +12,6 @@ const addon_encoding = new Map([["black_pearl", "Pearl"], ["mini_pearl", "Mini P
   
 
 function Checkout() {
-    console.log(func.get_order_queue());
     const { state } = useLocation();
     const { back_page } = state;
 
@@ -27,6 +26,7 @@ function Checkout() {
     const [refreshFlag, setRefreshFlag] = useState(false);
     const deliveryFee = shipping === "Delivery" ? 3.0 : 0.0;
 
+    //load cart items
     useEffect(() => {
         (async () => {
             let cart = func.get_order_queue();
@@ -89,7 +89,7 @@ function Checkout() {
             {!orderConfirmed ? (
                 <form onSubmit={handlePlaceOrder}>
                     <h2>Checkout</h2>
-
+                    {/*display cart items*/}
                     <h3>Order Summary</h3>
                     <ul style={{listStyle: "none"}}>
                         {cartItems.map((item, index) => (

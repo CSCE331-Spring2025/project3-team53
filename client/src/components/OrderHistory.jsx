@@ -9,11 +9,15 @@ ChartJS.register(CategoryScale, LinearScale, BarElement,
   Title, Tooltip, Legend);
 
 const OrderHistory = () => {
+  //bar chart data
   const [ingredient, setIngredient] = useState([]);
   const [data, setData] = useState([]);
+
+  //fetch analysis data parameter
   const [startDate, setSDate] = useState("");
   const [endDate, setEDate] = useState("");
 
+  //fetch data from backend then populate graph
   const handleButton = async (start_date, end_date) => {
     let newIngredient = [], newData = [];
     let arr = (await ingred_hist(start_date, end_date)).data;
@@ -25,6 +29,7 @@ const OrderHistory = () => {
     setData(newData);
   };
 
+  //bar chart data format
   const chartData = {
     labels: ingredient,
     datasets: [
@@ -36,6 +41,7 @@ const OrderHistory = () => {
     ]
   };
 
+  //bar chart settings
   const options = {
     responsive: true,
     maintainAspectRatio: false,
@@ -73,6 +79,8 @@ const OrderHistory = () => {
   return (
     <div>
       <h2 className = "login-header">Order History</h2>
+
+      {/*bar chart*/}
       <div
         style={{
           width: "80vw",
@@ -91,6 +99,8 @@ const OrderHistory = () => {
       </center>
       </div>
       <br/>
+      
+      {/*datetime selector*/}
       <div className = "range">
         <input type="date" placeholder="Select a date" onChange={(e) => {setSDate(e.target.value)}}/>
         <p>-----</p>

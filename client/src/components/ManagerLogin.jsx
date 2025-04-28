@@ -11,7 +11,7 @@ const ManagerLogin = () => {
 
   function handleUsernameChange(event) {
     const val = event.target.value;
-    if(val === "" || /^\d+$/.test(val)){
+    if(val === "" || /^\d+$/.test(val)){      // accept only interger inputs
       setUsername(val);
     }
     checkInputs(event.target.value, password); // Update checkbox state
@@ -37,7 +37,7 @@ const ManagerLogin = () => {
   }
 
   const handleLogin = () => {
-    if(/^\d+$/.test(username)){
+    if(/^\d+$/.test(username)){     // check for >= 0 interger username
       setLoginID(Number(username));
       navigate(`/Manager`);
     }
