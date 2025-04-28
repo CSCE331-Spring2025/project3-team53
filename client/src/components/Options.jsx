@@ -1,6 +1,7 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect, useContext} from "react";
 import { useNavigate, Link, useLocation, useSearchParams} from "react-router-dom";
 import * as func from '../apiCall.js';
+import { GlobalContext } from './GlobalContext';
 
 const encoding = new Map([
   ["No Ice",0], ["Light Ice",1], ["Normal Ice",2], ["Extra Ice",3],
@@ -22,7 +23,7 @@ const Options = () => {
   const { category } = state;
 
   //saved state for stashing order
-  const [ice, setIce] = useState("Large Ice");
+  const [ice, setIce] = useState("Normal Ice");
   const [sugar, setSugar] = useState("100%");
   const [checked, setChecked] = useState(new Map([
     ["None", true], ["Pearl", false], ["Mini Pearl", false], 
@@ -30,6 +31,9 @@ const Options = () => {
     ["Red Bean", false], ["Creama", false], ["Aiyu Jelly", false], 
     ["Crystal Boba", false]]
   ));
+
+  //get global state for stashing orders
+  const {loginID} = useContext(GlobalContext)
 
   return (
     <>
@@ -116,7 +120,7 @@ const Options = () => {
               }
             });
           };
-          func.enqueue_order(-1, drink, encoding.get(ice), encoding.get(sugar), add_ons);
+          func.enqueue_order(loginID, drink, encoding.get(ice), encoding.get(sugar), add_ons);
           navigate(`/menu/${category}`,);
         }}
       >
