@@ -404,3 +404,27 @@ export const translateText = async (text, targetLang) => {
     // Assuming the response contains the translated text
     return response.translatedText;
 };
+
+export const login_signup = async (username, password) => {
+    const url = 'http://localhost:5000/api/login/signup';
+    const body = JSON.stringify({username: username, password: password});
+    const request_type = 3;
+
+    return await fetch_request(url, body, 3);
+}
+
+export const login_signin = async (username, password, google) => {
+    const url = 'http://localhost:5000/api/login/signin';
+    const body = JSON.stringify({username: username, password: password});
+    const request_type = 3;
+
+    return await fetch_request(url, body, 2);
+}
+
+export const login_save_cart = async (username, cart) => {
+    const url = 'http://localhost:5000/api/login/save-order';
+    const body = JSON.stringify({username: username, cart: JSON.stringify(cart)});
+    const request_type = 3;
+
+    return await fetch_request(url, body, 2);
+}

@@ -151,54 +151,53 @@ const CustomerMenu = () => {
             </div>
           </div>
         )}
-{showPopup && (
-  <div className="popup-overlay">
-    <div className="popup-content">
-      <span className="close-btn2" onClick={() => setShowPopup(false)}>
-        &times;
-      </span>
-      <b>Level Of Ice</b>
-      <div className="button-container">
-        <button className = "b1" onClick={() => {handleIce(0)}} 
-        style={{ backgroundColor: ice === 0 ? 'aqua' : 'GhostWhite' }}>None</button>
-        <button className = "b1" onClick={() => {handleIce(1)}}
-        style={{ backgroundColor: ice === 1 ? 'aqua' : 'GhostWhite' }}>Light Ice</button>
-        <button className = "b1" onClick={() => {handleIce(2)}}
-        style={{ backgroundColor: ice === 2 ? 'aqua' : 'GhostWhite' }}>Normal Ice</button>
-        <button className = "b1" onClick={() => {handleIce(3)}}
-        style={{ backgroundColor: ice === 3 ? 'aqua' : 'GhostWhite' }}>Extra Ice</button>
-      </div>
-      <b className="Sugar">Level Of Sugar</b>
-      <div className="button-container">
-        <button className = "b1" onClick={() => {handleSugar(0)}}
-        style={{ backgroundColor: sugar === 0 ? 'aqua' : 'GhostWhite' }}>None</button>
-        <button className = "b1" onClick={() => {handleSugar(1)}}
-        style={{ backgroundColor: sugar === 1 ? 'aqua' : 'GhostWhite' }}>25%</button>
-        <button className = "b1" onClick={() => {handleSugar(2)}}
-        style={{ backgroundColor: sugar === 2 ? 'aqua' : 'GhostWhite' }}>50%</button>
-        <button className = "b1" onClick={() => {handleSugar(3)}}
-        style={{ backgroundColor: sugar === 3 ? 'aqua' : 'GhostWhite' }}>75%</button>
-        <button className = "b1" onClick={() => {handleSugar(4)}}
-        style={{ backgroundColor: sugar === 4 ? 'aqua' : 'GhostWhite' }}>100%</button>
-      </div>
-      <b className="Sugar">Toppings</b>
-      <div className="button-container">
-        <button className = "b1" onClick={() => {handleAddons(0)}} style={{ backgroundColor: addons[0]? 'aqua' : 'GhostWhite' }}>None</button>
-        <button className = "b1" onClick={() => {handleAddons(1)}} style={{ backgroundColor: addons[1]? 'aqua' : 'GhostWhite' }}>Pearl</button>
-        <button className = "b1" onClick={() => {handleAddons(2)}} style={{ backgroundColor: addons[2]? 'aqua' : 'GhostWhite' }}>Mini Pearl</button>
-        <button className = "b1" onClick={() => {handleAddons(3)}} style={{ backgroundColor: addons[3]? 'aqua' : 'GhostWhite' }}>Ice Cream</button>
-        <button className = "b1" onClick={() => {handleAddons(4)}} style={{ backgroundColor: addons[4]? 'aqua' : 'GhostWhite' }}>Pudding</button>
-        <button className = "b1" onClick={() => {handleAddons(5)}} style={{ backgroundColor: addons[5]? 'aqua' : 'GhostWhite' }}>Aloe Vera</button>
-        <button className = "b1" onClick={() => {handleAddons(6)}} style={{ backgroundColor: addons[6]? 'aqua' : 'GhostWhite' }}>Red Bean</button>
-        <button className = "b1" onClick={() => {handleAddons(7)}} style={{ backgroundColor: addons[7]? 'aqua' : 'GhostWhite' }}>Crema</button>
-        <button className = "b1" onClick={() => {handleAddons(8)}} style={{ backgroundColor: addons[8]? 'aqua' : 'GhostWhite' }}>Aiju Jelly</button>
-        <button className = "b1" onClick={() => {handleAddons(9)}} style={{ backgroundColor: addons[9]? 'aqua' : 'GhostWhite' }}>Crystal Boba</button>
-      </div>
-      <button className = "b2" onClick={handleAddToCart}> Add to cart</button>
-    </div>
-  </div>
-)}
-
+        {showPopup && (
+          <div className="popup-overlay">
+            <div className="popup-content">
+              <span className="close-btn2" onClick={() => setShowPopup(false)}>
+                &times;
+              </span>
+              <b>Level Of Ice</b>
+              <div className="button-container">
+                <button className = "b1" onClick={() => {handleIce(0)}} 
+                style={{ backgroundColor: ice === 0 ? 'aqua' : 'GhostWhite' }}>None</button>
+                <button className = "b1" onClick={() => {handleIce(1)}}
+                style={{ backgroundColor: ice === 1 ? 'aqua' : 'GhostWhite' }}>Light Ice</button>
+                <button className = "b1" onClick={() => {handleIce(2)}}
+                style={{ backgroundColor: ice === 2 ? 'aqua' : 'GhostWhite' }}>Normal Ice</button>
+                <button className = "b1" onClick={() => {handleIce(3)}}
+                style={{ backgroundColor: ice === 3 ? 'aqua' : 'GhostWhite' }}>Extra Ice</button>
+              </div>
+              <b className="Sugar">Level Of Sugar</b>
+              <div className="button-container">
+                <button className = "b1" onClick={() => {handleSugar(0)}}
+                style={{ backgroundColor: sugar === 0 ? 'aqua' : 'GhostWhite' }}>None</button>
+                <button className = "b1" onClick={() => {handleSugar(1)}}
+                style={{ backgroundColor: sugar === 1 ? 'aqua' : 'GhostWhite' }}>25%</button>
+                <button className = "b1" onClick={() => {handleSugar(2)}}
+                style={{ backgroundColor: sugar === 2 ? 'aqua' : 'GhostWhite' }}>50%</button>
+                <button className = "b1" onClick={() => {handleSugar(3)}}
+                style={{ backgroundColor: sugar === 3 ? 'aqua' : 'GhostWhite' }}>75%</button>
+                <button className = "b1" onClick={() => {handleSugar(4)}}
+                style={{ backgroundColor: sugar === 4 ? 'aqua' : 'GhostWhite' }}>100%</button>
+              </div>
+              <b className="Sugar">Toppings</b>
+              <div className="button-container">
+                <button className = "b1" onClick={() => {handleAddons(0)}} style={{ backgroundColor: addons[0]? 'aqua' : 'GhostWhite' }}>None</button>
+                <button className = "b1" onClick={() => {handleAddons(1)}} style={{ backgroundColor: addons[1]? 'aqua' : 'GhostWhite' }}>Pearl</button>
+                <button className = "b1" onClick={() => {handleAddons(2)}} style={{ backgroundColor: addons[2]? 'aqua' : 'GhostWhite' }}>Mini Pearl</button>
+                <button className = "b1" onClick={() => {handleAddons(3)}} style={{ backgroundColor: addons[3]? 'aqua' : 'GhostWhite' }}>Ice Cream</button>
+                <button className = "b1" onClick={() => {handleAddons(4)}} style={{ backgroundColor: addons[4]? 'aqua' : 'GhostWhite' }}>Pudding</button>
+                <button className = "b1" onClick={() => {handleAddons(5)}} style={{ backgroundColor: addons[5]? 'aqua' : 'GhostWhite' }}>Aloe Vera</button>
+                <button className = "b1" onClick={() => {handleAddons(6)}} style={{ backgroundColor: addons[6]? 'aqua' : 'GhostWhite' }}>Red Bean</button>
+                <button className = "b1" onClick={() => {handleAddons(7)}} style={{ backgroundColor: addons[7]? 'aqua' : 'GhostWhite' }}>Crema</button>
+                <button className = "b1" onClick={() => {handleAddons(8)}} style={{ backgroundColor: addons[8]? 'aqua' : 'GhostWhite' }}>Aiju Jelly</button>
+                <button className = "b1" onClick={() => {handleAddons(9)}} style={{ backgroundColor: addons[9]? 'aqua' : 'GhostWhite' }}>Crystal Boba</button>
+              </div>
+              <button className = "b2" onClick={handleAddToCart}> Add to cart</button>
+            </div>
+          </div>
+        )}
 
         <Link to="/CustomerOptions">
           <button className="drinksButton">Go Back</button>
