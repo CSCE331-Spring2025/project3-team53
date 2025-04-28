@@ -127,6 +127,7 @@ const Menu = () => {
                         </>
               })
             }
+            
             {<p>Total: ${totalPrice.toFixed(2)}</p>}
             <button onClick={() => {navigate("/Checkout", {state: {back_page: `/menu/${category}`}})}}>Proceed to Payment</button>
           </div>

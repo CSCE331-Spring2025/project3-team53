@@ -1,6 +1,13 @@
 import React, { useState, useEffect} from "react";
 import { Link, useParams  } from "react-router-dom";
 import { SERVER_DOMAIN } from "./config";
+import * as func from "../apiCall";
+
+const ice_encoding = new Map([[0,"No Ice"], [1,"Light Ice"], [2,"Normal Ice"], [3,"Extra Ice"]]);
+const sugar_encoding = new Map([[0,"0% Sugar"], [1,"25% Sugar"], [2,"50% Sugar"], [3,"75% Sugar"], [4,"100% Sugar"]]);
+const addon_encoding = [["black_pearl", "Pearl"], ["mini_pearl", "Mini Pearl"], ["ice_cream", "Ice Cream"], 
+  ["pudding", "Pudding"], ["aloe_vera", "Aloe Vera"], ["red_bean", "Red Bean"], 
+  ["creama", "Creama"], ["aiyu_jelly", "Aiyu Jelly"], ["crystal_boba", "Crystal Boba"]]
 
 //TODO - refactor for each drink type
 const CustomerMenu = () => {
@@ -12,27 +19,60 @@ const CustomerMenu = () => {
     ["Crema", "/crema-tea.jpg"], ["Specialty", "/specialty-tea.jpg"]
   ])
 
+  const [drinks, setDrinks] = useState([]);  
+  const [showPopup, setShowPopup] = useState(false);
+  const [selectedDrink, setSelectedDrink] = useState(null);
+  const [showCheckout, setShowCheckout] = useState(false);
+  const [sugar, setSugar] = useState(0);
+  const [ice, setIce] = useState(0);
+  const [addons, setAddons] = useState([true, false, false, false, false, false,
+  false, false, false, false]);
+  const [cart, setCart] = useState(new Map());
+
+
+  useEffect(() => {
+    fetch(`http://${SERVER_DOMAIN}/api/drinks/${category}`)
+      .then((response) => response.json())
+      .then((data) => {
+        //console.log("Fetched drinks:", data)
+        setDrinks(data);
+      })
+      .catch((error) => console.error("Error fetching drinks:", error));
+  }, [category]);
 
   const handleCardClick = (drink) => {
     setSelectedDrink(drink); 
     setShowPopup(true);
   };
 
-  const [drinks, setDrinks] = useState([]);  
-  const [showPopup, setShowPopup] = useState(false);
-  const [selectedDrink, setSelectedDrink] = useState(null);
-  const [showCheckout, setShowCheckout] = useState(false);
-
-  useEffect(() => {
-    fetch(`http://${SERVER_DOMAIN}/api/drinks/${category}`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Fetched drinks:", data)
-        setDrinks(data);
-      })
-      .catch((error) => console.error("Error fetching drinks:", error));
-  }, [category]);
-
+  const handleSugar = (level) => {
+    setSugar(level);
+  }
+  const handleIce = (level) => {
+    setIce(level);
+  }
+  const handleAddons = (level) => {
+    let newAddons = addons.slice();
+    newAddons[level] = !newAddons[level];
+    if(level === 0 && newAddons[0]){
+      newAddons = [true, false, false, false, false, false, false, false, false, false];
+    }
+    else{
+      newAddons[0] = false;
+    }
+    setAddons(newAddons);
+  }
+  const handleAddToCart = () => {
+    let temp = [];
+    if(!addons[0]){
+      addons.slice(1).forEach((bool, index) => {
+        if(bool){
+          temp.push(addon_encoding[index][0]);
+        }
+      })};
+    //console.log(0, selectedDrink.id, ice, sugar, temp);
+    func.enqueue_order(0, selectedDrink.id, ice, sugar, temp);
+  }
   return (
     <>
       <h2 className="title-m">{category.replace("-", " ")} Menu</h2>
@@ -86,33 +126,42 @@ const CustomerMenu = () => {
       </span>
       <b>Level Of Ice</b>
       <div className="button-container">
-        <button className = "b1">None</button>
-        <button className = "b1">Light Ice</button>
-        <button className = "b1">Normal Ice</button>
-        <button className = "b1">Extra Ice</button>
+        <button className = "b1" onClick={() => {handleIce(0)}} 
+        style={{ backgroundColor: ice === 0 ? 'aqua' : 'GhostWhite' }}>None</button>
+        <button className = "b1" onClick={() => {handleIce(1)}}
+        style={{ backgroundColor: ice === 1 ? 'aqua' : 'GhostWhite' }}>Light Ice</button>
+        <button className = "b1" onClick={() => {handleIce(2)}}
+        style={{ backgroundColor: ice === 2 ? 'aqua' : 'GhostWhite' }}>Normal Ice</button>
+        <button className = "b1" onClick={() => {handleIce(3)}}
+        style={{ backgroundColor: ice === 3 ? 'aqua' : 'GhostWhite' }}>Extra Ice</button>
       </div>
       <b className="Sugar">Level Of Sugar</b>
       <div className="button-container">
-        <button className = "b1">None</button>
-        <button className = "b1">25%</button>
-        <button className = "b1">50%</button>
-        <button className = "b1">75%</button>
-        <button className = "b1">100%</button>
+        <button className = "b1" onClick={() => {handleSugar(0)}}
+        style={{ backgroundColor: sugar === 0 ? 'aqua' : 'GhostWhite' }}>None</button>
+        <button className = "b1" onClick={() => {handleSugar(1)}}
+        style={{ backgroundColor: sugar === 1 ? 'aqua' : 'GhostWhite' }}>25%</button>
+        <button className = "b1" onClick={() => {handleSugar(2)}}
+        style={{ backgroundColor: sugar === 2 ? 'aqua' : 'GhostWhite' }}>50%</button>
+        <button className = "b1" onClick={() => {handleSugar(3)}}
+        style={{ backgroundColor: sugar === 3 ? 'aqua' : 'GhostWhite' }}>75%</button>
+        <button className = "b1" onClick={() => {handleSugar(4)}}
+        style={{ backgroundColor: sugar === 4 ? 'aqua' : 'GhostWhite' }}>100%</button>
       </div>
       <b className="Sugar">Toppings</b>
       <div className="button-container">
-        <button className = "b1">None</button>
-        <button className = "b1">Pearl</button>
-        <button className = "b1">Mini Pearl</button>
-        <button className = "b1">Ice Cream</button>
-        <button className = "b1">Pudding</button>
-        <button className = "b1">Aloe Vera</button>
-        <button className = "b1">Red Bean</button>
-        <button className = "b1">Crema</button>
-        <button className = "b1">Aiju Jelly</button>
-        <button className = "b1">Crystal Boba</button>
+        <button className = "b1" onClick={() => {handleAddons(0)}} style={{ backgroundColor: addons[0]? 'aqua' : 'GhostWhite' }}>None</button>
+        <button className = "b1" onClick={() => {handleAddons(1)}} style={{ backgroundColor: addons[1]? 'aqua' : 'GhostWhite' }}>Pearl</button>
+        <button className = "b1" onClick={() => {handleAddons(2)}} style={{ backgroundColor: addons[2]? 'aqua' : 'GhostWhite' }}>Mini Pearl</button>
+        <button className = "b1" onClick={() => {handleAddons(3)}} style={{ backgroundColor: addons[3]? 'aqua' : 'GhostWhite' }}>Ice Cream</button>
+        <button className = "b1" onClick={() => {handleAddons(4)}} style={{ backgroundColor: addons[4]? 'aqua' : 'GhostWhite' }}>Pudding</button>
+        <button className = "b1" onClick={() => {handleAddons(5)}} style={{ backgroundColor: addons[5]? 'aqua' : 'GhostWhite' }}>Aloe Vera</button>
+        <button className = "b1" onClick={() => {handleAddons(6)}} style={{ backgroundColor: addons[6]? 'aqua' : 'GhostWhite' }}>Red Bean</button>
+        <button className = "b1" onClick={() => {handleAddons(7)}} style={{ backgroundColor: addons[7]? 'aqua' : 'GhostWhite' }}>Crema</button>
+        <button className = "b1" onClick={() => {handleAddons(8)}} style={{ backgroundColor: addons[8]? 'aqua' : 'GhostWhite' }}>Aiju Jelly</button>
+        <button className = "b1" onClick={() => {handleAddons(9)}} style={{ backgroundColor: addons[9]? 'aqua' : 'GhostWhite' }}>Crystal Boba</button>
       </div>
-      <button className = "b2"> Add to cart</button>
+      <button className = "b2" onClick={handleAddToCart}> Add to cart</button>
     </div>
   </div>
 )}

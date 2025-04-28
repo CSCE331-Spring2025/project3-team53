@@ -4,14 +4,14 @@ import { GlobalContext } from './GlobalContext';
 
 const ManagerLogin = () => {
   const navigate = useNavigate();
-  const {setLoginID} = useContext(GlobalContext);
+  const {setLoginID, setIsManager} = useContext(GlobalContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false); // State for checkbox
 
   function handleUsernameChange(event) {
     const val = event.target.value;
-    if(val === "" || /^\d+$/.test(val)){
+    if(val === "" || /^\d+$/.test(val)){      // accept only interger inputs
       setUsername(val);
     }
     checkInputs(event.target.value, password); // Update checkbox state
@@ -37,8 +37,9 @@ const ManagerLogin = () => {
   }
 
   const handleLogin = () => {
-    if(/^\d+$/.test(username)){
+    if(/^\d+$/.test(username)){     // check for >= 0 interger username
       setLoginID(Number(username));
+      setIsManager(true);
       navigate(`/Manager`);
     }
   }

@@ -1,6 +1,9 @@
+import { useContext } from 'react';
 import { Link } from "react-router-dom";
+import { GlobalContext } from './GlobalContext';
 
 const Categories = () => {
+  const {isManager} = useContext(GlobalContext);
   return(
     <>
       <h2 className="login-header">Menu</h2>
@@ -49,7 +52,7 @@ const Categories = () => {
             <p className='manager-text'>BYOT</p> <br />
         </div>
       </Link>
-      <Link to="/Emplogin">
+      <Link to={isManager?"/Manager":"/Emplogin"}>
         <button className="drinksButton" >Go Back</button>
       </Link>
     </>

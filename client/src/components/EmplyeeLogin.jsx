@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { GlobalContext } from './GlobalContext';
 
 const EmployeeLogin = () => {
-  const {setLoginID} = useContext(GlobalContext)
+  const {setLoginID, setIsManager} = useContext(GlobalContext)
   const [ID, setID] = useState('');
   const navigate = useNavigate();
 
@@ -17,6 +17,7 @@ const EmployeeLogin = () => {
   const handleLogin = () => {
     if(/^\d+$/.test(ID)){
       setLoginID(Number(ID));
+      setIsManager(false);
       navigate(`/Categories`);
     }
   }

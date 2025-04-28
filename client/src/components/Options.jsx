@@ -109,7 +109,8 @@ const Options = () => {
       <Link to={`/menu/${category}`}>
         <button className="drinksButton">Go Back</button>
       </Link>
-
+      
+      {/*Button to send the order*/}
       <button className="drinksButton"
         onClick = {() => {
           const add_ons = [];

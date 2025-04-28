@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import { Link } from "react-router-dom";
 import { get_inventory, edit_inventory_quantity } from '../apiCall';
+import { GlobalContext } from './GlobalContext';
 
 const Inventory = () => {  
     const tableColumns = [
@@ -10,14 +11,17 @@ const Inventory = () => {
       { key: 'quantity', title: 'Quantity' },
     ];
 
+    const {loginID} = useContext(GlobalContext);
     const[ID, setID] = useState(0);
     const[quantity, setQuantity] = useState(1);
     const [tableData, setTable] = useState([]);
 
+    //load inventory data
     useEffect(() => {
-      get_inventory(1).then(res => {setTable(res.data)});
+      get_inventory(loginID).then(res => {setTable(res.data)});
     },[])
 
+    //handle edit request to inventory
     const handleButton = async (isAdd) => {
       if(isAdd === true){
         await edit_inventory_quantity(ID, quantity, false);
@@ -35,10 +39,11 @@ const Inventory = () => {
         setQuantity(Number(event.target.value));
     } 
 
-  
+    
     return (
       <div>
         <h2 className = "login-header">Inventory</h2>
+        {/*loads inventory table*/}
         <table border="1">
           <thead>
             <tr>
@@ -57,6 +62,7 @@ const Inventory = () => {
             ))}
           </tbody>
         </table>
+        {/*edit inventory options*/}
         <br/>
         <p>Enter Ingredient ID:&nbsp;&nbsp;&nbsp;    
         <input value = {ID} onChange = {handleIDChange}  type = "number"/>

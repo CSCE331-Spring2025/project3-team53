@@ -10,12 +10,16 @@ ChartJS.register(CategoryScale, LinearScale, BarElement,
 
 
 const Logging = () => {
+  //graph data 
   const [hr, setHr] = useState([]);
   const [data, setData] = useState([[],[],[]]);
+
+  //fetch analysis data parameter
   const [date, setDate] = useState("");
   const [hourF, sethourF] = useState("11");
   const [hourT, sethourT] = useState("22");
 
+  //fetch data from backend then populate graph
   const handleMakeReport = async () => {
     let res = (await func.order_hist(date, hourF, hourT));
     if(res.hasOwnProperty('data')){
@@ -32,6 +36,7 @@ const Logging = () => {
     }
   }
 
+  //bar chart data format
   const chartData = {
     labels: hr,
     datasets: [
@@ -53,6 +58,7 @@ const Logging = () => {
     ]
   };
 
+  //bar chart settings
   const options = {
     responsive: true,
     maintainAspectRatio: false,
@@ -85,6 +91,8 @@ const Logging = () => {
   return (
     <>
       <h2 className="login-header">X-Report</h2>
+
+      {/*bar chart*/}
       <div
         style={{
           width: "80vw",
@@ -101,6 +109,8 @@ const Logging = () => {
         <center style={{width: "80vw", height: "30vw"}}>
           <Bar data={chartData} options={options}/>
         </center>
+
+      {/*datetime selector*/}
       </div>
       <input className = "date" type="date" placeholder="Select a date" onChange={(e) => {setDate(e.target.value)}}/>
       <br/>
@@ -121,7 +131,7 @@ const Logging = () => {
         })}
       </select>
 
-
+      {/*buttons to generate graph*/}
       <div>
         <button className="log" onClick={() => {handleMakeReport()}}>Make Report</button>
         <button className="log" onClick={() => {setData([])}}>Clear</button>
