@@ -73,25 +73,25 @@ const EmployeeEditor = () => {
   };
 
   return (
-    <div className="employee-editor">
-      <h1 className="title">Employee Management</h1>
+    <div className="employee-editor-emp">
+      <h1 className="title-emp">Employee Management</h1>
       
-      <div className="action-buttons">
-        <button className="btn add-btn" onClick={() => setShowAddPopup(true)}>
+      <div className="action-buttons-emp">
+        <button className="btn-emp add-btn-emp" onClick={() => setShowAddPopup(true)}>
           Add New Employee
         </button>
-        <button className="btn remove-btn" onClick={() => setShowDeletePopup(true)}>
+        <button className="btn-emp remove-btn-emp" onClick={() => setShowDeletePopup(true)}>
           Remove Employee
         </button>
-        <Link to="/Editor" className="btn back-btn">
+        <Link to="/Editor" className="btn-emp back-btn-emp">
           Back
         </Link>
       </div>
 
       {/* Add Employee Popup */}
       {showAddPopup && (
-        <div className="popup-overlay">
-          <div className="popup-content">
+        <div className="popup-overlay-emp">
+          <div className="popup-content-emp">
             <h2>Add New Employee</h2>
             
             <div className="form-group">
@@ -141,11 +141,11 @@ const EmployeeEditor = () => {
               </div>
             )}
             
-            <div className="popup-actions">
-              <button className="btn submit-btn" onClick={handleAddEmployee}>
+            <div className="popup-actions-emp">
+              <button className="btn-emp submit-btn-emp" onClick={handleAddEmployee}>
                 Add Employee
               </button>
-              <button className="btn cancel-btn" onClick={() => setShowAddPopup(false)}>
+              <button className="btn-emp cancel-btn-emp" onClick={() => setShowAddPopup(false)}>
                 Cancel
               </button>
             </div>
@@ -155,8 +155,8 @@ const EmployeeEditor = () => {
 
       {/* Delete Employee Popup */}
       {showDeletePopup && (
-        <div className="popup-overlay">
-          <div className="popup-content">
+        <div className="popup-overlay-emp">
+          <div className="popup-content-emp">
             <h2>Remove Employee</h2>
             
             <div className="form-group">
@@ -175,11 +175,11 @@ const EmployeeEditor = () => {
               </div>
             )}
             
-            <div className="popup-actions">
-              <button className="btn submit-btn" onClick={handleDeleteEmployee}>
+            <div className="popup-actions-emp">
+              <button className="btn-emp submit-btn-emp" onClick={handleDeleteEmployee}>
                 Confirm Removal
               </button>
-              <button className="btn cancel-btn" onClick={() => setShowDeletePopup(false)}>
+              <button className="btn-emp cancel-btn-emp" onClick={() => setShowDeletePopup(false)}>
                 Cancel
               </button>
             </div>
