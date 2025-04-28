@@ -12,7 +12,7 @@ const addon_encoding = new Map([["black_pearl", "Pearl"], ["mini_pearl", "Mini P
   
 
 function Checkout() {
-    console.log(func.get_order_queue())
+    console.log(func.get_order_queue());
     const { state } = useLocation();
     const { back_page } = state;
 
@@ -62,7 +62,7 @@ function Checkout() {
         setShipping(event.target.value);
     }
 
-    function handlePlaceOrder(event) {
+    async function handlePlaceOrder(event) {
         event.preventDefault();
 
         // Validation
@@ -80,6 +80,8 @@ function Checkout() {
         }
 
         setIsLoading(true);
+        await func.send_order_queue();
+        setOrderConfirmed(true);
     }
 
     return (
