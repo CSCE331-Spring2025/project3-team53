@@ -52,7 +52,7 @@ const ManagerLogin = () => {
           className="username-text"
           type="text"
           value={username}
-          placeholder="Username"
+          placeholder="Manager ID"
           onChange={handleUsernameChange}
         /> <br />
         <input
