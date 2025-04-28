@@ -215,8 +215,10 @@ const CustomerOptions = () => {
               </option>
             ))}
           </select>
+          <Link to="/Customer">
+        <button className = "cusLogin"> Login</button>
+        </Link>
         </div>
-
         {isLoading ? (
           <div style={{ textAlign: "center", padding: "2rem" }}>
             Loading translations...
