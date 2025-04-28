@@ -12,7 +12,7 @@ function parseJWT(token) {
 }
 
 export const GoogleSignIn = () => {
-  const clientId = '<insert_client_id_here>';
+  const clientId = '677836819584-1nmmovtsmjl587mbst3l061dl7efnssi.apps.googleusercontent.com';
   const navigate = useNavigate();
 
   const onSuccess = async (response) => {
