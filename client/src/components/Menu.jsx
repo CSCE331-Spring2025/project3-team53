@@ -120,7 +120,7 @@ const Menu = () => {
               })
             }
             {<p>Total: ${totalPrice.toFixed(2)}</p>}
-            <button>Proceed to Payment</button>
+            <button onClick={() => {navigate("/Checkout")}}>Proceed to Payment</button>
           </div>
         </div>
       )}
