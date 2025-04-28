@@ -39,6 +39,8 @@ body {
   overflow-wrap: break-word;
   flex-grow: 1; /* Allows text to expand evenly */
 }
+
+
 .card:hover {
   background-color: hsl(0, 0%, 83%);
   cursor: pointer;
@@ -711,6 +713,30 @@ a {
   box-sizing: border-box;
   vertical-align: top;
   overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card3:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card3 .card-text{
+  /* font-weight: bold; */
+  font-size: 1.2rem;
+  margin: 10px 0;
+  text-align: center;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px; 
+  padding: 20px;
 }
 
 .popup-overlay {
