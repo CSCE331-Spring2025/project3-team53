@@ -96,6 +96,7 @@ const CustomerOptions = () => {
       description: translations["A smooth blend of rich tea and creamy milk for the perfect balance of flavor."] || "A smooth blend of rich tea and creamy milk for the perfect balance of flavor.",
       alt: "Our Mascot",
       link: "/CustomerMenu/Milk-Tea",
+      image: "/milk_tea.jpg"
     },
     {
       id: 2,
@@ -103,6 +104,7 @@ const CustomerOptions = () => {
       description: translations["A vibrant mix of fruit flavors and tea, refreshingly light with a hint of love."] || "A vibrant mix of fruit flavors and tea, refreshingly light with a hint of love.",
       alt: "Hohn Jina",
       link: "/CustomerMenu/Fruit-Tea",
+      image: "/fruit-tea.jpg"
     },
     {
       id: 3,
@@ -110,6 +112,7 @@ const CustomerOptions = () => {
       description: translations["Classic fresh tea brewed daily for a clean, crisp, and energizing experience."] || "Classic fresh tea brewed daily for a clean, crisp, and energizing experience.",
       alt: "Our Boy",
       link: "/CustomerMenu/Brewed-Tea",
+      image: "/brewed-tea.jpg"
     },
   ];
 
@@ -120,6 +123,7 @@ const CustomerOptions = () => {
       description: translations["Start your day with a nice blend of milk and some Bobruh goodness."] || "Start your day with a nice blend of milk and some Bobruh goodness.",
       alt: "Milk Drink",
       link: "/CustomerMenu/Fresh-Milk",
+      image: "/fresh-milk.jpg"
     },
     {
       id: 5,
@@ -127,6 +131,7 @@ const CustomerOptions = () => {
       description: translations["Cold, creamy, and perfect all year round."] || "Cold, creamy, and perfect all year round.",
       alt: "Ice Blended Drink",
       link: "/CustomerMenu/Ice-Blended",
+      image: "/ice-blended.jpg"
     },
     {
       id: 6,
@@ -134,6 +139,7 @@ const CustomerOptions = () => {
       description: translations["The flavors of a mojito combined with signature Bobruh flavors. What could go wrong?"] || "The flavors of a mojito combined with signature Bobruh flavors. What could go wrong?",
       alt: "Mojito Tea",
       link: "/CustomerMenu/Tea-Mojito",
+      image: "/mojito-tea.jpg"
     },
   ];
 
@@ -144,6 +150,7 @@ const CustomerOptions = () => {
       description: translations["Smooth and rich. Cremé drinks elevate the experience of the user tenfold."] || "smooth and rich. Cremé drinks elevate the experience of the user tenfold.",
       alt: "Cream",
       link: "/CustomerMenu/Crema",
+      image: "/crema-tea.jpg"
     },
     {
       id: 8,
@@ -151,6 +158,7 @@ const CustomerOptions = () => {
       description: translations["The real creme of the crop. Order them fast because some of them will be gone forever."] || "The real creme of the crop. Order them fast because some of them will be gone forever.",
       alt: "Spec/Promo",
       link: "/CustomerMenu/Specialty",
+      image: "/specialty-tea.jpg"
     },
     {
       id: 9,
@@ -158,14 +166,15 @@ const CustomerOptions = () => {
       description: translations["When it comes to choices you know best. Cut out the middle-man and choose your own combinations."] || "When it comes to choices you know best. Cut out the middle-man and choose your own combinations.",
       alt: "BYOT",
       link: "/CustomerMenu/build-your-own-tea",
+      image: "/BYOT.jpg"
     },
   ];
 
-  const renderCard = ({ id, title, description, alt, link }) => {
+  const renderCard = ({ id, title, description, alt, link, image }) => {
     const card = (
       <div className="card2" onClick={() => handleCardClick(id)} style={cardStyle}>
         <div style={{ borderRadius: "50%", padding: "1rem" }}>
-          <img src="/Hohn_Jina.jpg" alt={alt} style={imgStyle} />
+          <img src={image} alt={alt} style={imgStyle} />
         </div>
         <h2 style={{ fontWeight: "bold", marginTop: "1rem", fontSize: "2.5em" }}>{title}</h2>
         <p>{description}</p>
