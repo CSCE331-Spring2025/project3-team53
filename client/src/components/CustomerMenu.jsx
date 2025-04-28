@@ -81,9 +81,9 @@ const CustomerMenu = () => {
       <b>Level Of Ice</b>
       <div className="button-container">
         <button className = "b1">None</button>
-        <button className = "b1">25%</button>
-        <button className = "b1">50%</button>
-        <button className = "b1">75%</button>
+        <button className = "b1">Light Ice</button>
+        <button className = "b1">Normal Ice</button>
+        <button className = "b1">Extra Ice</button>
       </div>
       <b className="Sugar">Level Of Sugar</b>
       <div className="button-container">

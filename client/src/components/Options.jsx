@@ -3,7 +3,7 @@ import { useNavigate, Link, useLocation, useSearchParams} from "react-router-dom
 import * as func from '../apiCall.js';
 
 const encoding = new Map([
-  ["No Ice",0], ["Little Ice",1], ["Medium Ice",2], ["Large Ice",3],
+  ["No Ice",0], ["Light Ice",1], ["Normal Ice",2], ["Extra Ice",3],
   ["0%",0], ["25%",1], ["50%",2], ["75%",3], ["100%",4],
   ["Pearl", "black_pearl"], ["Mini Pearl", "mini_pearl"], ["Ice Cream", "ice_cream"], 
   ["Pudding", "pudding"], ["Aloe Vera", "aloe_vera"], ["Red Bean", "red_bean"], 
@@ -39,7 +39,7 @@ const Options = () => {
       {/*ice options*/}
       <div>
         <h3>Ice</h3>
-        {["No Ice", "Little Ice", "Medium Ice", "Large Ice"].map((option) => (
+        {["No Ice", "Light Ice", "Normal Ice", "Extra Ice"].map((option) => (
           <label key={option}>
             <input
               type="radio"

@@ -741,40 +741,44 @@ a {
 
 .popup-overlay {
   position: fixed;
-  bottom: 0;
+  top: 0;
   left: 0;
-  width: 100vw;
-  height: 95vh; 
-  background: #fff;
-  box-shadow: 0 -0.5vh 2vh rgba(0, 0, 0, 0.3); /* Drop shadow above the pop-up */
-  padding: 2vh 2vw;
-  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Dim the background */
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
-  transition: transform 0.3s ease;
+  z-index: 1000; /* Make sure it sits on top */
 }
 
 .popup-content {
-  display: flex;
-  flex-direction: column;
-  margin-top: -16vw;
-  margin-left: 2vw;
-  padding: 2vh 2vw;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 2.2rem;
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  width: 800px; /* Fixed width for the popup */
+  max-width: 90%; /* Responsive on smaller screens */
+  max-height: 75%;
+  /* overflow-y: auto; Scroll if content is too tall */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  position: relative;
 
 }
 
 .close-btn2 {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #555;
   cursor: pointer;
-  font-size: 1.5rem;
-  margin-left: -59.5vw;
-  margin-right: 38vw; 
-  margin-top: 16vw;
-  margin-bottom: 1.5vw;
+  background: none;
+  border: none;
+}
 
+.close-btn2:hover {
+  color: #000;
 }
 
 .cart-item {
@@ -834,16 +838,18 @@ a {
 
 .button-container {
   display: flex;
+  flex-wrap: wrap;
   gap: 2rem; 
   margin-top: 7vh;
+  margin-bottom: 20px;
 }
 
 .b1 {
   font-size: 1.6rem; 
   cursor: pointer;
-  width: 7vw;
-  height: 7vw;
-  margin-top: -2vw;
+  width: 5vw;
+  height: 5vw;
+  margin-top: -1vw;
 }
 
 .Sugar {
@@ -855,7 +861,11 @@ a {
   cursor: pointer;
   width: 7vw;
   height: 3vw;
-  margin-top: 5vw;
-  margin-left: 75vw;
+  /* margin-top: 5vw;
+  margin-left: 75vw; */
   background-color: hsl(85, 71%, 45%);
+}
+
+.b2:hover{
+  background-color: hsl(85, 71%, 30%);
 }
