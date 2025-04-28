@@ -189,8 +189,22 @@ color: hsl(0, 0%, 20%);
 }
 
 .drinksButton {
-  margin-bottom: 0px;
-  margin-left: 0px;
+  position: fixed;
+  bottom: 30px; /* distance from the bottom */
+  left: 30px;   /* distance from the left */
+  padding: 10px 20px;
+  background-color: #4CAF50; /* a nice green color */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.drinksButton:hover {
+  background-color: #38843c; /* slightly darker on hover */
 }
 
 .invent {

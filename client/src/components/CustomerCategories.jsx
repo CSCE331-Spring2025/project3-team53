@@ -226,7 +226,7 @@ const CustomerOptions = () => {
         ) : (
           <>
             <Link to="/Customer">
-            <button className="custback-btn" >Go Back</button>
+            <button className="drinksButton" >Go Back</button>
            </Link>
             {<>
             <h1 className="title-m2" style={{ textAlign: 'center', margin: '1rem 0' }}>
