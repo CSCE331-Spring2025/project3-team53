@@ -6,6 +6,12 @@ import { SERVER_DOMAIN } from "./config";
 const CustomerMenu = () => {
   const { category } = useParams();
 
+  const images = new Map([
+    ["Milk-Tea", "/milk_tea.jpg"], ["Fruit-Tea", "/fruit-tea.jpg"], ["Brewed-Tea", "/brewed-tea.jpg"],
+    ["Fresh-Milk", "/fresh-milk.jpg"], ["Ice-Blended", "/ice-blended.jpg"], ["Mojito", "/mojito-tea.jpg"],
+    ["Crema", "/crema-tea.jpg"], ["Specialty", "/specialty-tea.jpg"]
+  ])
+
 
   const handleCardClick = (drink) => {
     setSelectedDrink(drink); 
@@ -47,7 +53,7 @@ const CustomerMenu = () => {
               >
                 <img
                   className="card-image3"
-                  src="/placeholder.jpg"
+                  src={images.get(category)}
                   alt={`Picture of ${drink.drink_name}`}
                 />
                 <p className="card-text">{drink.drink_name}</p>

@@ -138,7 +138,7 @@ const CustomerOptions = () => {
       title: translations["Tea Mojito"] || "Tea Mojito",
       description: translations["The flavors of a mojito combined with signature Bobruh flavors. What could go wrong?"] || "The flavors of a mojito combined with signature Bobruh flavors. What could go wrong?",
       alt: "Mojito Tea",
-      link: "/CustomerMenu/Tea-Mojito",
+      link: "/CustomerMenu/Mojito",
       image: "/mojito-tea.jpg"
     },
   ];
