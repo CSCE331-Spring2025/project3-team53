@@ -46,7 +46,7 @@ function Home() {
                 </button>
                 <p></p>
                 <nav>
-                    <li><Link to="/Customer">Customer Login</Link></li>
+                    <li><Link to="/CustomerOptions">Customer</Link></li>
                     <li><Link to="/Emplogin">Employee Login</Link></li>
                     <li><Link to="/Malogin">Manager Login</Link></li>
                     {/* <li><Link to="/Debug">Debug Page</Link></li> */}
