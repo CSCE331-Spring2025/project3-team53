@@ -34,7 +34,7 @@ const CustomerOptions = () => {
       "The flavors of a mojito combined with signature Bobruh flavors. What could go wrong?",
       "Specialty Drinks",
       "Cremé",
-      "smooth and rich. Cremé drinks elevate the experience of the user tenfold.",
+      "Smooth and rich. Cremé drinks elevate the experience of the user tenfold.",
       "Specialty",
       "The real creme of the crop. Order them fast because some of them will be gone forever.",
       "Build Your Own Tea",
@@ -138,7 +138,7 @@ const CustomerOptions = () => {
     {
       id: 7,
       title: translations["Cremé"] || "Cremé",
-      description: translations["smooth and rich. Cremé drinks elevate the experience of the user tenfold."] || "smooth and rich. Cremé drinks elevate the experience of the user tenfold.",
+      description: translations["Smooth and rich. Cremé drinks elevate the experience of the user tenfold."] || "smooth and rich. Cremé drinks elevate the experience of the user tenfold.",
       alt: "Cream",
       link: "/CustomerMenu/Crema",
     },

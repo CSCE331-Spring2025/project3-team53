@@ -208,7 +208,7 @@ color: hsl(0, 0%, 20%);
 .range {
   display: flex;
   gap: 0.5vw; 
-  margin-left: 3.5vw;
+  margin-left: 32.5vw;
   margin-bottom: 3vw;
 }
 .date{
@@ -756,7 +756,7 @@ a {
   background: white;
   padding: 30px;
   border-radius: 16px;
-  width: 800px; /* Fixed width for the popup */
+  width: 45vw; /* Fixed width for the popup */
   max-width: 90%; /* Responsive on smaller screens */
   max-height: 75%;
   /* overflow-y: auto; Scroll if content is too tall */
@@ -840,15 +840,15 @@ a {
   display: flex;
   flex-wrap: wrap;
   gap: 2rem; 
-  margin-top: 7vh;
-  margin-bottom: 20px;
+  margin-top: 3.5vh;
+  margin-bottom: 2vh;
 }
 
 .b1 {
   font-size: 1.6rem; 
   cursor: pointer;
-  width: 5vw;
-  height: 5vw;
+  width: 7vw;
+  height: 7vw;
   margin-top: -1vw;
 }
 
