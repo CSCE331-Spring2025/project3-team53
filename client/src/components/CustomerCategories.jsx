@@ -15,6 +15,9 @@ const CustomerOptions = () => {
     { code: "es", name: "Español (Spanish)" },
     { code: "fr", name: "Français (French)" },
     { code: "de", name: "Deutsch (German)" },
+    { code: "el", name: "Ελληνικά (Greek)" },
+    { code: "de", name: "Deutsch (German)" },
+    { code: "ko", name: "한국어 (Korean)" },
     { code: "ja", name: "日本語 (Japanese)" }
   ];
 
