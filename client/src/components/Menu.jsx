@@ -3,8 +3,12 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import * as func from '../apiCall.js';
 import { SERVER_DOMAIN } from "./config";
 
-const ice_encoding = new Map([[0,"No Ice"], [1,"Little Ice"], [2,"Medium Ice"], [3,"Large Ice"]]);
-const sugar_encoding = new Map([[0,"0%"], [1,"25%"], [2,"50%"], [3,"75%"], [4,"100%"]]);
+const ice_encoding = new Map([[0,"No Ice"], [1,"Light Ice"], [2,"Normal Ice"], [3,"Extra Ice"]]);
+const sugar_encoding = new Map([[0,"0% Sugar"], [1,"25% Sugar"], [2,"50% Sugar"], [3,"75% Sugar"], [4,"100% Sugar"]]);
+const addon_encoding = new Map([["black_pearl", "Pearl"], ["mini_pearl", "Mini Pearl"], ["ice_cream", "Ice Cream"], 
+  ["pudding", "Pudding"], ["aloe_vera", "Aloe Vera"], ["red_bean", "Red Bean"], 
+  ["aiyu_jelly", "Aiyu Jelly"], ["creama", "Creama"], ["crystal_boba", "Crystal Boba"]
+])
 
 
 const Menu = () => {
@@ -55,7 +59,9 @@ const Menu = () => {
       setTotalPrice(prices.get(0));
       func.get_order_queue().forEach((value, key, _) => {
         let name = func.get_menu().find(obj => obj.id === value[1]).drink_name;
-        newCart.set(key, [name, ice_encoding.get(value[2]), sugar_encoding.get(value[3]), prices.get(key)]);
+        newCart.set(key, 
+          [name, ice_encoding.get(value[2]), sugar_encoding.get(value[3]), prices.get(key), 
+          value[4].map((element) => addon_encoding.get(element)).join(", ")]);
       });
       setCart(newCart);
     })();
@@ -113,14 +119,16 @@ const Menu = () => {
               Array.from(cart).map(([key, values]) => {
                 return  <>
                           <p className="cart-item">
-                            {values[0]} - {values[1]} - {values[2]} - ${values[3]}
                             <span className="close-btn" onClick={() => {func.dequeue_order(key); setCartChanged(!cartChanged)}}>&times;</span>
+                            {values[0]} - ${values[3]}<br/>
+                            <span style={{margin: "0em 0em 0em 2em"}}>{values[1]} - {values[2]}</span> <br/>
+                            <span style={{margin: "0em 0em 0em 2em"}}>{values[4]}</span>
                           </p>
                         </>
               })
             }
             {<p>Total: ${totalPrice.toFixed(2)}</p>}
-            <button onClick={() => {navigate("/Checkout")}}>Proceed to Payment</button>
+            <button onClick={() => {navigate("/Checkout", {state: {back_page: `/menu/${category}`}})}}>Proceed to Payment</button>
           </div>
         </div>
       )}
