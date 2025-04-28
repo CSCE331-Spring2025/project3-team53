@@ -248,7 +248,7 @@ Add a new employee entry
     store_id: id for which store the employee belongs to
 */
 export const add_new_employee = async (name, position, store_id) => {
-    const url = 'http://localhost:5000/api/edit/employee';
+    const url = 'http://localhost:5000/api/insert/employee';
     const body = JSON.stringify({
         name: name,
         position: position,

@@ -72,29 +72,37 @@ request takes value of (name, position, store_id)
     insrt the employee
 */
 router.put("/employee", async (req, res) => {
-    console.log("Insert employee");
     try {
-        const {name, position, store_id} = req.body;
-        if(typeof name !== 'string' || typeof position !== 'string' ||
-        !Number.isInteger(store_id)){
-            return res.status(400).json({error: 'Invalid Input'});
+        const { name, position, store_id } = req.body;
+        
+        // Validate input
+        if (typeof name !== 'string' || name.trim().length === 0) {
+            return res.status(400).json({ error: 'Invalid employee name' });
+        }
+        if (!['employee', 'manager'].includes(position)) {
+            return res.status(400).json({ error: 'Invalid position' });
+        }
+        if (![1, 2, 3].includes(store_id)) {
+            return res.status(400).json({ error: 'Invalid store ID' });
         }
 
-        let sql = `INSERT INTO employees (emp_name, position, store_id)
-        VALUES('${name}', '${position}', ${store_id})`;
-        console.log(sql);
-        try{
-            await pool.query(sql);
-        }
-        catch(err){
-            return res.status(400).json({ message:"Query error", error: err.message });
-        }
-        return res.status(200).json({ message:"Employee inserted"});
-        console.log('Employee inserted');
-    } 
-    catch (err) {
-        //console.error(err.message);
-        return res.status(500).json({ message:"Server error", error: err.message });
+        // Safe parameterized query
+        const result = await pool.query(
+            `INSERT INTO employees (emp_name, position, store_id)
+             VALUES($1, $2, $3) RETURNING *`,
+            [name.trim(), position, store_id]
+        );
+
+        return res.status(201).json({
+            message: "Employee inserted successfully",
+            employee: result.rows[0]
+        });
+    } catch (err) {
+        console.error("Insert error:", err);
+        return res.status(500).json({ 
+            error: 'Internal server error',
+            details: err.message 
+        });
     }
 });
 
