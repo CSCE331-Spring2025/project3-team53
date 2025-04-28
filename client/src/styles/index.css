@@ -758,7 +758,7 @@ a {
   border-radius: 16px;
   width: 45vw; /* Fixed width for the popup */
   max-width: 90%; /* Responsive on smaller screens */
-  max-height: 75%;
+  max-height: 80%;
   /* overflow-y: auto; Scroll if content is too tall */
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   position: relative;
