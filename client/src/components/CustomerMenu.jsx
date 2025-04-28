@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from "react";
-import { Link, useParams  } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { SERVER_DOMAIN } from "./config";
 import * as func from "../apiCall";
 
@@ -14,7 +14,7 @@ const addon_encoding = new Map([["black_pearl", "Pearl"], ["mini_pearl", "Mini P
 //TODO - refactor for each drink type
 const CustomerMenu = () => {
   const { category } = useParams();
-
+  const navigation = useNavigate();
   const images = new Map([
     ["Milk-Tea", "/milk_tea.jpg"], ["Fruit-Tea", "/fruit-tea.jpg"], ["Brewed-Tea", "/brewed-tea.jpg"],
     ["Fresh-Milk", "/fresh-milk.jpg"], ["Ice-Blended", "/ice-blended.jpg"], ["Mojito", "/mojito-tea.jpg"],
@@ -96,7 +96,8 @@ const CustomerMenu = () => {
     setSugar(4);
     setAddons([true, false, false, false, false, false,
       false, false, false, false]);
-    setShowPopup(false)
+    setShowPopup(false);
+    setCartChanged(!cartChanged);
   }
 
   return (
@@ -146,9 +147,7 @@ const CustomerMenu = () => {
 
               }
               <p>Total: ${totalPrice}</p>
-              <Link to="/Checkout">
-                <button>Proceed to Payment</button>
-              </Link>
+              <button onClick={() => {navigation("/Checkout", {state:{back_page: `/CustomerMenu/${category}`}})}}>Proceed to Payment</button>
             </div>
           </div>
         )}
