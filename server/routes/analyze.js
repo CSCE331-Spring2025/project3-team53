@@ -120,7 +120,7 @@ router.get("/inventory", async (req, res) => {
             return res.status(400).json({error:`Employee id ${employee_id} is not integer`});
         }
         let sql = `
-                SELECT id, name, type, quantity FROM inventory 
+                SELECT id, name, type, quantity, calories FROM inventory 
                 WHERE store_id = (SELECT store_id FROM employees WHERE id = ${employee_id}) 
                 ORDER BY id ASC`;
         try{
