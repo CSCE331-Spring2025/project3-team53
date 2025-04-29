@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { translateText } from "../apiCall.js"; // Ensure you have the translate function correctly imported
+import { translateText, get_weather } from "../apiCall.js"; // Ensure you have the translate function correctly imported
 
 const CustomerOptions = () => {
   const location = useLocation();
@@ -9,6 +9,7 @@ const CustomerOptions = () => {
   const [language, setLanguage] = useState("en"); // Track the language state
   const [translations, setTranslations] = useState({}); // Store translations as an object
   const [isLoading, setIsLoading] = useState(true);
+  const [weather, setWeather] = useState([]);
 
   //for more language support simply add them to the array
   const languageOptions = [
@@ -71,6 +72,13 @@ const CustomerOptions = () => {
       }
     };
     getTranslations();
+
+    const fetchWeather = async () => {
+        const weatherData = await get_weather();
+        console.log(weatherData);
+        setWeather(weatherData);  
+    };
+    fetchWeather();
   }, [language]);
 
   const handleLanguageChange = (e) => {
@@ -308,6 +316,12 @@ const CustomerOptions = () => {
           </>
         )}
       </div>
+      <center>
+        <p style={{marginBottom: '5px'}}>{Math.round(weather?.current?.temp_f)}°F {weather?.current?.condition?.text} <img src={weather?.current?.condition?.icon}
+                   style={{ verticalAlign: "middle", marginLeft: "-15px", marginRight: "-18px", scale: "50%"}}></img> 
+                 - {weather?.location?.name}, {weather?.location?.region}</p>
+        <p style={{marginTop: '-20px'}}>© 2025 Bruhba. All rights reserved.</p>
+    </center>
     </div>
   );
 };
