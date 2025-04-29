@@ -935,3 +935,114 @@ a {
   gap: 2vw;
   height: 100vh;
 }
+
+.language-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+  font-family: sans-serif;
+  font-size: 18px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 4px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+.Header-home {
+display: flex;
+gap: 13vw;
+}
+
+.Bobruh {
+  text-align: center;
+  margin-left: 12vw;
+}
+
+.card-container4 {
+  display: flex;
+  justify-content: space-around;
+}
+
+.card-wrap4 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-label {
+  margin-top: 0vw;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px; /* Adds space between label and card */
+  text-align: center;
+  color: rgb(4, 4, 4);
+}
+
+.card4 {
+  width: 20vw;
+  height: 20vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(4, 4, 4);
+  font-size: 24px;
+  text-align: center;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 1.2);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+}
+
+.card-wrap:nth-child(1) .card4 { background-image: url('/public/kiosk.jpg'); }
+.card-wrap:nth-child(2) .card4 { background-image: url('/public/employee.jpg'); }
+.card-wrap:nth-child(3) .card4 { background-image: url('/public/boss2.jpg'); }
+
+.img-card {
+  display: none; 
+}
+
+.about {
+  font-size: 2.5rem;
+  margin-top: 1vw;
+}
