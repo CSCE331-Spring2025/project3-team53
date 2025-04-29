@@ -428,3 +428,23 @@ export const login_save_cart = async (username, cart) => {
 
     return await fetch_request(url, body, 2);
 }
+
+
+export const get_calories = async (id) => {
+    const parameter = new URLSearchParams({
+        drink_id: id
+    });
+    const url = `http://localhost:5000/api/analyze/drink_calories?${parameter.toString()}`;
+    return await fetch_request(url, null, 1);
+}
+
+/*
+Fetch all ingredients for a drink by id
+    id: id of the drink
+Returns:
+    { ingredients: [...] }
+*/
+export const fetch_drink_ingredients = async (id) => {
+    const url = `http://localhost:5000/api/analyze/drink/${id}/ingredients`;
+    return await fetch_request(url, null, 1);
+};

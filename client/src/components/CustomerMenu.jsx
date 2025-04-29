@@ -33,12 +33,65 @@ const CustomerMenu = () => {
   const [cartChanged, setCartChanged] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
 
+  const allergenFlags = (ingredients) => {
+    const flags = {
+      dairy: false,
+      soy: false,
+      egg: false,
+      gluten: false,
+    };
+  
+    for (const ing of ingredients) {
+      const name = ing.toLowerCase();  // ing is now a string like "milk" or "creamer"
+  
+      // Dairy
+      if (name.includes('milk') || name.includes('creama') || name.includes('creamer') || name.includes('pudding') || name.includes('ice_cream')) {
+        flags.dairy = true;
+      }
+  
+      // Soy
+      if (name.includes('creamer') || name.includes('oreo')) {
+        flags.soy = true;
+      }
+  
+      // Egg
+      if (name.includes('pudding')) {
+        flags.egg = true;
+      }
+  
+      // Gluten
+      if (name.includes('oreo')) {
+        flags.gluten = true;
+      }
+    }
+  
+    return flags;
+  };
+  
+
   useEffect(() => {
     fetch(`http://${SERVER_DOMAIN}/api/drinks/${category}`)
       .then((response) => response.json())
-      .then((data) => {
-        //console.log("Fetched drinks:", data)
-        setDrinks(data);
+      .then(async (data) => {
+        const enrichedDrinks = await Promise.all(
+          data.map(async (drink) => {
+            const caloriesInfo  = await func.get_calories(drink.id);
+            const calories = caloriesInfo.data
+            const price = await func.get_order_price(drink.id, []);
+  
+            const ingredientsObj = await func.fetch_drink_ingredients(drink.id);
+            const flags = allergenFlags(ingredientsObj.ingredients);
+
+      
+            return {
+              ...drink,
+              calories: calories,
+              price: price,
+              flags: flags, 
+            };
+          })
+        );
+        setDrinks(enrichedDrinks);
       })
       .catch((error) => console.error("Error fetching drinks:", error));
   }, [category]);
@@ -111,21 +164,32 @@ const CustomerMenu = () => {
         </div>
         <center>
           <div className="card-container">
-            {drinks.map((drink) => (
-              <div
-                key={drink.id}
-                className="card3"
-                onClick={() => handleCardClick(drink)}
-                style={{ cursor: "pointer" }}
-              >
-                <img
-                  className="card-image3"
-                  src={images.get(category)}
-                  alt={`Picture of ${drink.drink_name}`}
-                />
-                <p className="card-text">{drink.drink_name}</p>
-              </div>
-            ))}
+          {drinks.map((drink) => (
+          <div
+            key={drink.id}
+            className="card3"
+            onClick={() => handleCardClick(drink)}
+            style={{ cursor: "pointer" }}
+          >
+            <img
+              className="card-image3"
+              src={images.get(category)}
+              alt={`Picture of ${drink.drink_name}`}
+            />
+            <p className="card-text">{drink.drink_name}</p>
+            <div className="price-cals">
+              <span>${drink.price.toFixed(2)  }</span>
+
+              <span>{drink.calories} Cal</span>
+            </div>
+            <div className="nutrients">
+              {drink.flags.dairy && <span>🥛 Dairy</span>}
+              {drink.flags.soy && <span>🌱 Soy</span>}
+              {drink.flags.egg && <span>🥚 Egg</span>}
+              {drink.flags.gluten && <span>🌾 Gluten</span>}
+            </div>
+          </div>
+        ))}
           </div>
         </center>
 
@@ -139,14 +203,14 @@ const CustomerMenu = () => {
               {Array.from(cart).map(([key, values]) => {
                 return <><p className="cart-item">
                         <span className="close-btn" onClick={() => {func.dequeue_order(key); setCartChanged(!cartChanged)}}>&times;</span>
-                        {values[0]} - ${values[3]}<br/>
+                        {values[0]} - ${values[3].toFixed(2)}<br/>
                         <span style={{margin: "0em 0em 0em 2em"}}>{values[1]} - {values[2]}</span> <br/>
                         <span style={{margin: "0em 0em 0em 2em"}}>{values[4]}</span>
                       </p></>
               })
 
               }
-              <p>Total: ${totalPrice}</p>
+              <p>Total: ${totalPrice.toFixed(2)}</p>
               <button onClick={() => {navigation("/Checkout", {state:{back_page: `/CustomerMenu/${category}`}})}}>Proceed to Payment</button>
             </div>
           </div>

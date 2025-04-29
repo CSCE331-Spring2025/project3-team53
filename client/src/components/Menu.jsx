@@ -120,7 +120,7 @@ const Menu = () => {
                 return  <>
                           <p className="cart-item">
                             <span className="close-btn" onClick={() => {func.dequeue_order(key); setCartChanged(!cartChanged)}}>&times;</span>
-                            {values[0]} - ${values[3]}<br/>
+                            {values[0]} - ${values[3].toFixed(2)}<br/>
                             <span style={{margin: "0em 0em 0em 2em"}}>{values[1]} - {values[2]}</span> <br/>
                             <span style={{margin: "0em 0em 0em 2em"}}>{values[4]}</span>
                           </p>
