@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Debug = () => {
   return (
-    <div>
+    <div> {/*Antiquated page*/}
       <h1>Nothing is happening here, pretty neat right?</h1>
       <img  className = "Hohn" src = "./Nothing.jpg" alt = "My Man Hohn Jina"></img><br/>
       <Link to="/Malogin">

@@ -1,28 +1,56 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useContext} from "react";
+import { Link, useLocation } from "react-router-dom";
+import * as func from '../apiCall.js';
+import { GlobalContext } from './GlobalContext';
 
-//Component for checking out as a customer, subject to change
+const ice_encoding = new Map([[0,"No Ice"], [1,"Light Ice"], [2,"Normal Ice"], [3,"Extra Ice"]]);
+const sugar_encoding = new Map([[0,"0% Sugar"], [1,"25% Sugar"], [2,"50% Sugar"], [3,"75% Sugar"], [4,"100% Sugar"]]);
+const addon_encoding = new Map([["black_pearl", "Pearl"], ["mini_pearl", "Mini Pearl"], ["ice_cream", "Ice Cream"], 
+    ["pudding", "Pudding"], ["aloe_vera", "Aloe Vera"], ["red_bean", "Red Bean"], 
+    ["aiyu_jelly", "Aiyu Jelly"], ["creama", "Creama"], ["crystal_boba", "Crystal Boba"]
+  ])
+  
+//checkout component for sending orders
 function Checkout() {
+    const { state } = useLocation();
+    const { back_page } = state;
+    const { stashedZ, setStashedZ, customerLoggedIn, setCustomerLoggedIn } = useContext(GlobalContext);
+
     const [name, setName] = useState("Guest");
-    const [quantity, setQuantity] = useState(1);
     const [comment, setComment] = useState("");
     const [payment, setPayment] = useState("");
-    const [shipping, setShipping] = useState("Delivery");
-    const [cartItems, setCartItems] = useState([
-        { name: "Water", price: 999.0, quantity: 2 },
-        { name: "Air", price: 2000.0, quantity: 1 },
-    ]);
+    const [shipping, setShipping] = useState("Pick Up");
+    const [cartItems, setCartItems] = useState([]);
+    const [totalPrice, setTotalPrice] = useState([0,0])
     const [orderConfirmed, setOrderConfirmed] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-
+    const [refreshFlag, setRefreshFlag] = useState(false);
     const deliveryFee = shipping === "Delivery" ? 3.0 : 0.0;
+
+    //load cart items
+    useEffect(() => {
+        (async () => {
+            let cart = func.get_order_queue();
+            let prices = await func.get_stash_price();
+            let newCartItems = [];
+            cart.forEach((value, key, _) => {
+                let name = func.get_menu().find(obj => obj.id === value[1]).drink_name;
+                newCartItems.push({
+                    name:name, price:prices.get(key), ice:ice_encoding.get(value[2]), sugar:sugar_encoding.get(value[3]), 
+                    add_on: value[4].map((element) => addon_encoding.get(element)).join(", "),
+                    drink_id: key 
+                });
+            })
+            if(customerLoggedIn){
+                func.login_save_cart(customerLoggedIn, Array.from(func.get_order_queue().values()));
+            }
+            setCartItems(newCartItems);
+            setTotalPrice([prices.get(0), prices.get(0)+deliveryFee]);
+        })();
+    },[refreshFlag])
 
     function handleNameChange(event) {
         setName(event.target.value);
-    }
-
-    function handleQuantityChange(event) {
-        setQuantity(event.target.value);
     }
 
     function handleCommentChange(event) {
@@ -34,10 +62,11 @@ function Checkout() {
     }
 
     function handleShippingChange(event) {
+        setRefreshFlag(!refreshFlag);
         setShipping(event.target.value);
     }
 
-    function handlePlaceOrder(event) {
+    async function handlePlaceOrder(event) {
         event.preventDefault();
 
         // Validation
@@ -55,6 +84,12 @@ function Checkout() {
         }
 
         setIsLoading(true);
+        await func.send_order_queue();
+        setStashedZ(stashedZ + totalPrice[0]);
+        setOrderConfirmed(true);
+        if(customerLoggedIn){
+            func.login_save_cart(customerLoggedIn, []);
+        }
     }
 
     return (
@@ -62,35 +97,28 @@ function Checkout() {
             {!orderConfirmed ? (
                 <form onSubmit={handlePlaceOrder}>
                     <h2>Checkout</h2>
-
+                    {/*display cart items*/}
                     <h3>Order Summary</h3>
-                    <ul>
+                    <ul style={{listStyle: "none"}}>
                         {cartItems.map((item, index) => (
                             <li key={index}>
-                                {item.name} x {item.quantity} - $
-                                {(item.price * item.quantity).toFixed(2)}
+                                <span className="close-btn" onClick={() => {func.dequeue_order(item.drink_id); setRefreshFlag(!refreshFlag);}}>&times;</span>
+                                {item.name} - ${(item.price).toFixed(2)} <br/>
+                                <span style={{margin: "0em 0em 0em 2em"}}>{item.ice}</span><br/>
+                                <span style={{margin: "0em 0em 0em 2em"}}>{item.sugar}</span><br/>
+                                <span style={{margin: "0em 0em 0em 2em"}}>{item.add_on}</span>
                             </li>
                         ))}
                     </ul>
-                    <p>Subtotal: $0</p>
-                    <p>Delivery Fee: $0</p>
-                    <p>Grand Total: $0</p>
+                    <p>Subtotal: ${totalPrice[0].toFixed(2)}</p>
+                    <p>Delivery Fee: ${deliveryFee.toFixed(2)}</p>
+                    <p>Grand Total: ${totalPrice[1].toFixed(2)}</p>
                     <div>
                     <label>
                         Name:
                         <input
                             value={name}
                             onChange={handleNameChange}
-                            required
-                        />
-                    </label>
-                    <label>
-                        Quantity:
-                        <input
-                            value={quantity}
-                            onChange={handleQuantityChange}
-                            type="number"
-                            min="1"
                             required
                         />
                     </label>
@@ -131,7 +159,7 @@ function Checkout() {
                      />
                     <p>Pick Up</p>
                     </label>
-                    <label>
+                    <label className="delivery">
                     <input
                          type="radio"
                         value="Delivery"
@@ -156,6 +184,9 @@ function Checkout() {
                     </Link>
                 </div>
             )}
+        <Link to={back_page}>
+            <button  >Go Back</button>
+        </Link>
         </div>
     );
 }

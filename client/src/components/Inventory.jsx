@@ -1,36 +1,50 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import { Link } from "react-router-dom";
+import { get_inventory, edit_inventory_quantity } from '../apiCall';
+import { GlobalContext } from './GlobalContext';
 
-//Component for viewing and editing inventory table
-const Inventory = () => {
-    const tableData = [
-      { id: 1, name: "mini_pearl", type: "Ingredient", store_id: 1, quantity: 100  },
-      { id: 1, name: "mini_pearl", type: "Ingredient", store_id: 1, quantity: 100  },
-    ];
-  
+const Inventory = () => {  
     const tableColumns = [
       { key: 'id', title: 'ID' },
       { key: 'name', title: 'Name' },
       { key: 'type', title: 'Type' },
-      { key: 'store_id', title: 'Store ID' },
       { key: 'quantity', title: 'Quantity' },
+      { key: 'calories', title: 'Cal'}
     ];
 
+    const {loginID} = useContext(GlobalContext);
     const[ID, setID] = useState(0);
     const[quantity, setQuantity] = useState(1);
+    const [tableData, setTable] = useState([]);
 
+    //load inventory data
+    useEffect(() => {
+      get_inventory(loginID).then(res => {setTable(res.data)});
+    },[])
+
+    //handle edit request to inventory
+    const handleButton = async (isAdd) => {
+      if(isAdd === true){
+        await edit_inventory_quantity(ID, quantity, false);
+      }
+      else{
+        await edit_inventory_quantity(ID, -quantity, false);
+      }
+      get_inventory(1).then(res => {setTable(res.data)});
+    }
     function handleIDChange(event) {
-        setID(event.target.value);
+        setID(Number(event.target.value));
     } 
 
     function handleQuantityChange(event) {
-        setQuantity(event.target.value);
+        setQuantity(Number(event.target.value));
     } 
 
-  
+    
     return (
       <div>
         <h2 className = "login-header">Inventory</h2>
+        {/*loads inventory table*/}
         <table border="1">
           <thead>
             <tr>
@@ -49,6 +63,7 @@ const Inventory = () => {
             ))}
           </tbody>
         </table>
+        {/*edit inventory options*/}
         <br/>
         <p>Enter Ingredient ID:&nbsp;&nbsp;&nbsp;    
         <input value = {ID} onChange = {handleIDChange}  type = "number"/>
@@ -59,12 +74,12 @@ const Inventory = () => {
         </p>
         <br/>
         <div>
-      <button className="invent">Add Ingredient/s</button>
-      <button className="invent">Remove Ingredient/s</button>
+          <button className="invent" onClick={() => {handleButton(true)}}>Add Ingredient/s</button>
+          <button className="invent" onClick={() => {handleButton(false)}}>Remove Ingredient/s</button>
         </div>
         <Link to="/Manager">
-        <button>Go Back</button>
-      </Link>
+          <button>Go Back</button>
+        </Link>
       </div>
     );
   };

@@ -1,13 +1,19 @@
-import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from 'react';
+import { Link, useNavigate } from "react-router-dom";
+import { GlobalContext } from './GlobalContext';
 
 const ManagerLogin = () => {
+  const navigate = useNavigate();
+  const {setLoginID, setIsManager} = useContext(GlobalContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false); // State for checkbox
 
   function handleUsernameChange(event) {
-    setUsername(event.target.value);
+    const val = event.target.value;
+    if(val === "" || /^\d+$/.test(val)){      // accept only interger inputs
+      setUsername(val);
+    }
     checkInputs(event.target.value, password); // Update checkbox state
   }
 
@@ -30,6 +36,14 @@ const ManagerLogin = () => {
     }
   }
 
+  const handleLogin = () => {
+    if(/^\d+$/.test(username)){     // check for >= 0 interger username
+      setLoginID(Number(username));
+      setIsManager(true);
+      navigate(`/Manager`);
+    }
+  }
+
   return (
     <div className="login-body">
       <h2 className="login-header">Welcome!</h2>
@@ -38,7 +52,7 @@ const ManagerLogin = () => {
           className="username-text"
           type="text"
           value={username}
-          placeholder="Username"
+          placeholder="Manager ID"
           onChange={handleUsernameChange}
         /> <br />
         <input
@@ -54,12 +68,9 @@ const ManagerLogin = () => {
           checked={showPassword} // Controlled checkbox state
           onChange={handleCheckboxChange}
         /> Show Password <br />
-        <Link to="/Manager">
-          <button className="login">Login</button>
-        </Link>
+        <button className="login" onClick={handleLogin}>Login</button>
       </div>
-      <p>Username: {username}</p>
-      <p>Password: {password}</p>
+      <p/>
       <Link to="/">
         <button>Go to Home Page</button>
       </Link>

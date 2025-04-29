@@ -1,97 +1,162 @@
-import { Link } from "react-router-dom";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import IngredientsSelector from './IngredientsSelector';
+import { add_new_drink, delete_entry, get_menu, refresh_menu } from '../apiCall.js';
 
-//Child component for a scrollable view to select any desired ingredients for the new drink.
-const IngredientsSelector = () => {
-  const [selectedIngredient, setSelectedIngredient] = useState(null);
+//component to add new drinks and delete old ones
+const MenuEditor = () => {
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState(""); 
+  const [selectedDrinkId, setSelectedDrinkId] = useState(""); 
+  const [selectedIngredients, setSelectedIngredients] = useState([]);
+  const [ingredientCounts, setIngredientCounts] = useState({});
+  const [menu, setMenu] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const handleSelect = (ingredient) => {
-    setSelectedIngredient(ingredient);
+  useEffect(() => {
+    const fetchMenu = async () => {
+      const drinks = await get_menu();
+      setMenu(drinks);
+      setLoading(false);
+    };
+    fetchMenu();
+  }, []);
+
+  const handleAddDrink = async () => {
+    const priceAsNumber = parseFloat(price);
+    if (!name) {
+      alert("Please enter a drink name.");
+      return;
+    }
+    if(isNaN(priceAsNumber)){
+      alert("Please enter a valid price");
+      return;
+    }
+    if(selectedIngredients.length === 0){
+      alert("Please select at least 1 ingredient");
+      return;
+    }
+
+    const ingredients = selectedIngredients;
+    const amounts = selectedIngredients.map((ingredient) => ingredientCounts[ingredient]);
+
+    try {
+      await add_new_drink(name, "Special", ingredients, amounts, priceAsNumber);
+      alert("Drink added successfully!");  
+      await refresh_menu();
+      const updatedMenu = await get_menu();
+      setMenu(updatedMenu);
+    } catch (error) {
+      alert("Error adding drink.");
+      console.error(error);
+    }
   };
 
-  const ingredients = [
-    "aloe_vera", "wintermelon", "black_pearl", "creamer", "creama",
-    "ice_cream", "matcha", "strawberry_juice", "mint", "pineapple_jam",
-    "honey", "mango_jam", "ginger_tea", "oreo", "thai_tea",
-    "cocoa_powder", "mini_pearl", "red_bean", "green_tea", "passion_fruit",
-    "orange_jam", "pudding", "black_tea", "lime_juice", "crystal_boba",
-    "wintermelon_tea", "lime_slice", "kiwi_jam", "oolong_tea", "aiju_jelly",
-    "grapefruit_jam", "milk", "taro_paste", "lemonade", "coffee",
-  ];
+  const handleRemoveDrink = async () => {
+    if (!selectedDrinkId) {
+      alert("Please select a drink to remove.");
+      return;
+    }
+
+    const id = parseInt(selectedDrinkId);
+    if (isNaN(id)) {
+      alert("Invalid drink ID.");
+      return;
+    }
+
+    try {
+      await delete_entry(1, id);
+      alert("Drink removed successfully!");
+      await refresh_menu();
+      const updatedMenu = await get_menu();
+      setMenu(updatedMenu);
+      setSelectedDrinkId("");
+    } catch (error) {
+      alert("Error removing drink.");
+      console.error(error);
+    }
+  };
+
+  if (loading) {
+    return <p>Loading menu...</p>;
+  }
 
   return (
-    <>
-      <div className="scrollable-container">
-        {ingredients.map((ingredient) => (
-          <div
-            key={ingredient}
-            className={`ingredient-item ${selectedIngredient === ingredient ? "selected" : ""}`}
-            onClick={() => handleSelect(ingredient)}
-          >
-            {ingredient}
-          </div>
-        ))}
-      </div>
-      <div className="sides">
-        <button className="button-ing">Add Item</button>
-        <button className="button-ing2">Add Ingredient</button>
-      </div>
-    </>
-  );
-};
-
-//Editor component with input fields for drink_name, ID, price.
-const MenuEditor = () => {  
-  const [name, setName] = useState("BoBruh");
-  const [ID3, setID3] = useState("");
-  const [ID5, setID5] = useState("");
-
-  return (
-    <>  
+    <div className="menu-editor-page" style={{ padding: '20px' }}>
       <p className="edit-header">Edit Menu</p>
-      <div className="Enter_ID">
-        <label>Enter Name of the Drink to Add:</label>
-        <br />
-        <input
-          id="drink-name"
-          className="text-input"
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+      
+      {/* Add Drink Section */}
+      <div className="editor-section" style={{ marginBottom: '30px' }}>
+        <h3 className="section-title">Add New Drink</h3>
+        <div className="input-group">
+          <label className="input-label">Drink Name:</label>
+          <input
+            className="text-input"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            style={{ width: '100%' }}
+          />
+        </div>
+
+        <div className="input-group">
+          <label className="input-label">Price:</label>
+          <input
+            className="text-input"
+            type="text"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            style={{ width: '100%' }}
+          />
+        </div>
+
+        <IngredientsSelector 
+          selectedIngredients={selectedIngredients}
+          setSelectedIngredients={setSelectedIngredients}
+          ingredientCounts={ingredientCounts}
+          setIngredientCounts={setIngredientCounts}
         />
+
+        <button className="button-ing" onClick={handleAddDrink} style={{ marginTop: '20px' }}>
+          Add Drink
+        </button>
       </div>
 
-      <div className="ID_4">
-        <label htmlFor="drink-price">Enter The Price:</label>
-        <br />
-        <input
-          id="drink-price"
-          className="text-input3"
-          type="text"
-          value={ID3}
-          onChange={(e) => setID3(e.target.value)}
-        />
-      </div>
-      <IngredientsSelector/>
+      {/* Remove Drink Section */}
+      <div className="editor-section" style={{ marginBottom: '30px' }}>
+        <h3 className="section-title">Remove Drink</h3>
+        <div className="input-group">
+          <label className="input-label">Select Drink:</label>
+          <select
+            className="text-input"
+            value={selectedDrinkId}
+            onChange={(e) => setSelectedDrinkId(e.target.value)}
+            style={{ width: '100%', height: '40px' }}
+          >
+            <option value="">-- Select a drink --</option>
+            {Array.isArray(menu) && menu.map((drink) => (
+              <option key={drink.id} value={drink.id}>
+                {drink.drink_name} (ID: {drink.id})
+              </option>
+            ))}
+          </select>
+        </div>
 
-      <div className="ID6">
-        <label>Enter ID of the Drink to Remove:</label>
-        <br />
-        <input
-          id="drink-rem"
-          className="text-input5"
-          type="number"
-          value={ID5}
-          onChange={(e) => setID5(e.target.value)}
-        />
+        <button 
+          className="button-ing3" 
+          onClick={handleRemoveDrink}
+          style={{ marginTop: '20px' }}
+        >
+          Remove Drink
+        </button>
       </div>
-      <button className="button-ing3">Remove Item</button>
-      <div>
-        <Link to="/Manager">
-          <button className="back">Back</button>
+
+      <div style={{ textAlign: 'center', marginTop: '30px' }}>
+        <Link to="/Editor">
+          <button className="back" style={{marginRight: "8000px"}}>Back</button>
         </Link>
       </div>
-    </>
+    </div>
   );
 };
 

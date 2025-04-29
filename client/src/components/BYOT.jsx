@@ -1,9 +1,7 @@
-
-
 const BYOT = () => {
     return (
         <>
-        </>
+        </> //cut content currently unsupported
     );
 };
 

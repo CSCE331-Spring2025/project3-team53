@@ -4,8 +4,7 @@ const pool = require("../db");
 const router = express.Router();
 
 
-//API calls to dynamically fetch drink categories from DB
-router.get("/milk-tea", async (req, res) => {
+router.get("/Milk-Tea", async (req, res) => {
     try {
         const result = await pool.query("SELECT id, drink_name FROM drinks WHERE drink_type = 'Milk Tea'");
         res.json(result.rows);
@@ -15,7 +14,7 @@ router.get("/milk-tea", async (req, res) => {
     }
 });
 
-router.get("/fresh-milk", async (req, res) => {
+router.get("/Fresh-Milk", async (req, res) => {
     try {
         const result = await pool.query("SELECT id, drink_name FROM drinks WHERE drink_type = 'Fresh Milk'");
         res.json(result.rows);
@@ -25,7 +24,7 @@ router.get("/fresh-milk", async (req, res) => {
     }
 });
 
-router.get("/crema", async (req, res) => {
+router.get("/Crema", async (req, res) => {
     try {
         const result = await pool.query("SELECT id, drink_name FROM drinks WHERE drink_type = 'Creama'");
         res.json(result.rows);
@@ -35,7 +34,7 @@ router.get("/crema", async (req, res) => {
     }
 });
 
-router.get("/brewed-tea", async (req, res) => {
+router.get("/Brewed-Tea", async (req, res) => {
     try {
         const result = await pool.query("SELECT id, drink_name FROM drinks WHERE drink_type = 'Brewed Tea'");
         res.json(result.rows);
@@ -45,7 +44,7 @@ router.get("/brewed-tea", async (req, res) => {
     }
 });
 
-router.get("/fruit-tea", async (req, res) => {
+router.get("/Fruit-Tea", async (req, res) => {
     try {
         const result = await pool.query("SELECT id, drink_name FROM drinks WHERE drink_type = 'Fruit Tea'");
         res.json(result.rows);
@@ -55,7 +54,7 @@ router.get("/fruit-tea", async (req, res) => {
     }
 });
 
-router.get("/ice-blended", async (req, res) => {
+router.get("/Ice-Blended", async (req, res) => {
     try {
         const result = await pool.query("SELECT id, drink_name FROM drinks WHERE drink_type = 'Ice Blended'");
         res.json(result.rows);
@@ -65,7 +64,7 @@ router.get("/ice-blended", async (req, res) => {
     }
 });
 
-router.get("/specialty", async (req, res) => {
+router.get("/Specialty", async (req, res) => {
     try {
         const result = await pool.query("SELECT id, drink_name FROM drinks WHERE drink_type = 'Special'");
         res.json(result.rows);
@@ -75,7 +74,7 @@ router.get("/specialty", async (req, res) => {
     }
 });
 
-router.get("/mojito", async (req, res) => {
+router.get("/Mojito", async (req, res) => {
     try {
         const result = await pool.query("SELECT id, drink_name FROM drinks WHERE drink_type = 'Mojito'");
         res.json(result.rows);

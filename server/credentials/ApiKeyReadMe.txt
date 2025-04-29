@@ -1,0 +1,1 @@
+You should have a translate-key.json file in this folder

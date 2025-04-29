@@ -1,18 +1,30 @@
-import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from 'react';
+import { Link, useNavigate } from "react-router-dom";
+import { GoogleSignIn } from './GoogleSignIn';
+import { GlobalContext } from './GlobalContext';
+import * as func from '../apiCall'
 
 const OverallLogin = () => {
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false); // State for checkbox
+  const {setCustomerLoggedIn} = useContext(GlobalContext);
 
   function handleUsernameChange(event) {
-    setUsername(event.target.value);
-    checkInputs(event.target.value, password); // Update checkbox state
+    let val = event.target.value;
+    if(/^[a-zA-Z0-9-_]*$/.test(val) || val === ""){
+      setUsername(val);
+    }
+    checkInputs(val, password); // Update checkbox state
   }
 
   function handlePasswordChange(event) {
-    setPassword(event.target.value);
+    let val = event.target.value;
+    if(!val.includes(' ')){
+      setPassword(event.target.value);
+    }
     checkInputs(username, event.target.value); // Update checkbox state
   }
 
@@ -30,6 +42,34 @@ const OverallLogin = () => {
     }
   }
 
+  const handleSignOn = async () => {
+    if (username && password){
+      let res = await func.login_signup(username,password);
+      console.log(res);
+      if(!res.error){
+        func.dequeue_order(0);
+        setCustomerLoggedIn(username);
+        navigate('/CustomerOptions');
+      }
+    }
+  }
+
+  const handleLogIn = async () => {
+    if (username && password){
+      let res = await func.login_signin(username,password,false);
+      console.log(res);
+      if(!res.error){
+        func.dequeue_order(0);
+        let savedCart = JSON.parse(res.data);
+        savedCart.forEach(element => {
+          func.enqueue_order(element[0], element[1], element[2], element[3], element[4]);
+        });
+        setCustomerLoggedIn(username);
+        navigate('/CustomerOptions');
+      }
+    }
+  }
+
   return (
     <div className="login-body">
       <h2 className="login-header">Welcome!</h2>
@@ -43,7 +83,7 @@ const OverallLogin = () => {
         /> <br />
         <input
           className="password-text"
-          type={showPassword ? "text" : "password"} // Toggle password visibility
+          type={showPassword ? "text" : "password"} 
           value={password}
           placeholder="Password"
           onChange={handlePasswordChange}
@@ -51,21 +91,20 @@ const OverallLogin = () => {
         <input
           className="show"
           type="checkbox"
-          checked={showPassword} // Controlled checkbox state
+          checked={showPassword} 
           onChange={handleCheckboxChange}
         /> Show Password <br />
-        <Link to="/Manager">
-          <button className="login">Sign In </button>
-        </Link>
+        <button className="login" onClick={handleSignOn}>Sign Up</button>
+        <button className="login" onClick={handleLogIn}>Log In</button>
         <p> or</p>
-        <Link to="/Debug">
+        {/* <Link to="/Debug">
           <button className="login2">Login</button>
-        </Link>
+        </Link> */}
+        <GoogleSignIn/>
       </div>
-      <p>Username: {username}</p>
-      <p>Password: {password}</p>
-      <Link to="/">
-        <button>Go to Home Page</button>
+      <p/>
+      <Link to="/CustomerOptions">
+        <button>Go Back</button>
       </Link>
     </div>
   );

@@ -4,3 +4,5 @@ node_modules/
 dist/
 # Ignore environment variables
 .env
+test.js
+credentials/translate-key.json
