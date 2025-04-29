@@ -9,6 +9,7 @@ const Inventory = () => {
       { key: 'name', title: 'Name' },
       { key: 'type', title: 'Type' },
       { key: 'quantity', title: 'Quantity' },
+      { key: 'calories', title: 'Cal'}
     ];
 
     const {loginID} = useContext(GlobalContext);

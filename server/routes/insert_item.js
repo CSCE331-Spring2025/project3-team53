@@ -50,8 +50,8 @@ router.put("/inventory", async (req, res) => {
             return res.status(400).json({error: 'Invalid Input'});
         }
 
-        let sql = `INSERT INTO inventory (name,type,store_id,quantity) 
-        VALUES('${name}', '${type}', ${store_id}, 0)`;
+        let sql = `INSERT INTO inventory (name,type,store_id,quantity,calories) 
+        VALUES('${name}', '${type}', ${store_id}, 0, 0)`;
         console.log(sql);
         try{
             await pool.query(sql);

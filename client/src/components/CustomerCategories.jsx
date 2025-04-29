@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { translateText } from "../apiCall.js"; // Ensure you have the translate function correctly imported
+import { translateText, get_weather } from "../apiCall.js"; // Ensure you have the translate function correctly imported
 
 const CustomerOptions = () => {
   const location = useLocation();
-  const { email } = location.state || {}; // email (can be nullable)
-//   console.log(email); // debug
+  //const { email } = location.state || ''; // email (can be nullable)
+  //console.log(email); // debug
   const [language, setLanguage] = useState("en"); // Track the language state
   const [translations, setTranslations] = useState({}); // Store translations as an object
   const [isLoading, setIsLoading] = useState(true);
+  const [weather, setWeather] = useState([]);
 
+  //for more language support simply add them to the array
   const languageOptions = [
     { code: "en", name: "English" },
     { code: "es", name: "Español (Spanish)" },
@@ -48,7 +50,7 @@ const CustomerOptions = () => {
   
     const translatedTexts = await translateText(englishTexts, newLanguage);
     
-    // Create a mapping from English to translated text
+    // mapping from English to translated text
     const newTranslations = {};
     for (let i = 0; i < englishTexts.length; i++) {
       newTranslations[englishTexts[i]] = translatedTexts[i];
@@ -59,17 +61,24 @@ const CustomerOptions = () => {
 
   useEffect(() => {
     const getTranslations = async () => {
-      setIsLoading(true); // Set loading to true when starting
+      setIsLoading(true);
       try {
         const newTranslations = await fetchTranslations(language);
         setTranslations(newTranslations);
       } catch (error) {
         console.error("Translation error:", error);
       } finally {
-        setIsLoading(false); // Set loading to false when done (success or error)
+        setIsLoading(false); 
       }
     };
     getTranslations();
+
+    const fetchWeather = async () => {
+        const weatherData = await get_weather();
+        console.log(weatherData);
+        setWeather(weatherData);  
+    };
+    fetchWeather();
   }, [language]);
 
   const handleLanguageChange = (e) => {
@@ -171,7 +180,6 @@ const CustomerOptions = () => {
       image: "/BYOT.jpg"
     },
   ];
-
   const renderCard = ({ id, title, description, alt, link, image }) => {
     const card = (
       <div className="card2" onClick={() => handleCardClick(id)} style={cardStyle}>
@@ -225,8 +233,8 @@ const CustomerOptions = () => {
           </div>
         ) : (
           <>
-            <Link to="/Customer">
-            <button className="custback-btn" >Go Back</button>
+            <Link to="/">
+            <button className="drinksButton" >Go Back</button>
            </Link>
             {<>
             <h1 className="title-m2" style={{ textAlign: 'center', margin: '1rem 0' }}>
@@ -308,6 +316,12 @@ const CustomerOptions = () => {
           </>
         )}
       </div>
+      <center>
+        <p style={{marginBottom: '5px'}}>{Math.round(weather?.current?.temp_f)}°F {weather?.current?.condition?.text} <img src={weather?.current?.condition?.icon}
+                   style={{ verticalAlign: "middle", marginLeft: "-15px", marginRight: "-18px", scale: "50%"}}></img> 
+                 - {weather?.location?.name}, {weather?.location?.region}</p>
+        <p style={{marginTop: '-20px'}}>© 2025 Bruhba. All rights reserved.</p>
+    </center>
     </div>
   );
 };

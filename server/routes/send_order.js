@@ -1,7 +1,5 @@
 const express = require("express");
 const pool = require("../db");
-const { fetch_request } = require("../../client/src/apiCall");
-
 const router = express.Router();
 
 /*

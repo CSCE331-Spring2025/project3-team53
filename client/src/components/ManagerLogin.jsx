@@ -70,8 +70,7 @@ const ManagerLogin = () => {
         /> Show Password <br />
         <button className="login" onClick={handleLogin}>Login</button>
       </div>
-      <p>Username: {username}</p>
-      <p>Password: {password}</p>
+      <p/>
       <Link to="/">
         <button>Go to Home Page</button>
       </Link>

@@ -6,6 +6,7 @@ export function GlobalProvider({children}){
     const [loginID, setLoginID] = useState(-1);
     const [stashedZ, setStashedZ] = useState(0);
     const [isManager, setIsManager] = useState(false);
+    const [customerLoggedIn, setCustomerLoggedIn] = useState("");
 
     const value = {
         loginID,
@@ -13,7 +14,9 @@ export function GlobalProvider({children}){
         stashedZ,
         setStashedZ,
         isManager,
-        setIsManager
+        setIsManager,
+        customerLoggedIn,
+        setCustomerLoggedIn
     }
 
     return (

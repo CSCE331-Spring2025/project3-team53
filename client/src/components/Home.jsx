@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import { get_weather, translateText } from '../apiCall.js';  // Make sure to import your translateText function
+import { get_weather, translateText, dequeue_order } from '../apiCall.js';  // Make sure to import your translateText function
+import { GlobalContext } from './GlobalContext';
 
-
+//Home page with mock language translation
 function Home() {
     const [language, setLanguage] = useState("en");  // Default to English
     const [translatedMessage, setTranslatedMessage] = useState("");
     const [weather, setWeather] = useState([]);
-
-    
+    const {setLoginID, setCustomerLoggedIn} = useContext(GlobalContext);
     const aboutEng = "Bruhba Bobruh is dedicated to surpassing customer expectations through carefully crafted and reliable solutions. Established by Alex Pierce, Aaron Mai, Jianwei Gao, and Chris Maldonado, our company is driven by one goal: putting customers at the center of everything we do. With a mission to deliver products that meet your needs at exceptional value and quality, Bruhba Bobruh ensures every order is tailored to your satisfaction. Why wait? Experience Bruhba Bobruh today!";
 
     // language toggle
@@ -21,7 +21,9 @@ function Home() {
     };
 
     useEffect(() => {
-
+        setLoginID(0);
+        setCustomerLoggedIn("");
+        dequeue_order(0);    
         setTranslatedMessage(aboutEng);
 
         const fetchWeather = async () => {

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { add_new_employee, delete_entry } from "../apiCall";
 import '../styles/empEditor.css'
 
+//component with popups handling adding/deleting employees
 const EmployeeEditor = () => {
   const [employeeId, setEmployeeId] = useState("");
   const [showAddPopup, setShowAddPopup] = useState(false);

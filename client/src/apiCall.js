@@ -404,3 +404,49 @@ export const translateText = async (text, targetLang) => {
     // Assuming the response contains the translated text
     return response.translatedText;
 };
+
+export const login_signup = async (username, password) => {
+    const url = 'http://localhost:5000/api/login/signup';
+    const body = JSON.stringify({username: username, password: password});
+    return await fetch_request(url, body, 3);
+}
+
+export const login_signin = async (username, password, google) => {
+    const url = 'http://localhost:5000/api/login/signin';
+    const body = JSON.stringify({username: username, password: password});
+    return await fetch_request(url, body, 2);
+}
+
+export const login_save_cart = async (username, cart) => {
+    const url = 'http://localhost:5000/api/login/save-order';
+    const body = JSON.stringify({username: username, cart: JSON.stringify(cart)});
+    return await fetch_request(url, body, 2);
+}
+
+export const login_get_username = async () => {
+    const url = 'http://localhost:5000/api/login/username';
+    return (await fetch_request(url, {}, 1)).data;
+}
+
+/*
+Takes an input of drink_id and returns the 
+calories by summing individual ingredients
+*/
+export const get_calories = async (id) => {
+    const parameter = new URLSearchParams({
+        drink_id: id
+    });
+    const url = `http://localhost:5000/api/analyze/drink_calories?${parameter.toString()}`;
+    return await fetch_request(url, null, 1);
+}
+
+/*
+Fetch all ingredients for a drink by id
+    id: id of the drink
+Returns:
+    { ingredients: [...] }
+*/
+export const fetch_drink_ingredients = async (id) => {
+    const url = `http://localhost:5000/api/analyze/drink/${id}/ingredients`;
+    return await fetch_request(url, null, 1);
+};

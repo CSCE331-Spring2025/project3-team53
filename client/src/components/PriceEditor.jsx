@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 import { get_menu, edit_drink_price, refresh_menu } from "../apiCall.js"; 
 
+//component to change prices of drinks
 const PriceEditor = () => {
   const [menu, setMenu] = useState([]); 
   const [selectedDrinkId, setSelectedDrinkId] = useState(""); 

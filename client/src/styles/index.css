@@ -185,8 +185,22 @@ color: hsl(0, 0%, 20%);
 }
 
 .drinksButton {
-  margin-bottom: 0px;
-  margin-left: 0px;
+  position: fixed;
+  bottom: 30px; /* distance from the bottom */
+  left: 30px;   /* distance from the left */
+  padding: 10px 20px;
+  background-color: #4CAF50; /* a nice green color */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.drinksButton:hover {
+  background-color: #38843c; /* slightly darker on hover */
 }
 
 .invent {
@@ -873,4 +887,51 @@ a {
   cursor: pointer;
   border-radius: 8px;
   background-color: #1cf21c;
+}
+
+.price-cals {
+  display: flex;
+  justify-content: space-between;
+  gap: .6em;
+  margin-top: 0.0em;
+  font-size: 0.9em;
+  color: rgb(0, 0, 0);
+  border-top: 1px solid #525252;
+
+}
+
+.nutrients {
+  margin-top: 0.5em;
+  font-size: 0.8em;
+  color: darkgray;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  justify-content: center;
+  margin-bottom: 1vh;
+}
+
+.card3:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 5px 15px rgba(0,0,0,0.15);
+  transition: 0.3s ease;
+}
+
+.editor-tabs{
+  position: flex;  
+  flex-direction: row;
+  width: 10vw;
+  height: 5vw;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  font-size: 20px;
+}
+
+.editor-buttons{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2vw;
+  height: 100vh;
 }

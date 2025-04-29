@@ -30,9 +30,9 @@ const EmployeeLogin = () => {
         <br />
         <button className = "login" onClick={handleLogin}>Login</button>
       </div>
-      <p>Employee ID: {ID}</p>
+      <p/>
       <Link to="/">
-        <button>Go to ome Page</button>
+        <button>Go to Home Page</button>
       </Link>
     </div>
   );

@@ -1,7 +1,8 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect, useContext} from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { SERVER_DOMAIN } from "./config";
 import * as func from "../apiCall";
+import { GlobalContext } from './GlobalContext';
 
 const ice_encoding = new Map([[0,"No Ice"], [1,"Light Ice"], [2,"Normal Ice"], [3,"Extra Ice"]]);
 const sugar_encoding = new Map([[0,"0% Sugar"], [1,"25% Sugar"], [2,"50% Sugar"], [3,"75% Sugar"], [4,"100% Sugar"]]);
@@ -11,7 +12,7 @@ const addon_encoding = new Map([["black_pearl", "Pearl"], ["mini_pearl", "Mini P
   ["pudding", "Pudding"], ["aloe_vera", "Aloe Vera"], ["red_bean", "Red Bean"], 
   ["creama", "Creama"], ["aiyu_jelly", "Aiyu Jelly"], ["crystal_boba", "Crystal Boba"]])
 
-//TODO - refactor for each drink type
+
 const CustomerMenu = () => {
   const { category } = useParams();
   const navigation = useNavigate();
@@ -32,13 +33,67 @@ const CustomerMenu = () => {
   const [cart, setCart] = useState(new Map());
   const [cartChanged, setCartChanged] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
+  const {customerLoggedIn} = useContext(GlobalContext);
+
+  const allergenFlags = (ingredients) => {
+    const flags = {
+      dairy: false,
+      soy: false,
+      egg: false,
+      gluten: false,
+    };
+  
+    for (const ing of ingredients) {
+      const name = ing.toLowerCase(); 
+  
+      // Dairy
+      if (name.includes('milk') || name.includes('creama') || name.includes('creamer') || name.includes('pudding') || name.includes('ice_cream')) {
+        flags.dairy = true;
+      }
+  
+      // Soy
+      if (name.includes('creamer') || name.includes('oreo')) {
+        flags.soy = true;
+      }
+  
+      // Egg
+      if (name.includes('pudding')) {
+        flags.egg = true;
+      }
+  
+      // Gluten
+      if (name.includes('oreo')) {
+        flags.gluten = true;
+      }
+    }
+  
+    return flags;
+  };
+  
 
   useEffect(() => {
     fetch(`http://${SERVER_DOMAIN}/api/drinks/${category}`)
       .then((response) => response.json())
-      .then((data) => {
-        //console.log("Fetched drinks:", data)
-        setDrinks(data);
+      .then(async (data) => {
+        const enrichedDrinks = await Promise.all(
+          data.map(async (drink) => {
+            const caloriesInfo  = await func.get_calories(drink.id);
+            const calories = caloriesInfo.data
+            const price = await func.get_order_price(drink.id, []);
+  
+            const ingredientsObj = await func.fetch_drink_ingredients(drink.id);
+            const flags = allergenFlags(ingredientsObj.ingredients);
+
+      
+            return {
+              ...drink,
+              calories: calories,
+              price: price,
+              flags: flags, 
+            };
+          })
+        );
+        setDrinks(enrichedDrinks);
       })
       .catch((error) => console.error("Error fetching drinks:", error));
   }, [category]);
@@ -55,6 +110,9 @@ const CustomerMenu = () => {
             [name, ice_encoding.get(value[2]), sugar_encoding.get(value[3]), prices.get(key), 
             value[4].map((element, index) => addon_encoding.get(element)).join(", ")]);
         });
+        if(customerLoggedIn){
+          func.login_save_cart(customerLoggedIn, Array.from(func.get_order_queue().values()));
+        }
         setCart(newCart);
       })();
     },[cartChanged]);
@@ -84,13 +142,17 @@ const CustomerMenu = () => {
 
   const handleAddToCart = () => {
     let temp = [];
+
+    //get addons
     if(!addons[0]){
       addons.slice(1).forEach((bool, index) => {
         if(bool){
           temp.push(addon_options[index]);
         }
       })};
+
     //console.log(0, selectedDrink.id, ice, sugar, temp);
+    //enque to stash and reset to default format
     func.enqueue_order(0, selectedDrink.id, ice, sugar, temp);
     setIce(2);
     setSugar(4);
@@ -111,21 +173,32 @@ const CustomerMenu = () => {
         </div>
         <center>
           <div className="card-container">
-            {drinks.map((drink) => (
-              <div
-                key={drink.id}
-                className="card3"
-                onClick={() => handleCardClick(drink)}
-                style={{ cursor: "pointer" }}
-              >
-                <img
-                  className="card-image3"
-                  src={images.get(category)}
-                  alt={`Picture of ${drink.drink_name}`}
-                />
-                <p className="card-text">{drink.drink_name}</p>
-              </div>
-            ))}
+          {drinks.map((drink) => (
+          <div
+            key={drink.id}
+            className="card3"
+            onClick={() => handleCardClick(drink)}
+            style={{ cursor: "pointer" }}
+          >
+            <img
+              className="card-image3"
+              src={images.get(category)}
+              alt={`Picture of ${drink.drink_name}`}
+            />
+            <p className="card-text">{drink.drink_name}</p>
+            <div className="price-cals">
+              <span>${drink.price.toFixed(2)  }</span>
+
+              <span>{drink.calories} Cal</span>
+            </div>
+            <div className="nutrients">
+              {drink.flags.dairy && <span>🥛 Dairy</span>}
+              {drink.flags.soy && <span>🌱 Soy</span>}
+              {drink.flags.egg && <span>🥚 Egg</span>}
+              {drink.flags.gluten && <span>🌾 Gluten</span>}
+            </div>
+          </div>
+        ))}
           </div>
         </center>
 
@@ -139,66 +212,65 @@ const CustomerMenu = () => {
               {Array.from(cart).map(([key, values]) => {
                 return <><p className="cart-item">
                         <span className="close-btn" onClick={() => {func.dequeue_order(key); setCartChanged(!cartChanged)}}>&times;</span>
-                        {values[0]} - ${values[3]}<br/>
+                        {values[0]} - ${values[3].toFixed(2)}<br/>
                         <span style={{margin: "0em 0em 0em 2em"}}>{values[1]} - {values[2]}</span> <br/>
                         <span style={{margin: "0em 0em 0em 2em"}}>{values[4]}</span>
                       </p></>
               })
 
               }
-              <p>Total: ${totalPrice}</p>
+              <p>Total: ${totalPrice.toFixed(2)}</p>
               <button onClick={() => {navigation("/Checkout", {state:{back_page: `/CustomerMenu/${category}`}})}}>Proceed to Payment</button>
             </div>
           </div>
         )}
-{showPopup && (
-  <div className="popup-overlay">
-    <div className="popup-content">
-      <span className="close-btn2" onClick={() => setShowPopup(false)}>
-        &times;
-      </span>
-      <b>Level Of Ice</b>
-      <div className="button-container">
-        <button className = "b1" onClick={() => {handleIce(0)}} 
-        style={{ backgroundColor: ice === 0 ? 'aqua' : 'GhostWhite' }}>None</button>
-        <button className = "b1" onClick={() => {handleIce(1)}}
-        style={{ backgroundColor: ice === 1 ? 'aqua' : 'GhostWhite' }}>Light Ice</button>
-        <button className = "b1" onClick={() => {handleIce(2)}}
-        style={{ backgroundColor: ice === 2 ? 'aqua' : 'GhostWhite' }}>Normal Ice</button>
-        <button className = "b1" onClick={() => {handleIce(3)}}
-        style={{ backgroundColor: ice === 3 ? 'aqua' : 'GhostWhite' }}>Extra Ice</button>
-      </div>
-      <b className="Sugar">Level Of Sugar</b>
-      <div className="button-container">
-        <button className = "b1" onClick={() => {handleSugar(0)}}
-        style={{ backgroundColor: sugar === 0 ? 'aqua' : 'GhostWhite' }}>None</button>
-        <button className = "b1" onClick={() => {handleSugar(1)}}
-        style={{ backgroundColor: sugar === 1 ? 'aqua' : 'GhostWhite' }}>25%</button>
-        <button className = "b1" onClick={() => {handleSugar(2)}}
-        style={{ backgroundColor: sugar === 2 ? 'aqua' : 'GhostWhite' }}>50%</button>
-        <button className = "b1" onClick={() => {handleSugar(3)}}
-        style={{ backgroundColor: sugar === 3 ? 'aqua' : 'GhostWhite' }}>75%</button>
-        <button className = "b1" onClick={() => {handleSugar(4)}}
-        style={{ backgroundColor: sugar === 4 ? 'aqua' : 'GhostWhite' }}>100%</button>
-      </div>
-      <b className="Sugar">Toppings</b>
-      <div className="button-container">
-        <button className = "b1" onClick={() => {handleAddons(0)}} style={{ backgroundColor: addons[0]? 'aqua' : 'GhostWhite' }}>None</button>
-        <button className = "b1" onClick={() => {handleAddons(1)}} style={{ backgroundColor: addons[1]? 'aqua' : 'GhostWhite' }}>Pearl</button>
-        <button className = "b1" onClick={() => {handleAddons(2)}} style={{ backgroundColor: addons[2]? 'aqua' : 'GhostWhite' }}>Mini Pearl</button>
-        <button className = "b1" onClick={() => {handleAddons(3)}} style={{ backgroundColor: addons[3]? 'aqua' : 'GhostWhite' }}>Ice Cream</button>
-        <button className = "b1" onClick={() => {handleAddons(4)}} style={{ backgroundColor: addons[4]? 'aqua' : 'GhostWhite' }}>Pudding</button>
-        <button className = "b1" onClick={() => {handleAddons(5)}} style={{ backgroundColor: addons[5]? 'aqua' : 'GhostWhite' }}>Aloe Vera</button>
-        <button className = "b1" onClick={() => {handleAddons(6)}} style={{ backgroundColor: addons[6]? 'aqua' : 'GhostWhite' }}>Red Bean</button>
-        <button className = "b1" onClick={() => {handleAddons(7)}} style={{ backgroundColor: addons[7]? 'aqua' : 'GhostWhite' }}>Crema</button>
-        <button className = "b1" onClick={() => {handleAddons(8)}} style={{ backgroundColor: addons[8]? 'aqua' : 'GhostWhite' }}>Aiju Jelly</button>
-        <button className = "b1" onClick={() => {handleAddons(9)}} style={{ backgroundColor: addons[9]? 'aqua' : 'GhostWhite' }}>Crystal Boba</button>
-      </div>
-      <button className = "b2" onClick={handleAddToCart}> Add to cart</button>
-    </div>
-  </div>
-)}
-
+        {showPopup && (
+          <div className="popup-overlay">
+            <div className="popup-content">
+              <span className="close-btn2" onClick={() => setShowPopup(false)}>
+                &times;
+              </span>
+              <b>Level Of Ice</b>
+              <div className="button-container">
+                <button className = "b1" onClick={() => {handleIce(0)}} 
+                style={{ backgroundColor: ice === 0 ? 'aqua' : 'GhostWhite' }}>None</button>
+                <button className = "b1" onClick={() => {handleIce(1)}}
+                style={{ backgroundColor: ice === 1 ? 'aqua' : 'GhostWhite' }}>Light Ice</button>
+                <button className = "b1" onClick={() => {handleIce(2)}}
+                style={{ backgroundColor: ice === 2 ? 'aqua' : 'GhostWhite' }}>Normal Ice</button>
+                <button className = "b1" onClick={() => {handleIce(3)}}
+                style={{ backgroundColor: ice === 3 ? 'aqua' : 'GhostWhite' }}>Extra Ice</button>
+              </div>
+              <b className="Sugar">Level Of Sugar</b>
+              <div className="button-container">
+                <button className = "b1" onClick={() => {handleSugar(0)}}
+                style={{ backgroundColor: sugar === 0 ? 'aqua' : 'GhostWhite' }}>None</button>
+                <button className = "b1" onClick={() => {handleSugar(1)}}
+                style={{ backgroundColor: sugar === 1 ? 'aqua' : 'GhostWhite' }}>25%</button>
+                <button className = "b1" onClick={() => {handleSugar(2)}}
+                style={{ backgroundColor: sugar === 2 ? 'aqua' : 'GhostWhite' }}>50%</button>
+                <button className = "b1" onClick={() => {handleSugar(3)}}
+                style={{ backgroundColor: sugar === 3 ? 'aqua' : 'GhostWhite' }}>75%</button>
+                <button className = "b1" onClick={() => {handleSugar(4)}}
+                style={{ backgroundColor: sugar === 4 ? 'aqua' : 'GhostWhite' }}>100%</button>
+              </div>
+              <b className="Sugar">Toppings</b>
+              <div className="button-container">
+                <button className = "b1" onClick={() => {handleAddons(0)}} style={{ backgroundColor: addons[0]? 'aqua' : 'GhostWhite' }}>None</button>
+                <button className = "b1" onClick={() => {handleAddons(1)}} style={{ backgroundColor: addons[1]? 'aqua' : 'GhostWhite' }}>Pearl</button>
+                <button className = "b1" onClick={() => {handleAddons(2)}} style={{ backgroundColor: addons[2]? 'aqua' : 'GhostWhite' }}>Mini Pearl</button>
+                <button className = "b1" onClick={() => {handleAddons(3)}} style={{ backgroundColor: addons[3]? 'aqua' : 'GhostWhite' }}>Ice Cream</button>
+                <button className = "b1" onClick={() => {handleAddons(4)}} style={{ backgroundColor: addons[4]? 'aqua' : 'GhostWhite' }}>Pudding</button>
+                <button className = "b1" onClick={() => {handleAddons(5)}} style={{ backgroundColor: addons[5]? 'aqua' : 'GhostWhite' }}>Aloe Vera</button>
+                <button className = "b1" onClick={() => {handleAddons(6)}} style={{ backgroundColor: addons[6]? 'aqua' : 'GhostWhite' }}>Red Bean</button>
+                <button className = "b1" onClick={() => {handleAddons(7)}} style={{ backgroundColor: addons[7]? 'aqua' : 'GhostWhite' }}>Crema</button>
+                <button className = "b1" onClick={() => {handleAddons(8)}} style={{ backgroundColor: addons[8]? 'aqua' : 'GhostWhite' }}>Aiju Jelly</button>
+                <button className = "b1" onClick={() => {handleAddons(9)}} style={{ backgroundColor: addons[9]? 'aqua' : 'GhostWhite' }}>Crystal Boba</button>
+              </div>
+              <button className = "b2" onClick={handleAddToCart}> Add to cart</button>
+            </div>
+          </div>
+        )}
 
         <Link to="/CustomerOptions">
           <button className="drinksButton">Go Back</button>
