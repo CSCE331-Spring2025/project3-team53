@@ -102,8 +102,7 @@ const OverallLogin = () => {
         </Link> */}
         <GoogleSignIn/>
       </div>
-      <p>Username: {username}</p>
-      <p>Password: {password}</p>
+      <p/>
       <Link to="/CustomerOptions">
         <button>Go Back</button>
       </Link>
