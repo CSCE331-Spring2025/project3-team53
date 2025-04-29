@@ -110,9 +110,9 @@ function Checkout() {
                             </li>
                         ))}
                     </ul>
-                    <p>Subtotal: ${totalPrice[0]}</p>
-                    <p>Delivery Fee: ${deliveryFee}</p>
-                    <p>Grand Total: ${totalPrice[1]}</p>
+                    <p>Subtotal: ${totalPrice[0].toFixed(2)}</p>
+                    <p>Delivery Fee: ${deliveryFee.toFixed(2)}</p>
+                    <p>Grand Total: ${totalPrice[1].toFixed(2)}</p>
                     <div>
                     <label>
                         Name:

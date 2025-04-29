@@ -44,14 +44,14 @@ request takes value of (name, type, store_id)
 router.put("/inventory", async (req, res) => {
     console.log("Insert inventory");
     try {
-        const {name, type, store_id} = req.body;
+        const {name, type, store_id, calories} = req.body;
         if(typeof name !== 'string' || typeof type !== 'string' ||
         !Number.isInteger(store_id)){
             return res.status(400).json({error: 'Invalid Input'});
         }
 
         let sql = `INSERT INTO inventory (name,type,store_id,quantity,calories) 
-        VALUES('${name}', '${type}', ${store_id}, 0, 0)`;
+        VALUES('${name}', '${type}', ${store_id}, 0, ${calories})`;
         console.log(sql);
         try{
             await pool.query(sql);

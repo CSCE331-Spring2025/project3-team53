@@ -121,7 +121,7 @@ router.get("/inventory", async (req, res) => {
         }
         let sql = `
                 SELECT id, name, type, quantity, calories FROM inventory 
-                WHERE store_id = (SELECT store_id FROM employees WHERE id = ${employee_id}) 
+                WHERE store_id = 1
                 ORDER BY id ASC`;
         try{
             //console.log(sql);

@@ -230,12 +230,13 @@ Add a new ietm entry into the inventory
     type: type of the item
     store_id: id for which store's inventory to add the item entry 
 */
-export const add_new_inventory = async (name, type, store_id) => {
-    const url = 'http://localhost:5000/api/edit/inventory';
+export const add_new_inventory = async (name, type, store_id, calories) => {
+    const url = 'http://localhost:5000/api/insert/inventory';
     const body = JSON.stringify({
         name: name,
         type: type,
-        store_id: store_id
+        store_id: store_id,
+        calories: calories
     }
     );
     return (await fetch_request(url, body, 2));
