@@ -29,6 +29,7 @@ import * as func from './apiCall.js';
 //func.get_weather().then(result => console.log(result))
 
 // func.login_signup('John Cina', '123');
-func.login_signin('John Cina', '').then(result => {console.log(result)});
+//func.login_signin('John Cina', '').then(result => {console.log(result)});
 //func.login_save_cart('John Cina', [[0,15,2,3,['black_pearl', 'mini_pearl']],[0,2,3,4,['black_pearl']]])
 //func.login_signin('John Cina', '123').then(result => {console.log(JSON.parse(result.data))});
+//func.login_get_username().then(result => {console.log(result)});

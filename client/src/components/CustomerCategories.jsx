@@ -4,8 +4,8 @@ import { translateText } from "../apiCall.js"; // Ensure you have the translate 
 
 const CustomerOptions = () => {
   const location = useLocation();
-  const { email } = location.state || {}; // email (can be nullable)
-//   console.log(email); // debug
+  //const { email } = location.state || ''; // email (can be nullable)
+  //console.log(email); // debug
   const [language, setLanguage] = useState("en"); // Track the language state
   const [translations, setTranslations] = useState({}); // Store translations as an object
   const [isLoading, setIsLoading] = useState(true);
@@ -225,7 +225,7 @@ const CustomerOptions = () => {
           </div>
         ) : (
           <>
-            <Link to="/Customer">
+            <Link to="/">
             <button className="drinksButton" >Go Back</button>
            </Link>
             {<>

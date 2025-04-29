@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from "react-router-dom";
 import { GoogleSignIn } from './GoogleSignIn';
+import { GlobalContext } from './GlobalContext';
 
 const OverallLogin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false); // State for checkbox
+  const {customerLoggedIn, setCustomerLoggedIn} = useContext(GlobalContext);
 
   function handleUsernameChange(event) {
     setUsername(event.target.value);

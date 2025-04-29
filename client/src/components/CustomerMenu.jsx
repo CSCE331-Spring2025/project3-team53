@@ -1,7 +1,8 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect, useContext} from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { SERVER_DOMAIN } from "./config";
 import * as func from "../apiCall";
+import { GlobalContext } from './GlobalContext';
 
 const ice_encoding = new Map([[0,"No Ice"], [1,"Light Ice"], [2,"Normal Ice"], [3,"Extra Ice"]]);
 const sugar_encoding = new Map([[0,"0% Sugar"], [1,"25% Sugar"], [2,"50% Sugar"], [3,"75% Sugar"], [4,"100% Sugar"]]);
@@ -32,6 +33,7 @@ const CustomerMenu = () => {
   const [cart, setCart] = useState(new Map());
   const [cartChanged, setCartChanged] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
+  const {customerLoggedIn} = useContext(GlobalContext);
 
   useEffect(() => {
     fetch(`http://${SERVER_DOMAIN}/api/drinks/${category}`)
@@ -55,6 +57,9 @@ const CustomerMenu = () => {
             [name, ice_encoding.get(value[2]), sugar_encoding.get(value[3]), prices.get(key), 
             value[4].map((element, index) => addon_encoding.get(element)).join(", ")]);
         });
+        if(customerLoggedIn){
+          func.login_save_cart(customerLoggedIn, Array.from(func.get_order_queue().values()));
+        }
         setCart(newCart);
       })();
     },[cartChanged]);
@@ -84,13 +89,17 @@ const CustomerMenu = () => {
 
   const handleAddToCart = () => {
     let temp = [];
+
+    //get addons
     if(!addons[0]){
       addons.slice(1).forEach((bool, index) => {
         if(bool){
           temp.push(addon_options[index]);
         }
       })};
+
     //console.log(0, selectedDrink.id, ice, sugar, temp);
+    //enque to stash and reset to default format
     func.enqueue_order(0, selectedDrink.id, ice, sugar, temp);
     setIce(2);
     setSugar(4);

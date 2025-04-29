@@ -11,7 +11,7 @@ router.post("/signup", async (req, res) => {
             return res.status(400).json({error: 'Username already exists'});
         }
         let sql = `INSERT INTO login (id, password, cachedcart) 
-        VALUES ('${username}', '${password}', '');`
+        VALUES ('${username}', '${password}', '[]');`
         try{
             await pool.query(sql);
         }
@@ -67,6 +67,22 @@ router.put("/save-order", async (req, res) => {
         try{
             await pool.query(sql)
             return res.status(200).json({message: "Customer Cart saved"})
+        }
+        catch(err){
+            return res.status(400).json({message: "Query Error", error: err.message});
+        }
+
+    } catch (err) {
+        return res.status(500).json({ message:"Server error", error: err.message });
+    }
+});
+
+router.get("/username", async (req, res) => {
+    try{
+        let sql = `SELECT id FROM login;`
+        try{
+            let result = (await pool.query(sql)).rows
+            return res.status(200).json({data:result, message: "Success"})
         }
         catch(err){
             return res.status(400).json({message: "Query Error", error: err.message});

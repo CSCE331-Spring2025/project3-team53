@@ -14,7 +14,7 @@ const addon_encoding = new Map([["black_pearl", "Pearl"], ["mini_pearl", "Mini P
 function Checkout() {
     const { state } = useLocation();
     const { back_page } = state;
-    const { stashedZ, setStashedZ } = useContext(GlobalContext);
+    const { stashedZ, setStashedZ, customerLoggedIn, setCustomerLoggedIn } = useContext(GlobalContext);
 
     const [name, setName] = useState("Guest");
     const [comment, setComment] = useState("");
@@ -41,6 +41,9 @@ function Checkout() {
                     drink_id: key 
                 });
             })
+            if(customerLoggedIn){
+                func.login_save_cart(customerLoggedIn, Array.from(func.get_order_queue().values()));
+            }
             setCartItems(newCartItems);
             setTotalPrice([prices.get(0), prices.get(0)+deliveryFee]);
         })();
@@ -84,6 +87,9 @@ function Checkout() {
         await func.send_order_queue();
         setStashedZ(stashedZ + totalPrice[0]);
         setOrderConfirmed(true);
+        if(customerLoggedIn){
+            func.login_save_cart(customerLoggedIn, []);
+        }
     }
 
     return (
