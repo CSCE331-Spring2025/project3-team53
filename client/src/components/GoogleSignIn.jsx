@@ -42,7 +42,7 @@ export const GoogleSignIn = () => {
         setCustomerLoggedIn(email);
 
         //login to account and populate cart
-        let data = (await func.login_signin(email, "")).data;
+        let data = (await func.login_signin(email, "", true)).data;
         let savedCart = JSON.parse(data);
         savedCart.forEach(element => {
           func.enqueue_order(element[0], element[1], element[2], element[3], element[4]);
