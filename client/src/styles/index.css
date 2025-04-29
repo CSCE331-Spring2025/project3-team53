@@ -4,10 +4,6 @@ body {
   align-items: center;
 }
 
-/* code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-} */
 .card {
   border: 1px solid black;
   border-radius: 10px;
