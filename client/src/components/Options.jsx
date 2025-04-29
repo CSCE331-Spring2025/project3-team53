@@ -10,7 +10,7 @@ const encoding = new Map([
   ["Pudding", "pudding"], ["Aloe Vera", "aloe_vera"], ["Red Bean", "red_bean"], 
   ["Aiyu Jelly", "aiyu_jelly"], ["Creama", "creama"], ["Crystal Boba", "crystal_boba"]
 ])
-
+//options the user is presented with open pressing a drink
 const Options = () => {
   const navigate = useNavigate();
 

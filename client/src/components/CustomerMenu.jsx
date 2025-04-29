@@ -12,7 +12,7 @@ const addon_encoding = new Map([["black_pearl", "Pearl"], ["mini_pearl", "Mini P
   ["pudding", "Pudding"], ["aloe_vera", "Aloe Vera"], ["red_bean", "Red Bean"], 
   ["creama", "Creama"], ["aiyu_jelly", "Aiyu Jelly"], ["crystal_boba", "Crystal Boba"]])
 
-//TODO - refactor for each drink type
+
 const CustomerMenu = () => {
   const { category } = useParams();
   const navigation = useNavigate();
@@ -44,7 +44,7 @@ const CustomerMenu = () => {
     };
   
     for (const ing of ingredients) {
-      const name = ing.toLowerCase();  // ing is now a string like "milk" or "creamer"
+      const name = ing.toLowerCase(); 
   
       // Dairy
       if (name.includes('milk') || name.includes('creama') || name.includes('creamer') || name.includes('pudding') || name.includes('ice_cream')) {

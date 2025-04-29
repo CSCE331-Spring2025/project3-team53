@@ -10,6 +10,7 @@ const CustomerOptions = () => {
   const [translations, setTranslations] = useState({}); // Store translations as an object
   const [isLoading, setIsLoading] = useState(true);
 
+  //for more language support simply add them to the array
   const languageOptions = [
     { code: "en", name: "English" },
     { code: "es", name: "Español (Spanish)" },
@@ -48,7 +49,7 @@ const CustomerOptions = () => {
   
     const translatedTexts = await translateText(englishTexts, newLanguage);
     
-    // Create a mapping from English to translated text
+    // mapping from English to translated text
     const newTranslations = {};
     for (let i = 0; i < englishTexts.length; i++) {
       newTranslations[englishTexts[i]] = translatedTexts[i];
@@ -59,14 +60,14 @@ const CustomerOptions = () => {
 
   useEffect(() => {
     const getTranslations = async () => {
-      setIsLoading(true); // Set loading to true when starting
+      setIsLoading(true);
       try {
         const newTranslations = await fetchTranslations(language);
         setTranslations(newTranslations);
       } catch (error) {
         console.error("Translation error:", error);
       } finally {
-        setIsLoading(false); // Set loading to false when done (success or error)
+        setIsLoading(false); 
       }
     };
     getTranslations();
@@ -171,7 +172,6 @@ const CustomerOptions = () => {
       image: "/BYOT.jpg"
     },
   ];
-
   const renderCard = ({ id, title, description, alt, link, image }) => {
     const card = (
       <div className="card2" onClick={() => handleCardClick(id)} style={cardStyle}>

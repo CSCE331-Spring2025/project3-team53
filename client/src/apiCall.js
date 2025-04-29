@@ -428,7 +428,10 @@ export const login_get_username = async () => {
     return (await fetch_request(url, {}, 1)).data;
 }
 
-
+/*
+Takes an input of drink_id and returns the 
+calories by summing individual ingredients
+*/
 export const get_calories = async (id) => {
     const parameter = new URLSearchParams({
         drink_id: id

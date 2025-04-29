@@ -10,7 +10,7 @@ const addon_encoding = new Map([["black_pearl", "Pearl"], ["mini_pearl", "Mini P
     ["aiyu_jelly", "Aiyu Jelly"], ["creama", "Creama"], ["crystal_boba", "Crystal Boba"]
   ])
   
-
+//checkout component for sending orders
 function Checkout() {
     const { state } = useLocation();
     const { back_page } = state;

@@ -1,6 +1,7 @@
 import React from 'react';
 import '../styles/IngredientSelector.css';
 
+//component which always for chosen any number of any ingredients to add to a drink
 const IngredientsSelector = ({ selectedIngredients, setSelectedIngredients, ingredientCounts, setIngredientCounts }) => {
   const ingredients = [
     "aloe_vera", "wintermelon", "black_pearl", "creamer", "creama",

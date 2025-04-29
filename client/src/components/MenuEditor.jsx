@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import IngredientsSelector from './IngredientsSelector';
 import { add_new_drink, delete_entry, get_menu, refresh_menu } from '../apiCall.js';
 
+//component to add new drinks and delete old ones
 const MenuEditor = () => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(""); 
