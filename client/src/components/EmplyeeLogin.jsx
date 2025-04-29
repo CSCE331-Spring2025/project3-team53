@@ -32,7 +32,7 @@ const EmployeeLogin = () => {
       </div>
       <p>Employee ID: {ID}</p>
       <Link to="/">
-        <button>Go to ome Page</button>
+        <button>Go to Home Page</button>
       </Link>
     </div>
   );

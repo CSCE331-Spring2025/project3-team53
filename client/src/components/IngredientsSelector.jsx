@@ -8,7 +8,7 @@ const IngredientsSelector = ({ selectedIngredients, setSelectedIngredients, ingr
     "honey", "mango_jam", "ginger_tea", "oreo", "thai_tea",
     "cocoa_powder", "mini_pearl", "red_bean", "green_tea", "passion_fruit",
     "orange_jam", "pudding", "black_tea", "lime_juice", "crystal_boba",
-    "wintermelon_tea", "lime_slice", "kiwi_jam", "oolong_tea", "aiju_jelly",
+    "wintermelon_tea", "lime_slice", "kiwi_jam", "oolong_tea", "aiyu_jelly",
     "grapefruit_jam", "milk", "taro_paste", "lemonade", "coffee",
   ];
 

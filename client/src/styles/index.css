@@ -920,3 +920,22 @@ a {
   box-shadow: 0px 5px 15px rgba(0,0,0,0.15);
   transition: 0.3s ease;
 }
+
+.editor-tabs{
+  position: flex;  
+  flex-direction: row;
+  width: 10vw;
+  height: 5vw;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  font-size: 20px;
+}
+
+.editor-buttons{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2vw;
+  height: 100vh;
+}
