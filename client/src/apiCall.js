@@ -8,6 +8,9 @@ Send request to servers vai api calls
         3: non-idempotent to create some data in the server
         4: delete some data in the server
 */
+// import { SERVER_DOMAIN } from "./components/config.jsx";
+const SERVER_DOMAIN = 'localhost:5000';
+
 export const fetch_request = async(url, body, request_type) => {
     let method;
     switch (request_type) {
@@ -85,7 +88,7 @@ Send a new drink order
     add_ons: array of add ons on the drink ordered
 */
 export const send_indv_order = async (employee_id, drink_id, ice_level, sugar_level, add_ons) => {
-    const url = 'http://localhost:5000/api/send_orders/';
+    const url = `http://${SERVER_DOMAIN}/api/send_orders/`;
     const body = JSON.stringify([
         [employee_id, drink_id, ice_level, sugar_level, add_ons]
     ]);
@@ -143,7 +146,7 @@ export const send_order_queue = async () => {
     })
     orders.clear();
     local_id = 1;
-    const url = 'http://localhost:5000/api/send_orders/';
+    const url = `http://${SERVER_DOMAIN}/api/send_orders/`;
     const body = JSON.stringify(
         temp
     );
@@ -156,7 +159,7 @@ Edit price of a drink
     new_price: the price to set to
 */
 export const edit_drink_price = async (id, new_price) => {
-    const url = 'http://localhost:5000/api/edit/drink';
+    const url = `http://${SERVER_DOMAIN}/api/edit/drink`;
     const body = JSON.stringify({
         drink_id: id,
         new_price: new_price,
@@ -174,7 +177,7 @@ Edit quantity of a inventory item
         true - replace the quantity with value
 */
 export const edit_inventory_quantity = async (id, value, set_value) => {
-    const url = 'http://localhost:5000/api/edit/inventory';
+    const url = `http://${SERVER_DOMAIN}/api/edit/inventory`;
     const body = JSON.stringify({
         inventory_id: id,
         value: value,
@@ -192,7 +195,7 @@ Edit employee entry
     store_id: new store_id of the employee
 */
 export const edit_employee = async (id, name, position, store_id) => {
-    const url = 'http://localhost:5000/api/edit/employee';
+    const url = `http://${SERVER_DOMAIN}/api/edit/employee`;
     const body = JSON.stringify({
         employee_id: id,
         name: name,
@@ -212,7 +215,7 @@ Add a new drink entry into the menu
     price: price of the new drink
 */
 export const add_new_drink = async (name, type, ingredient, amount, price) => {
-    const url = 'http://localhost:5000/api/insert/drink';
+    const url = `http://${SERVER_DOMAIN}/api/insert/drink`;
     const body = JSON.stringify({
         name: name,
         type: type,
@@ -231,7 +234,7 @@ Add a new ietm entry into the inventory
     store_id: id for which store's inventory to add the item entry 
 */
 export const add_new_inventory = async (name, type, store_id, calories) => {
-    const url = 'http://localhost:5000/api/insert/inventory';
+    const url = `http://${SERVER_DOMAIN}/api/insert/inventory`;
     const body = JSON.stringify({
         name: name,
         type: type,
@@ -249,7 +252,7 @@ Add a new employee entry
     store_id: id for which store the employee belongs to
 */
 export const add_new_employee = async (name, position, store_id) => {
-    const url = 'http://localhost:5000/api/insert/employee';
+    const url = `http://${SERVER_DOMAIN}/api/insert/employee`;
     const body = JSON.stringify({
         name: name,
         position: position,
@@ -268,7 +271,7 @@ Delete an entry from the database
     entry_id: id of the entry
 */
 export const delete_entry = async (table_id, entry_id) => {
-    const url = 'http://localhost:5000/api/delete';
+    const url = `http://${SERVER_DOMAIN}/api/delete`;
     const body = JSON.stringify({
         table_id: table_id,
         id: entry_id
@@ -290,7 +293,7 @@ export const order_hist = async (date, start_hour, end_hour) => {
         start: start_hour,
         end: end_hour
     });
-    const url = `http://localhost:5000/api/analyze/order_history?${parameter.toString()}`;
+    const url = `http://${SERVER_DOMAIN}/api/analyze/order_history?${parameter.toString()}`;
     //console.log(url);
     return (await fetch_request(url, {} ,1));
 }
@@ -305,7 +308,7 @@ export const ingred_hist = async (start_date, end_date) => {
         start: start_date,
         end: end_date
     });
-    const url = `http://localhost:5000/api/analyze/ingredients_use?${parameter.toString()}`;
+    const url = `http://${SERVER_DOMAIN}/api/analyze/ingredients_use?${parameter.toString()}`;
     //console.log(url);
     return (await fetch_request(url, {} ,1));
 }
@@ -318,7 +321,7 @@ export const get_inventory = async (manager_id) => {
     const parameter = new URLSearchParams({
         employee_id: manager_id
     });
-    const url = `http://localhost:5000/api/analyze/inventory?${parameter.toString()}`;
+    const url = `http://${SERVER_DOMAIN}/api/analyze/inventory?${parameter.toString()}`;
     //console.log(url);
     return (await fetch_request(url, {} ,1));
 }
@@ -331,7 +334,7 @@ export const get_employees = async (manager_id) => {
     const parameter = new URLSearchParams({
         employee_id: manager_id
     });
-    const url = `http://localhost:5000/api/analyze/employee?${parameter.toString()}`;
+    const url = `http://${SERVER_DOMAIN}/api/analyze/employee?${parameter.toString()}`;
     return (await fetch_request(url, {} ,1));
 }
 
@@ -340,7 +343,7 @@ export const get_employees = async (manager_id) => {
 /*
 Return the menu data
 */
-fetch_request("http://localhost:5000/api/analyze/menu", {} ,1).then(res => {menu = res.data});
+fetch_request(`http://${SERVER_DOMAIN}/api/analyze/menu`, {} ,1).then(res => {menu = res.data});
 export const get_menu = () => {
     return menu;
 }
@@ -349,7 +352,7 @@ export const get_menu = () => {
 Updates the global menu variable; used after changes to menu data table
 */
 export const refresh_menu = async () => {
-    menu = (await fetch_request("http://localhost:5000/api/analyze/menu", {} ,1)).data;
+    menu = (await fetch_request(`http://${SERVER_DOMAIN}/api/analyze/menu`, {} ,1)).data;
 }
 
 /*
@@ -358,7 +361,7 @@ Return price of a drink + their add ons
     add_ons: string array of the add ons on the drink
 */
 export const get_order_price = async (drink_id, add_ons) => {
-    const url = 'http://localhost:5000/api/analyze/order_price';
+    const url = `http://${SERVER_DOMAIN}/api/analyze/order_price`;
     const body = JSON.stringify({
         drink_id: drink_id,
         add_ons: add_ons
@@ -388,14 +391,14 @@ Return data on the current weather in college station
 Imagine having good cybersecruity practices
 */
 export const get_weather = async () => {
-    const url = "http://api.weatherapi.com/v1/current.json?key=44c96021f40a49f197114416252004&q=77845";
+    const url = "https://api.weatherapi.com/v1/current.json?key=44c96021f40a49f197114416252004&q=77845";
     let result = await fetch_request(url, {}, 1);
     return result;
 }
 
 
 export const translateText = async (text, targetLang) => {
-    const url = 'http://localhost:5000/api/translate/translate';
+    const url = `http://${SERVER_DOMAIN}/api/translate/translate`;
     const body = JSON.stringify({ text, target: targetLang });
     const request_type = 3; 
 
@@ -407,25 +410,25 @@ export const translateText = async (text, targetLang) => {
 };
 
 export const login_signup = async (username, password) => {
-    const url = 'http://localhost:5000/api/login/signup';
+    const url = `http://${SERVER_DOMAIN}/api/login/signup`;
     const body = JSON.stringify({username: username, password: password});
     return await fetch_request(url, body, 3);
 }
 
 export const login_signin = async (username, password, google) => {
-    const url = 'http://localhost:5000/api/login/signin';
+    const url = `http://${SERVER_DOMAIN}/api/login/signin`;
     const body = JSON.stringify({username: username, password: password});
     return await fetch_request(url, body, 2);
 }
 
 export const login_save_cart = async (username, cart) => {
-    const url = 'http://localhost:5000/api/login/save-order';
+    const url = `http://${SERVER_DOMAIN}/api/login/save-order`;
     const body = JSON.stringify({username: username, cart: JSON.stringify(cart)});
     return await fetch_request(url, body, 2);
 }
 
 export const login_get_username = async () => {
-    const url = 'http://localhost:5000/api/login/username';
+    const url = `http://${SERVER_DOMAIN}/api/login/username`;
     return (await fetch_request(url, {}, 1)).data;
 }
 
@@ -437,7 +440,7 @@ export const get_calories = async (id) => {
     const parameter = new URLSearchParams({
         drink_id: id
     });
-    const url = `http://localhost:5000/api/analyze/drink_calories?${parameter.toString()}`;
+    const url = `http://${SERVER_DOMAIN}/api/analyze/drink_calories?${parameter.toString()}`;
     return await fetch_request(url, null, 1);
 }
 
@@ -448,6 +451,6 @@ Returns:
     { ingredients: [...] }
 */
 export const fetch_drink_ingredients = async (id) => {
-    const url = `http://localhost:5000/api/analyze/drink/${id}/ingredients`;
+    const url = `http://${SERVER_DOMAIN}/api/analyze/drink/${id}/ingredients`;
     return await fetch_request(url, null, 1);
 };
