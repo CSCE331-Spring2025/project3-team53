@@ -24,7 +24,7 @@ const Menu = () => {
 
   //fetch infomation about drinks and their prices
   useEffect(() => {
-    fetch(`http://${SERVER_DOMAIN}/api/drinks/${category}`)
+    fetch(`https://${SERVER_DOMAIN}/api/drinks/${category}`)
       .then((response) => response.json())
       .then((data) => {
         setDrinks(data);
