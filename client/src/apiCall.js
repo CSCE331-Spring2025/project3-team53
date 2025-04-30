@@ -231,7 +231,7 @@ export const add_new_drink = async (name, type, ingredient, amount, price) => {
 Add a new ietm entry into the inventory
     name: name of the item
     type: type of the item
-    store_id: id for which store's inventory to add the item entry 
+    store_id: id for which store`s inventory to add the item entry 
 */
 export const add_new_inventory = async (name, type, store_id, calories) => {
     const url = `http://${SERVER_DOMAIN}/api/insert/inventory`;
