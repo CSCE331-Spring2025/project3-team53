@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext} from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { SERVER_DOMAIN } from "./config";
+import { SERVER_DOMAIN, PROTOCOL } from "./config";
 import * as func from "../apiCall";
 import { GlobalContext } from './GlobalContext';
 
@@ -72,7 +72,7 @@ const CustomerMenu = () => {
   
 
   useEffect(() => {
-    fetch(`https://${SERVER_DOMAIN}/api/drinks/${category}`)
+    fetch(`${PROTOCOL}://${SERVER_DOMAIN}/api/drinks/${category}`)
       .then((response) => response.json())
       .then(async (data) => {
         const enrichedDrinks = await Promise.all(
@@ -104,8 +104,8 @@ const CustomerMenu = () => {
       (async () => {
         let prices = await func.get_stash_price();
         setTotalPrice(prices.get(0));
-        func.get_order_queue().forEach((value, key, _) => {
-          let name = func.get_menu().find(obj => obj.id === value[1]).drink_name;
+        func.get_order_queue().forEach(async (value, key, _) => {
+          let name = (await func.get_menu()).find(obj => obj.id === value[1]).drink_name;
           newCart.set(key, 
             [name, ice_encoding.get(value[2]), sugar_encoding.get(value[3]), prices.get(key), 
             value[4].map((element, index) => addon_encoding.get(element)).join(", ")]);
