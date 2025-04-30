@@ -8,7 +8,8 @@ Send request to servers vai api calls
         3: non-idempotent to create some data in the server
         4: delete some data in the server
 */
-import { SERVER_DOMAIN } from "./components/config";
+// import { SERVER_DOMAIN } from "./components/config";
+const SERVER_DOMAIN = 'bruhba2.onrender.com';
 
 export const fetch_request = async(url, body, request_type) => {
     let method;
