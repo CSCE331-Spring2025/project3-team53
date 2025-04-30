@@ -72,7 +72,7 @@ const CustomerMenu = () => {
   
 
   useEffect(() => {
-    fetch(`http://${SERVER_DOMAIN}/api/drinks/${category}`)
+    fetch(`https://${SERVER_DOMAIN}/api/drinks/${category}`)
       .then((response) => response.json())
       .then(async (data) => {
         const enrichedDrinks = await Promise.all(
