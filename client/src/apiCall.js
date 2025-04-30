@@ -343,7 +343,7 @@ export const get_employees = async (manager_id) => {
 /*
 Return the menu data
 */
-fetch_request("https://${SERVER_DOMAIN}/api/analyze/menu", {} ,1).then(res => {menu = res.data});
+fetch_request(`https://${SERVER_DOMAIN}/api/analyze/menu`, {} ,1).then(res => {menu = res.data});
 export const get_menu = () => {
     return menu;
 }
@@ -352,7 +352,7 @@ export const get_menu = () => {
 Updates the global menu variable; used after changes to menu data table
 */
 export const refresh_menu = async () => {
-    menu = (await fetch_request("https://${SERVER_DOMAIN}/api/analyze/menu", {} ,1)).data;
+    menu = (await fetch_request(`https://${SERVER_DOMAIN}/api/analyze/menu`, {} ,1)).data;
 }
 
 /*
