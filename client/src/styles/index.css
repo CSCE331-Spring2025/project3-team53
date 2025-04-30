@@ -989,13 +989,16 @@ input:checked + .slider:before {
   transform: translateX(26px);
 }
 .Header-home {
-display: flex;
-gap: 13vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* gap: 13vw; */
 }
 
 .Bobruh {
   text-align: center;
-  margin-left: 12vw;
+  margin-left: 14vw;
+  margin-right: 10vw;
 }
 
 .card-container4 {
