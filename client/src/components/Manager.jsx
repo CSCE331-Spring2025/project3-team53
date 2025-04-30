@@ -5,6 +5,7 @@ const Manager = () => {
 return(
   <>
     <h2 className = "login-header">Select Option</h2>
+    <div>
     <Link to="/Categories">
       <div className='manager-card'>
         <p className = 'manager-text'>Standard Ordering</p> <br />
@@ -42,6 +43,11 @@ return(
       <div className='manager-card'>
         <p className = 'manager-text'>Settings</p> <br />
       </div>
+    </Link>
+    </div>
+
+    <Link to="/Malogin">
+        <button style={{marginLeft: '2vw'}}>Go Back</button>
     </Link>
   </>
   );
