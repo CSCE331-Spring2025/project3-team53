@@ -105,7 +105,7 @@ const CustomerOptions = () => {
       id: 1,
       title: translations["Milk Tea"] || "Milk Tea",
       description: translations["A smooth blend of rich tea and creamy milk for the perfect balance of flavor."] || "A smooth blend of rich tea and creamy milk for the perfect balance of flavor.",
-      alt: "Our Mascot",
+      alt: "Milk Tea",
       link: "/CustomerMenu/Milk-Tea",
       image: "/milk_tea.jpg"
     },
@@ -113,7 +113,7 @@ const CustomerOptions = () => {
       id: 2,
       title: translations["Fruit Tea"] || "Fruit Tea",
       description: translations["A vibrant mix of fruit flavors and tea, refreshingly light with a hint of love."] || "A vibrant mix of fruit flavors and tea, refreshingly light with a hint of love.",
-      alt: "Hohn Jina",
+      alt: "Fruit Tea",
       link: "/CustomerMenu/Fruit-Tea",
       image: "/fruit-tea.jpg"
     },
@@ -121,7 +121,7 @@ const CustomerOptions = () => {
       id: 3,
       title: translations["Brewed Tea"] || "Brewed Tea",
       description: translations["Classic fresh tea brewed daily for a clean, crisp, and energizing experience."] || "Classic fresh tea brewed daily for a clean, crisp, and energizing experience.",
-      alt: "Our Boy",
+      alt: "Brewed Tea",
       link: "/CustomerMenu/Brewed-Tea",
       image: "/brewed-tea.jpg"
     },
@@ -182,7 +182,7 @@ const CustomerOptions = () => {
   ];
   const renderCard = ({ id, title, description, alt, link, image }) => {
     const card = (
-      <div className="card2" onClick={() => handleCardClick(id)} style={cardStyle}>
+      <div className="card2" onClick={() => handleCardClick(id)} style={cardStyle} title={alt}>
         <div style={{ borderRadius: "50%", padding: "1rem" }}>
           <img src={image} alt={alt} style={imgStyle} />
         </div>
