@@ -1,70 +1,101 @@
-# Getting Started with Create React App
+# Bruhba Boba Shop — CSCE 331 Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A point-of-sale (POS) system developed for a fictional boba tea company, Bobruh Bruhba, as part of a group project for CSCE 331 at Texas A&M University.
 
-## Available Scripts
+This full-stack web application was built by a team of four and includes dedicated interfaces for managers, employees, and customers. The system simulates the core functionality needed to run a real-world boba tea shop, such as menu management, order processing, inventory tracking, and customer customization — with additional features to enhance usability.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Manager View
+- View and update inventory dynamically
+- Add or remove drinks, modify pricing, and manage employees
+- Access full order history along with X and Z reports for sales summaries
+- Includes multiple chart components and placeholders for future feature expansion
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Employee POS System
+- Place customer orders through a streamlined, categorized interface
+- Optimized for quick interaction and minimal user input
+- Tailored for in-store use with fast access to all menu items
+- Ability for customers to create their own boba from a list of given ingredients
 
-### `npm test`
+### Customer Kiosk
+- Similar to the employee POS, but enhanced with visual menus and touch-friendly design
+- Displays live weather for College Station
+- Includes multilingual support via real-time translations
+- Works on most modern browsers and touchscreen devices
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Screenshots
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+| Before                                        | After                                       |
+| --------------------------------------------- | ------------------------------------------- |
+| ![Cart component Before](./public/Before1.png)| ![Cart Component After](./public/After1.png)|
+| ![Customer BYOT Before](./public/Before2.png) | ![Customer BYOT After](./public/After2.png) |
+| ![Employee BYOT Before](./public/Before3.png) | ![Employee BYOT After](./public/After3.png) |
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## Tech Stack
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **Frontend:** React.js, 
+- **Backend:** Node.js, Express.js
+- **Database:** PostgreSQL, pgAdmin4
+- **Other Tools:** Chart.js, React Router, dotenv, CORS
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+##  Getting Started
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+###  Clone the repository
+```bash
+git clone https://github.com/CSCE331-Spring2025/project3-team53
+cd project3-team53
 
-## Learn More
+# Install root components
+npm install
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# Client Installs
+cd client
+npm install react-router-dom
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Server Installs
+cd ../server
+npm install cors dotenv express pg
 
-### Code Splitting
+## Run Application
+npm start
+```
+--- 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+##  My Contributions (Chris M.) — Frontend Lead
+As the Frontend Lead on this project, I was responsible for the structure, layout, and visual styling across the entire user interface. My work spanned all major views, including the customer-facing kiosk, manager dashboard, employee POS, and landing page.
 
-### Analyzing the Bundle Size
+###  Core Frontend Architecture
+- Designed and implemented the layout and visual design for:
+    - Customer Menu (including BYOT)
+    - Manager View (inventory, analytics, reports)
+    - Employee POS System
+    - Home Page / Landing Page
+- Ensured the layout stayed true to what our team wanted among the various website components
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+###  UI/UX Design & Improvements
+- Created reusable React components for drink cards, modals, and UI controls
+- Polished styling for accessibility and consistency 
+- Designed intuitive flows for creating, customizing, and submitting orders
+- Implemented user-friendly visual feedback 
 
-### Making a Progressive Web App
+### Frontend Features
+- Built the Build Your Own Tea interface with topping selection, live cart preview, and custom naming
+- Built other Menu components for the Customers and the Employees
+- Integrated weather API and language translation in the customer view
+- Enabled touch-friendly controls and ensured cross-browser compatibility
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+###  Team Collaboration
+- Led frontend code organization and file structure to support modular development
+- Coordinated with teammates on interface requirements and implementation priorities
+- Assisted in debugging UI-related logic involving React state (useState, props)
+Note: I was not involved in backend database setup or API implementation.
