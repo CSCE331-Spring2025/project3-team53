@@ -21,6 +21,7 @@ import MenuEditor from './components/MenuEditor.jsx';
 import CustomerOptions from './components/CustomerCategories.jsx';
 import CustomerMenu from './components/CustomerMenu.jsx';
 import Menu from './components/Menu.jsx';
+import BYOT from './components/BYOT.jsx';
 import { GlobalProvider } from './components/GlobalContext.jsx';
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
           <Route path="/CustomerOptions" element={<CustomerOptions/>} />
           <Route path="/CustomerMenu/:category" element={<CustomerMenu/>} />
           <Route path="/menu/:category" element={<Menu />} />
+          <Route path="/CustomerMenu/BYOT" element={<BYOT />} />
         </Routes>
       </Router>
     </GlobalProvider>

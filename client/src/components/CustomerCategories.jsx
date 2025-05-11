@@ -176,7 +176,7 @@ const CustomerOptions = () => {
       title: translations["Build Your Own Tea"] || "Build Your Own Tea",
       description: translations["When it comes to choices you know best. Cut out the middle-man and choose your own combinations."] || "When it comes to choices you know best. Cut out the middle-man and choose your own combinations.",
       alt: "BYOT",
-      link: "/CustomerMenu/build-your-own-tea",
+      link: "/CustomerMenu/BYOT",
       image: "/BYOT.jpg"
     },
   ];
