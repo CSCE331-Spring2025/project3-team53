@@ -38,24 +38,30 @@ function Home() {
     return (
         <center>
             <header className="Header-home">
-            <div className="language-toggle">
-            <span>ENG</span>
-            <label className="switch">
-            <input
-                type="checkbox"
-                onChange={toggleLanguage}
-                checked={language === "es"}
-            />
-            <span className="slider"></span>
-            </label>
-            <span>SPA</span>
-            </div>
-            <h1 className = "Bobruh">Bruhba Bobruh Tea</h1>
+                <div className="language-toggle">
+                    <span>ENG</span>
+                    <label className="switch" role="switch" aria-label="Language toggle switch">
+                    <input
+                        type="checkbox"
+                        onChange={toggleLanguage}
+                        checked={language === "es"}
+                        role = "switch"
+                        aria-label="Toggle between English and Spanish"
+                        alt="Language toggle switch"
+                    />
+                    <span className="slider" role="presentation"></span>
+                    </label>
+                    <span>SPA</span>
+                </div>
+                <h1 className = "Bobruh">Bruhba Bobruh Tea</h1>
             {/* display weather info */}
-            <p>{Math.round(weather?.current?.temp_f)}°F {weather?.current?.condition?.text} <img src={weather?.current?.condition?.icon}
-                   style={{ verticalAlign: "middle", marginLeft: "-15px", marginRight: "-18px", scale: "50%"}}></img> 
-                 - {weather?.location?.name}, {weather?.location?.region}</p>
+                <p style={{margin: "0 auto"}}>
+                    {Math.round(weather?.current?.temp_f)}°F {weather?.current?.condition?.text} <img src={weather?.current?.condition?.icon}
+                    style={{ verticalAlign: "middle", marginLeft: "-15px", marginRight: "-18px", scale: "50%"}}></img> 
+                    - {weather?.location?.name}, {weather?.location?.region}
+                </p>
             </header>
+
             <hr />
             <main>
                 <h8 className="about">About Us</h8>
@@ -64,15 +70,15 @@ function Home() {
                 <div className="card-container">
                  <div className="card-wrap">
                 <p className="card-label">Customer</p>
-                <Link to="/CustomerOptions" className="card4"></Link>
+                <Link to="/CustomerOptions" className="card4" aria-label="Navigate to Customer Menu"></Link>
                 </div>
                 <div className="card-wrap">
                 <p className="card-label">Employee Login</p>
-                <Link to="/Emplogin" className="card4"></Link>
+                <Link to="/Emplogin" className="card4" aria-label="Navigate to Cashier Login"></Link>
                 </div>
                 <div className="card-wrap">
                 <p className="card-label">Manager Login</p>
-                <Link to="/Malogin" className="card4"></Link>
+                <Link to="/Malogin" className="card4" aria-label="Navigate to Manager Login"></Link>
                 </div>
                 </div>
             </main>

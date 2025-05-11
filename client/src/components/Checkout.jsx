@@ -33,8 +33,8 @@ function Checkout() {
             let cart = func.get_order_queue();
             let prices = await func.get_stash_price();
             let newCartItems = [];
-            cart.forEach((value, key, _) => {
-                let name = func.get_menu().find(obj => obj.id === value[1]).drink_name;
+            cart.forEach(async (value, key, _) => {
+                let name = (await func.get_menu()).find(obj => obj.id === value[1]).drink_name;
                 newCartItems.push({
                     name:name, price:prices.get(key), ice:ice_encoding.get(value[2]), sugar:sugar_encoding.get(value[3]), 
                     add_on: value[4].map((element) => addon_encoding.get(element)).join(", "),

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import * as func from '../apiCall.js';
-import { SERVER_DOMAIN } from "./config";
+import { SERVER_DOMAIN, PROTOCOL } from "./config";
 
 const ice_encoding = new Map([[0,"No Ice"], [1,"Light Ice"], [2,"Normal Ice"], [3,"Extra Ice"]]);
 const sugar_encoding = new Map([[0,"0% Sugar"], [1,"25% Sugar"], [2,"50% Sugar"], [3,"75% Sugar"], [4,"100% Sugar"]]);
@@ -24,7 +24,7 @@ const Menu = () => {
 
   //fetch infomation about drinks and their prices
   useEffect(() => {
-    fetch(`http://${SERVER_DOMAIN}/api/drinks/${category}`)
+    fetch(`${PROTOCOL}://${SERVER_DOMAIN}/api/drinks/${category}`)
       .then((response) => response.json())
       .then((data) => {
         setDrinks(data);
@@ -57,8 +57,8 @@ const Menu = () => {
     (async () => {
       let prices = await func.get_stash_price();
       setTotalPrice(prices.get(0));
-      func.get_order_queue().forEach((value, key, _) => {
-        let name = func.get_menu().find(obj => obj.id === value[1]).drink_name;
+      func.get_order_queue().forEach(async (value, key, _) => {
+        let name = (await func.get_menu()).find(obj => obj.id === value[1]).drink_name;
         newCart.set(key, 
           [name, ice_encoding.get(value[2]), sugar_encoding.get(value[3]), prices.get(key), 
           value[4].map((element) => addon_encoding.get(element)).join(", ")]);
