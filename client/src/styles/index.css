@@ -614,6 +614,12 @@ a {
   padding: 1.5vh 3vw;
   margin-left: 85vw;
   margin-top: -8vw;
+  background-image: url('/public/cart.png');
+  background-repeat: no-repeat; 
+  background-position: center;
+  background-size: contain;
+  width: 5vw;
+  height:3vw;
   font-size: 2vh;
   cursor: pointer;
 }

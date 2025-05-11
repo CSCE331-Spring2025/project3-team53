@@ -168,7 +168,6 @@ const CustomerMenu = () => {
       <div>
         <div className="cart">
           <button className="checkoutButton" onClick={() => setShowCheckout(true)}>
-            View Cart
           </button>
         </div>
         <center>
