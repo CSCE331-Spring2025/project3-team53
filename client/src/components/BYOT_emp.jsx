@@ -15,7 +15,7 @@ const formatName = (name) =>
     .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
     .join(" ");
 
-const BYOT = ({ cart, setCart, totalPrice, setTotalPrice, cartChanged, setCartChanged }) => {
+const BYOT_emp = ({ cart, setCart, totalPrice, setTotalPrice, cartChanged, setCartChanged }) => {
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [ingredientCounts, setIngredientCounts] = useState({});
   const [customName, setCustomName] = useState("");
@@ -117,7 +117,6 @@ const BYOT = ({ cart, setCart, totalPrice, setTotalPrice, cartChanged, setCartCh
             key={ingredient}
             className={`ingredient-card ${selectedIngredients.includes(ingredient) ? "selected" : ""}`}
             onClick={() => handleSelectIngredient(ingredient)}
-            style={{ backgroundImage: `url('/${ingredient}.png')` }}
           >
             <p className="ingredient-name">{formatName(ingredient)}</p>
           </div>
@@ -218,4 +217,4 @@ const BYOT = ({ cart, setCart, totalPrice, setTotalPrice, cartChanged, setCartCh
   );
 };
 
-export default BYOT;
+export default BYOT_emp;

@@ -22,6 +22,7 @@ import CustomerOptions from './components/CustomerCategories.jsx';
 import CustomerMenu from './components/CustomerMenu.jsx';
 import Menu from './components/Menu.jsx';
 import BYOT from './components/BYOT.jsx';
+import BYOT_emp from './components/BYOT_emp.jsx';
 import { GlobalProvider } from './components/GlobalContext.jsx';
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
           <Route path="/CustomerMenu/:category" element={<CustomerMenu/>} />
           <Route path="/menu/:category" element={<Menu />} />
           <Route path="/CustomerMenu/BYOT" element={<BYOT />} />
+          <Route path="/drinks/BYOT" element={<BYOT_emp />} />
         </Routes>
       </Router>
     </GlobalProvider>
